@@ -6,7 +6,7 @@ public void circle1_click1(GButton source, GEvent event) { //_CODE_:circle1:5613
   for(st = 0; st < 50; st++){
   noStroke ();
   fill (random (255), random (255), random(255), 170);
-  ellipse (random (30, width/1.75), random (0, height), 60, 60);
+  ellipse (random (30, displayWidth-displayWidth/4), random (0, height), 60, 60);
  }
  Gui();
 } //_CODE_:circle1:561316:
@@ -16,7 +16,7 @@ public void button2_click1(GButton source, GEvent event) { //_CODE_:square1:6564
   for(st = 0; st < 50; st++){
   noStroke ();
   fill (random (255), random (255), random(255), 170);
-  rect(random(0,width/1.86), random(0,height), 60,60);
+  rect(random(0,displayWidth-displayWidth/4), random(0,height), 60,60);
   }
   Gui();
 } //_CODE_:square1:656476:
@@ -26,7 +26,7 @@ public void button3_click1(GButton source, GEvent event) { //_CODE_:triangle1:29
   for(st = 0; st < 50; st++){
   noStroke ();
   fill (random (255), random (255), random(255), 200);
-  triangle(random(0,width/1.7), random(0,height), random(0,width/1.7), random(0,height), width/3.2, height/2);
+  triangle(random(0,displayWidth-displayWidth/4), random(0,height), random(0,width/1.7), random(0,height), width/3.2, height/2);
   }
   Gui();
 } //_CODE_:triangle1:298157:
@@ -36,13 +36,13 @@ public void button4_click1(GButton source, GEvent event) { //_CODE_:pause1:48843
   pg1.clear();
   pg1.beginDraw();
   pg1.background(200);
-      image(pg1,600,0,400,600);
+      image(pg1,displayWidth-displayWidth/4,displayHeight-displayHeight);
   pg1.endDraw();
 
 //pg2
   pg2.beginDraw();
   pg2.background(230);
-      image(pg2,0,0,600,600);
+      image(pg2,displayWidth-displayWidth/4,displayHeight);
   pg2.endDraw();
   
  Gui();
@@ -53,7 +53,7 @@ public void button5_click1(GButton source, GEvent event) { //_CODE_:resume1:2847
   println("Background clicked at: " + millis());
   pg2.beginDraw();
   pg2.background(random(255),random(255),random(255));
-      image(pg2,0,0,600,600);
+      image(pg2,displayWidth-displayWidth/4,displayHeight);
   pg2.endDraw();
  
  
@@ -71,7 +71,7 @@ public void button6_click1(GButton source, GEvent event) { //_CODE_:resume1:2847
 public void button7_click1(GButton source, GEvent event) { //_CODE_:resume1:284723:
   println("Filer clicked at: " + millis());
   filter(BLUR,5);
-//  Gui();
+  Gui();
 } //_CODE_:resume1:284723:
 
 //filter2 button
@@ -119,8 +119,8 @@ public void button13_click1(GButton source, GEvent event) { //_CODE_:resume1:284
 //Import
 public void button14_click1(GButton source, GEvent event) { //_CODE_:resume1:284723:
   println("import1 clicked at: " + millis());
-  selectInput("Select a file to process:", "fileSelected");
-
+  selectInput( "Select an image", "imageChosen" );
+ 
   Gui();
 } //_CODE_:resume1:284723:
 
@@ -132,90 +132,92 @@ public void createGUI(){
   if(frame != null)
      frame.setTitle("Random Art Generator");
     
+ //Triangle button
+  triangle1 = new GButton(this, displayWidth-displayWidth/4.1,displayHeight/2.9, 80, 30);
+  triangle1.setText("Triangle");
+  triangle1.setLocalColorScheme(GCScheme.CYAN_SCHEME);
+  triangle1.addEventHandler(this, "button3_click1");   
+    
 //Circle button
-  circle1 = new GButton(this, 790, 300, 80, 30);
+   // displayWidth-400,displayHeight/3.8
+  circle1 = new GButton(this, displayWidth-displayWidth/5.35, displayHeight/2.9, 80, 30);
   circle1.setText("Circle");
   circle1.setLocalColorScheme(GCScheme.CYAN_SCHEME);
   circle1.addEventHandler(this, "circle1_click1");
   
 //Square button
-  square1 = new GButton(this, 700, 300, 80, 30);
+  square1 = new GButton(this, displayWidth-displayWidth/7.72, displayHeight/2.9, 80, 30);
   square1.setText("Square");
   square1.setLocalColorScheme(GCScheme.CYAN_SCHEME);
   square1.addEventHandler(this, "button2_click1");
   
-//Triangle button
-  triangle1 = new GButton(this, 610, 300, 80, 30);
-  triangle1.setText("Triangle");
-  triangle1.setLocalColorScheme(GCScheme.CYAN_SCHEME);
-  triangle1.addEventHandler(this, "button3_click1");
+  //Import
+    import1 = new GButton(this, displayWidth-displayWidth/13.85, displayHeight/2.9, 80, 30);
+  import1.setText("import");
+  import1.setLocalColorScheme(GCScheme.CYAN_SCHEME);
+  import1.addEventHandler(this, "button14_click1"); 
   
 //Clear Button
-  clear1 = new GButton(this, 610, 570, 80, 30);
+  clear1 = new GButton(this, displayWidth-displayWidth/4.1, displayHeight/1.1, 80, 30);
   clear1.setText("Clear");
   clear1.setLocalColorScheme(GCScheme.RED_SCHEME);
   clear1.addEventHandler(this, "button4_click1");
   
 //Background button
-  background1 = new GButton(this, 830, 570, 80, 30);
+  background1 = new GButton(this, displayWidth-displayWidth/7.72, displayHeight/1.1, 80, 30);
   background1.setText("Background");
   background1.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   background1.addEventHandler(this, "button5_click1");
   
 //Save button
-  save1 = new GButton(this, 930, 570, 80, 30);
+  save1 = new GButton(this, displayWidth-displayWidth/13.85, displayHeight/1.1, 80, 30);
   save1.setText("Save");
   save1.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   save1.addEventHandler(this, "button6_click1");
   
   
 //Filter
-  filter1 = new GButton(this, 610, 420, 80, 30);
+  filter1 = new GButton(this, displayWidth-displayWidth/4.1, displayHeight/2.1, 80, 30);
   filter1.setText("Blur");
   filter1.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   filter1.addEventHandler(this, "button7_click1");
    
 //Filter2
-  filter2 = new GButton(this, 700, 420, 80, 30);
+  filter2 = new GButton(this, displayWidth-displayWidth/5.35, displayHeight/2.1, 80, 30);
   filter2.setText("Threshold");
   filter2.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   filter2.addEventHandler(this, "button8_click1");
    
 //Filter3
-  filter3 = new GButton(this, 790, 420, 80, 30);
+  filter3 = new GButton(this, displayWidth-displayWidth/7.72, displayHeight/2.1, 80, 30);
   filter3.setText("Gray");
   filter3.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   filter3.addEventHandler(this, "button9_click1");
    
 //Filter4
-  filter4 = new GButton(this, 880, 420, 80, 30);
+  filter4 = new GButton(this, displayWidth-displayWidth/13.85, displayHeight/2.1, 80, 30);
   filter4.setText("Invert");
   filter4.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   filter4.addEventHandler(this, "button10_click1");
    
 //Filter5
-  filter5 = new GButton(this, 610, 460, 80, 30);
+  filter5 = new GButton(this, displayWidth-displayWidth/4.1, displayHeight/1.955, 80, 30);
   filter5.setText("Posterize");
   filter5.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   filter5.addEventHandler(this, "button11_click1");
    
 //Filter6
-  filter6 = new GButton(this, 700, 460, 80, 30);
+  filter6 = new GButton(this, displayWidth-displayWidth/5.35, displayHeight/1.955, 80, 30);
   filter6.setText("Erode");
   filter6.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   filter6.addEventHandler(this, "button12_click1");
    
 //Filter7
-  filter7 = new GButton(this, 790, 460, 80, 30);
+  filter7 = new GButton(this, displayWidth-displayWidth/7.72, displayHeight/1.955, 80, 30);
   filter7.setText("Dilate");
   filter7.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   filter7.addEventHandler(this, "button13_click1"); 
   
-  //Import
-  import1 = new GButton(this, 880, 300, 80, 30);
-  import1.setText("import");
-  import1.setLocalColorScheme(GCScheme.CYAN_SCHEME);
-  import1.addEventHandler(this, "button14_click1"); 
 }
 
 // Variable declarations 
