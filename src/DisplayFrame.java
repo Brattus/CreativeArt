@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by RaminErDigg on 16.03.2015.
@@ -16,12 +17,11 @@ public class DisplayFrame extends JFrame
     private JButton circleButton;
     private JButton colorPicker;
     private JButton resetButton;
-    private JButton testKnapp;
 
     // Menus
     private JMenuBar menuBar;
-    private JMenu menu;
-    private JMenuItem menuItem;
+    private JMenu fileMenu;
+    private JMenuItem save;
 
     // Labels
     private JLabel title;
@@ -71,6 +71,13 @@ public class DisplayFrame extends JFrame
         setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         setLocationRelativeTo( null );
 
+        // Initiate Menu items
+        menuBar = new JMenuBar();
+        fileMenu = new JMenu( "File" );
+
+        this.setJMenuBar( menuBar );
+        menuBar.add( fileMenu );
+
         setVisible( true );
     }
 
@@ -91,12 +98,13 @@ public class DisplayFrame extends JFrame
         circleButton = new JButton( "Circles" );
         resetButton = new JButton( "Clear Canvas" );
         colorPicker = new JButton( "Color Picker" );
-        testKnapp = new JButton( "Test this shit");
 
-        // Initiate Menu items
-        menuBar = new JMenuBar();
-        menu = new JMenu( "Menu 1" );
-        menuItem = new JMenuItem( "test" );
+        save = new JMenuItem( "Save" );
+        save.setMnemonic( KeyEvent.VK_S );
+
+        fileMenu.add( save );
+        fileMenu.setMnemonic( KeyEvent.VK_F );
+
 
         // Initiate Label
         title = new JLabel( "Random Art Generator" );
@@ -116,9 +124,8 @@ public class DisplayFrame extends JFrame
         this.add( circleButton );
         this.add( resetButton );
         this.add( colorPicker );
-        this.add ( testKnapp );
 
-        this.setJMenuBar( menuBar );
+
 
         this.add( title );
 
@@ -133,15 +140,14 @@ public class DisplayFrame extends JFrame
     {
         setLayout( null );
 
-        processingPanel.setBounds( getWidth()-1030, 10, 1000, getHeight()-10 );
+        processingPanel.setBounds( getWidth() - 1030, 10, 1000, getHeight() - 500 );
 
 
         triangleButton.setBounds( 10, 100, 100, 25 );
         squareButton.setBounds( 120, 100, 100, 25 );
         circleButton.setBounds( 230, 100, 100, 25 );
         colorPicker.setBounds( 10, 200, 120, 25 );
-        resetButton.setBounds( 10, getHeight()-80, 150, 25 );
-        testKnapp.setBounds(10, 300, 150, 25);
+        resetButton.setBounds( 10, getHeight() - 100, 150, 25 );
 
         title.setBounds( 10, 10, 300, 100 );
     }
@@ -163,8 +169,8 @@ public class DisplayFrame extends JFrame
         colorPicker.addActionListener( randomArtProcessing );
         colorPicker.setActionCommand( "color" );
 
-        testKnapp.addActionListener(randomArtProcessing);
-        testKnapp.setActionCommand("testKnapp");
+        save.addActionListener( randomArtProcessing );
+        save.setActionCommand( "save" );
     }
 }
 

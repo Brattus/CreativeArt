@@ -21,10 +21,7 @@ Ramin
 Per-Olav
 
 ----------------------------
-
-<<<<<<< Updated upstream
 Knut Olav
-=======
 Knut Olav
 
 ----------------------------
@@ -32,4 +29,4 @@ Knut Olav
 Things left:
 - Utskriftsmulighet
 - Ramme på bilder
->>>>>>> Stashed changes
+
