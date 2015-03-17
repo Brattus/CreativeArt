@@ -145,7 +145,10 @@ public class RandomArt extends PApplet implements ActionListener
 
     public void clearCanvas()
     {
-        clear();
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear the canvas? Everything you created so far will disappear", "Clear canvas",  JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            background(color(255));
+        }
     }
 
     private void changeColor()
