@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Ramin on 16.03.2015.
+ * Created by RaminErDigg on 16.03.2015.
  */
 public class DisplayFrame extends JFrame
 {
