@@ -3,7 +3,7 @@
  */
 
 import processing.core.*;
-import g4p_controls.*;;
+import g4p_controls.*;
 
 public class Gui extends PApplet
 {

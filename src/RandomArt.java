@@ -18,10 +18,13 @@ public class RandomArt extends PApplet implements ActionListener
     PGraphics pg1;
     PGraphics pg2;
     PImage img;
+    Color c = null;
+    float r=0;
+    float g=0;
+    float b=0;
 
     //fonts
     PFont myFont;
-
     int st;
 
     public void setup(){
@@ -34,8 +37,25 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     @Override
-    public void draw()
-    {
+    public void draw() {
+
+
+        if (mousePressed == true) {
+            if(mouseButton == RIGHT){
+                c = JColorChooser.showDialog(null, "Choose a Color", Color.BLACK);
+                r = c.getRed();
+                g = c.getGreen();
+                b = c.getBlue();
+            }
+
+            if (mouseButton == LEFT) {
+
+                stroke(r,g,b);
+                strokeWeight(5);
+                line(mouseX, mouseY, pmouseX, pmouseY);
+            }
+
+        }
     }
 
 
@@ -120,14 +140,18 @@ public class RandomArt extends PApplet implements ActionListener
 
     public void clearCanvas()
     {
-        clear();
+        background(255);
     }
 
-        private void changeColor()
+    private void changeColor()
         {
             Color c = JColorChooser.showDialog(null, "Choose a Color", Color.BLACK);
              background( c.getRGB() );
         }
+
+    private void testOle() {
+        Color b = JColorChooser.showDialog(null, "Choose a Color", Color.BLACK);
+    }
 
 
 
@@ -155,6 +179,9 @@ public class RandomArt extends PApplet implements ActionListener
                 break;
             case "color":
                 changeColor();
+                break;
+            case "testOle":
+                testOle();
         }
     }
 }
