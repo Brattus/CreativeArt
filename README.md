@@ -1,3 +1,2 @@
 # CreativeArt
-Systemutvikling
-Fuck u bigboi
+Processing project in course ID202712 Systemutvikling.

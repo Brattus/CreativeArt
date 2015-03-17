@@ -1,0 +1,32 @@
+Her skriver man opp hva man holder på meg og hva man skal lage:
+
+----------------------------
+
+Ole-Martin
+- Brush
+    Må kunnde endre størrelse?
+    Men det får jeg ta igjen?
+
+----------------------------
+
+Ramin
+<<<<<<< Updated upstream
+=======
+- Lagre som bilde
+- Send til utskrift
+>>>>>>> Stashed changes
+
+----------------------------
+
+Per-Olav
+
+----------------------------
+Knut Olav
+Knut Olav
+
+----------------------------
+
+Things left:
+- Utskriftsmulighet
+- Ramme på bilder
+
