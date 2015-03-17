@@ -2,61 +2,47 @@
  * Created by Ramin on 16.03.2015.
  */
 
-import javafx.stage.FileChooser;
 import processing.core.*;
 
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-
-
-import javax.print.*;
-import javax.print.attribute.AttributeSet;
-import javax.print.attribute.HashAttributeSet;
-import javax.print.attribute.standard.PrinterName;
-import javax.print.event.PrintJobAdapter;
-import javax.print.event.PrintJobEvent;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 public class RandomArt extends PApplet implements ActionListener
 {
     PGraphics pg1;
     PGraphics pg2;
-    PImage img;
+    PImage img = null;
+
+    long time = 0;
 
     int st;
 
     public void setup()
     {
-
         size( 1000, 680 );
-
         background( 255 );
-
         noStroke();
+        img = loadImage( "splash.jpg" );
+        imageMode( CENTER );
+        image( img, width / 2, height / 2, 500, 500 );
     }
+
+
 
     @Override
     public void draw()
     {
-    }
+        time = millis()/1000;
 
-    // Use this method to add additional statements
-    // to customise the GUI controls
-
-    void imageChosen(File file)
-    {
-        if(file.exists())
+        if(time >= 3 && time <= 4)
         {
-            img = loadImage( file.getAbsolutePath() );
+            clearCanvas();
         }
     }
 
@@ -102,9 +88,36 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+    /**
+     * Blur filter on canvas
+     */
+    public void blurFilter()
+    {
+        filter(BLUR, 5);
+    }
+
+    /**
+     * Threshold filter on canvas
+     */
+    public void thresholdFilter()
+    {
+        filter( THRESHOLD );
+    }
+
+    /**
+     *  Gray scale filter on canvas
+     */
+    public void grayScaleFilter()
+    {
+        filter( GRAY );
+    }
+
+
+
     public void clearCanvas()
     {
         clear();
+        background( 255 );
     }
 
     private void changeColor()
@@ -148,80 +161,6 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
-    /**
-     * Print the following saved file
-     */
-    public void printFile()
-    {
-        JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
-        chooser.setFileFilter( filter );
-        chooser.setDialogTitle( "Choose file to print" );
-
-        PrinterJob pj = PrinterJob.getPrinterJob();
-        InputStream in = null;
-        PrintJobWatcher watcher = null;
-
-
-        int returnVal = chooser.showOpenDialog( this );
-        if(returnVal == JFileChooser.APPROVE_OPTION)
-        {
-            if(pj.printDialog())
-            {
-
-                try
-                {
-                    in = new FileInputStream( new File( chooser.getSelectedFile().getPath() ) );
-                    System.out.println( chooser.getSelectedFile().getPath() );
-
-                    DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
-                    AttributeSet attributeSet = new HashAttributeSet();
-                    attributeSet.add( new PrinterName( "NPI8DA48A", null ) );
-                    PrintService service = PrintServiceLookup.lookupDefaultPrintService();
-
-                    DocPrintJob job = service.createPrintJob();
-                    Doc doc = new SimpleDoc( in, flavor, null );
-                    watcher = new PrintJobWatcher( job );
-
-                    job.print( doc, null );
-                } catch(FileNotFoundException e)
-                {
-                    e.printStackTrace();
-                } catch(PrintException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            watcher.waitForDone();
-
-
-        /*JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
-        chooser.setFileFilter( filter );
-        chooser.setDialogTitle( "Save file" );
-
-        PrinterJob pj = PrinterJob.getPrinterJob();
-
-
-        int returnVal = chooser.showOpenDialog( this );
-        if(returnVal == JFileChooser.APPROVE_OPTION)
-        {
-            if(pj.printDialog())
-            {
-                try
-                {
-                    pj.setJobName( chooser.getSelectedFile().getPath() );
-                    pj.getJobName();
-                    pj.print();
-                } catch(PrinterException exc)
-                {
-                    System.out.println( exc );
-                }
-            }
-        }*/
-        }
-    }
-
 
     /**
      * Invoked when an action occurs.
@@ -251,63 +190,7 @@ public class RandomArt extends PApplet implements ActionListener
             case "save":
                 saveToFile();
                 break;
-            case "print":
-                printFile();
         }
     }
 
-    class PrintJobWatcher
-    {
-        // true iff it is safe to close the print job's input stream
-        boolean done = false;
-
-        PrintJobWatcher(DocPrintJob job)
-        {
-            // Add a listener to the print job
-            job.addPrintJobListener( new PrintJobAdapter()
-            {
-                public void printJobCanceled(PrintJobEvent pje)
-                {
-                    allDone();
-                }
-
-                public void printJobCompleted(PrintJobEvent pje)
-                {
-                    allDone();
-                }
-
-                public void printJobFailed(PrintJobEvent pje)
-                {
-                    allDone();
-                }
-
-                public void printJobNoMoreEvents(PrintJobEvent pje)
-                {
-                    allDone();
-                }
-
-                void allDone()
-                {
-                    synchronized(PrintJobWatcher.this)
-                    {
-                        done = true;
-                        PrintJobWatcher.this.notify();
-                    }
-                }
-            } );
-        }
-
-        public synchronized void waitForDone()
-        {
-            try
-            {
-                while(!done)
-                {
-                    wait();
-                }
-            } catch(InterruptedException e)
-            {
-            }
-        }
-    }
 }

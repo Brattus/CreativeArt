@@ -7,11 +7,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="core" level="project" />
     <orderEntry type="library" name="G4P" level="project" />
     <orderEntry type="library" name="gluegen-rt-natives-windows-i586" level="project" />
     <orderEntry type="library" name="gluegen-rt-natives-windows-i5861" level="project" />
     <orderEntry type="library" name="ant-launcher" level="project" />
     <orderEntry type="library" name="gluegen-rt-natives-linux-amd64" level="project" />
+    <orderEntry type="library" name="library" level="application" />
+    <orderEntry type="library" name="core" level="project" />
   </component>
 </module>

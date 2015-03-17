@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by Ramin on 16.03.2015.
+ * Created by RaminErDigg on 16.03.2015.
  */
 public class DisplayFrame extends JFrame
 {
@@ -111,7 +111,6 @@ public class DisplayFrame extends JFrame
         fileMenu.add( print );
 
 
-
         // Initiate Label
         title = new JLabel( "Random Art Generator" );
         title.setForeground( new Color( 0, 0, 0 ) );
@@ -130,8 +129,6 @@ public class DisplayFrame extends JFrame
         this.add( circleButton );
         this.add( resetButton );
         this.add( colorPicker );
-
-
 
         this.add( title );
 
@@ -154,6 +151,7 @@ public class DisplayFrame extends JFrame
         circleButton.setBounds( 230, 100, 100, 25 );
         colorPicker.setBounds( 10, 200, 120, 25 );
         resetButton.setBounds( 10, getHeight() - 100, 150, 25 );
+
 
         title.setBounds( 10, 10, 300, 100 );
     }
