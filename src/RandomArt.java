@@ -3,6 +3,7 @@
  */
 
 import processing.core.*;
+import processing.opengl.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +32,7 @@ public class RandomArt extends PApplet implements ActionListener
 
         size(1000, 700);
 
-        background(0);
+        background(255);
 
         noStroke();
     }

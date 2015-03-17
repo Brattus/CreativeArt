@@ -10,12 +10,19 @@ public class DisplayFrame extends JFrame
 
     private JPanel processingPanel;
 
+    // Buttons
     private JButton triangleButton;
     private JButton squareButton;
     private JButton circleButton;
     private JButton colorPicker;
     private JButton resetButton;
 
+    // Menus
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem menuItem;
+
+    // Labels
     private JLabel title;
 
 
@@ -52,6 +59,10 @@ public class DisplayFrame extends JFrame
     {
         this.setSize(1366 , 768 );
         this.setMinimumSize( new Dimension( 1366, 768 ) );
+
+        this.setBackground( new Color( 116, 228, 74 ) );
+
+
         if(this != null)
         {
             this.setResizable( true );
@@ -68,16 +79,24 @@ public class DisplayFrame extends JFrame
      */
     private void initiateComponents()
     {
+        // Initiate processing items
         randomArtProcessing = new RandomArt();
         randomArtProcessing.init();
         processingPanel = new JPanel();
 
+        // Initiate buttons
         triangleButton = new JButton( "Triangles" );
         squareButton = new JButton("Squares");
         circleButton = new JButton( "Circles" );
         resetButton = new JButton( "Clear Canvas" );
         colorPicker = new JButton( "Color Picker" );
 
+        // Initiate Menu items
+        menuBar = new JMenuBar();
+        menu = new JMenu( "Menu 1" );
+        menuItem = new JMenuItem( "test" );
+
+        // Initiate Label
         title = new JLabel( "Random Art Generator" );
         title.setForeground( new Color( 0, 0, 0 ) );
         title.setFont( new Font( null, 2, 25 ) );
@@ -95,6 +114,8 @@ public class DisplayFrame extends JFrame
         this.add( circleButton );
         this.add( resetButton );
         this.add( colorPicker );
+
+        this.setJMenuBar( menuBar );
 
         this.add( title );
 
