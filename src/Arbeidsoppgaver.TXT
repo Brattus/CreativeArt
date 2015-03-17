@@ -4,8 +4,7 @@ Her skriver man opp hva man holder på meg og hva man skal lage:
 
 Ole-Martin
 - Brush
-    Skal kunne endre farge og størrelse
-    Men usikker på hvordan enda
+    Må kunnde endre størrelse?
 
 ----------------------------
 
