@@ -19,14 +19,10 @@ public class RandomArt extends PApplet implements ActionListener
     PGraphics pg2;
     PImage img;
 
-    Gui gui;
-
     //fonts
     PFont myFont;
-    PFont myFont1;
 
     int st;
-    PGraphics pGraphics;
 
     public void setup(){
 
