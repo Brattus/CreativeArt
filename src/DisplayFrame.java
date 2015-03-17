@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by Ramin on 16.03.2015.
@@ -19,8 +20,8 @@ public class DisplayFrame extends JFrame
 
     // Menus
     private JMenuBar menuBar;
-    private JMenu menu;
-    private JMenuItem menuItem;
+    private JMenu fileMenu;
+    private JMenuItem save;
 
     // Labels
     private JLabel title;
@@ -70,6 +71,13 @@ public class DisplayFrame extends JFrame
         setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         setLocationRelativeTo( null );
 
+        // Initiate Menu items
+        menuBar = new JMenuBar();
+        fileMenu = new JMenu( "File" );
+
+        this.setJMenuBar( menuBar );
+        menuBar.add( fileMenu );
+
         setVisible( true );
     }
 
@@ -91,10 +99,12 @@ public class DisplayFrame extends JFrame
         resetButton = new JButton( "Clear Canvas" );
         colorPicker = new JButton( "Color Picker" );
 
-        // Initiate Menu items
-        menuBar = new JMenuBar();
-        menu = new JMenu( "Menu 1" );
-        menuItem = new JMenuItem( "test" );
+        save = new JMenuItem( "Save" );
+        save.setMnemonic( KeyEvent.VK_S );
+
+        fileMenu.add( save );
+        fileMenu.setMnemonic( KeyEvent.VK_F );
+
 
         // Initiate Label
         title = new JLabel( "Random Art Generator" );
@@ -115,7 +125,7 @@ public class DisplayFrame extends JFrame
         this.add( resetButton );
         this.add( colorPicker );
 
-        this.setJMenuBar( menuBar );
+
 
         this.add( title );
 
@@ -130,14 +140,14 @@ public class DisplayFrame extends JFrame
     {
         setLayout( null );
 
-        processingPanel.setBounds( getWidth()-1030, 10, 1000, getHeight()-10 );
+        processingPanel.setBounds( getWidth() - 1030, 10, 1000, getHeight() - 500 );
 
 
         triangleButton.setBounds( 10, 100, 100, 25 );
         squareButton.setBounds( 120, 100, 100, 25 );
         circleButton.setBounds( 230, 100, 100, 25 );
         colorPicker.setBounds( 10, 200, 120, 25 );
-        resetButton.setBounds( 10, getHeight()-80, 150, 25 );
+        resetButton.setBounds( 10, getHeight() - 100, 150, 25 );
 
         title.setBounds( 10, 10, 300, 100 );
     }
@@ -158,6 +168,9 @@ public class DisplayFrame extends JFrame
 
         colorPicker.addActionListener( randomArtProcessing );
         colorPicker.setActionCommand( "color" );
+
+        save.addActionListener( randomArtProcessing );
+        save.setActionCommand( "save" );
     }
 }
 
