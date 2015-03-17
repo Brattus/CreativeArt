@@ -22,6 +22,7 @@ public class DisplayFrame extends JFrame
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem save;
+    private JMenuItem print;
 
     // Labels
     private JLabel title;
@@ -105,6 +106,11 @@ public class DisplayFrame extends JFrame
         fileMenu.add( save );
         fileMenu.setMnemonic( KeyEvent.VK_F );
 
+        print = new JMenuItem( "Print file" );
+        print.setMnemonic( KeyEvent.VK_P );
+        fileMenu.add( print );
+
+
 
         // Initiate Label
         title = new JLabel( "Random Art Generator" );
@@ -171,6 +177,9 @@ public class DisplayFrame extends JFrame
 
         save.addActionListener( randomArtProcessing );
         save.setActionCommand( "save" );
+
+        print.addActionListener( randomArtProcessing );
+        print.setActionCommand( "print" );
     }
 }
 

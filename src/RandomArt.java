@@ -2,29 +2,35 @@
  * Created by Ramin on 16.03.2015.
  */
 
+import javafx.stage.FileChooser;
 import processing.core.*;
 
-import javax.imageio.ImageIO;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+
+
+import javax.print.*;
+import javax.print.attribute.AttributeSet;
+import javax.print.attribute.HashAttributeSet;
+import javax.print.attribute.standard.PrinterName;
+import javax.print.event.PrintJobAdapter;
+import javax.print.event.PrintJobEvent;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class RandomArt extends PApplet implements ActionListener
 {
-    // Need G4P library
-
     PGraphics pg1;
     PGraphics pg2;
     PImage img;
-
-    //fonts
-    PFont myFont;
 
     int st;
 
@@ -41,36 +47,6 @@ public class RandomArt extends PApplet implements ActionListener
     @Override
     public void draw()
     {
-    }
-
-
-    public void gui()
-    {
-        pg1.beginDraw();
-        pg1.background( 200 );
-        image( pg1, displayWidth - displayWidth / 4, displayHeight - displayHeight );
-        pg1.endDraw();
-
-        //Setting the font, texts size and text of the right window.
-        myFont = createFont( "Arial", 25 );
-        textFont( myFont );
-        textAlign( CENTER, CENTER );
-        fill( 255 );
-        String s = "Welcome to Random Art Generator!";
-        fill( 255 );
-        text( s, displayWidth - displayWidth / 4, displayHeight / 40, displayWidth / 4, displayHeight / 12 );  // Text wraps within text box
-
-        //Font text
-        textAlign( LEFT, CENTER );
-        textSize( 22 );
-        text( "Choose filter:", (float) ( displayWidth - displayWidth / 4.1 ), (float) ( displayHeight / 2.55 ), 400, 100 );
-
-
-        //Objects text
-        textAlign( LEFT, CENTER );
-        textSize( 22 );
-        text( "Choose Objects:", (float) ( displayWidth - displayWidth / 4.1 ), (float) ( displayHeight / 3.8 ), 400, 100 );
-
     }
 
     // Use this method to add additional statements
@@ -172,6 +148,80 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+    /**
+     * Print the following saved file
+     */
+    public void printFile()
+    {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
+        chooser.setFileFilter( filter );
+        chooser.setDialogTitle( "Choose file to print" );
+
+        PrinterJob pj = PrinterJob.getPrinterJob();
+        InputStream in = null;
+        PrintJobWatcher watcher = null;
+
+
+        int returnVal = chooser.showOpenDialog( this );
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            if(pj.printDialog())
+            {
+
+                try
+                {
+                    in = new FileInputStream( new File( chooser.getSelectedFile().getPath() ) );
+                    System.out.println( chooser.getSelectedFile().getPath() );
+
+                    DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
+                    AttributeSet attributeSet = new HashAttributeSet();
+                    attributeSet.add( new PrinterName( "NPI8DA48A", null ) );
+                    PrintService service = PrintServiceLookup.lookupDefaultPrintService();
+
+                    DocPrintJob job = service.createPrintJob();
+                    Doc doc = new SimpleDoc( in, flavor, null );
+                    watcher = new PrintJobWatcher( job );
+
+                    job.print( doc, null );
+                } catch(FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                } catch(PrintException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            watcher.waitForDone();
+
+
+        /*JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
+        chooser.setFileFilter( filter );
+        chooser.setDialogTitle( "Save file" );
+
+        PrinterJob pj = PrinterJob.getPrinterJob();
+
+
+        int returnVal = chooser.showOpenDialog( this );
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            if(pj.printDialog())
+            {
+                try
+                {
+                    pj.setJobName( chooser.getSelectedFile().getPath() );
+                    pj.getJobName();
+                    pj.print();
+                } catch(PrinterException exc)
+                {
+                    System.out.println( exc );
+                }
+            }
+        }*/
+        }
+    }
+
 
     /**
      * Invoked when an action occurs.
@@ -200,6 +250,64 @@ public class RandomArt extends PApplet implements ActionListener
                 break;
             case "save":
                 saveToFile();
+                break;
+            case "print":
+                printFile();
+        }
+    }
+
+    class PrintJobWatcher
+    {
+        // true iff it is safe to close the print job's input stream
+        boolean done = false;
+
+        PrintJobWatcher(DocPrintJob job)
+        {
+            // Add a listener to the print job
+            job.addPrintJobListener( new PrintJobAdapter()
+            {
+                public void printJobCanceled(PrintJobEvent pje)
+                {
+                    allDone();
+                }
+
+                public void printJobCompleted(PrintJobEvent pje)
+                {
+                    allDone();
+                }
+
+                public void printJobFailed(PrintJobEvent pje)
+                {
+                    allDone();
+                }
+
+                public void printJobNoMoreEvents(PrintJobEvent pje)
+                {
+                    allDone();
+                }
+
+                void allDone()
+                {
+                    synchronized(PrintJobWatcher.this)
+                    {
+                        done = true;
+                        PrintJobWatcher.this.notify();
+                    }
+                }
+            } );
+        }
+
+        public synchronized void waitForDone()
+        {
+            try
+            {
+                while(!done)
+                {
+                    wait();
+                }
+            } catch(InterruptedException e)
+            {
+            }
         }
     }
 }
