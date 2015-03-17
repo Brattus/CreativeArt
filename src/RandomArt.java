@@ -2,7 +2,7 @@
  * Created by RaminErIkkeDigg on 16.03.2015.
  */
 
-import processing.core.*;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import processing.core.*;
 
 public class RandomArt extends PApplet implements ActionListener
 {
@@ -22,6 +23,8 @@ public class RandomArt extends PApplet implements ActionListener
     PGraphics pg1;
     PGraphics pg2;
     PImage img;
+    float r,g,b = 0;
+
 
     //fonts
     PFont myFont;
@@ -38,9 +41,23 @@ public class RandomArt extends PApplet implements ActionListener
         noStroke();
     }
 
-    @Override
-    public void draw()
-    {
+
+    public void draw() {
+        if (mousePressed == true) {
+            if (mouseButton == RIGHT) {
+                Color c = JColorChooser.showDialog( null, "Choose a Color", Color.BLACK );
+                r = c.getRed();
+                g = c.getGreen();
+                b = c.getBlue();
+            }
+
+            if (mouseButton == LEFT) {
+                stroke(r,g,b);
+                strokeWeight(5);
+                line(mouseX,mouseY,pmouseX,pmouseY);
+            }
+
+        }
     }
 
 

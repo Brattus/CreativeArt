@@ -13,5 +13,6 @@
     <orderEntry type="library" name="gluegen-rt-natives-windows-i5861" level="project" />
     <orderEntry type="library" name="ant-launcher" level="project" />
     <orderEntry type="library" name="gluegen-rt-natives-linux-amd64" level="project" />
+    <orderEntry type="library" name="library" level="application" />
   </component>
 </module>
