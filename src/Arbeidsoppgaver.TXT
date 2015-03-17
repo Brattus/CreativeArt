@@ -10,6 +10,11 @@ Ole-Martin
 ----------------------------
 
 Ramin
+<<<<<<< Updated upstream
+=======
+- Lagre som bilde
+- Send til utskrift
+>>>>>>> Stashed changes
 
 ----------------------------
 
@@ -17,4 +22,14 @@ Per-Olav
 
 ----------------------------
 
+<<<<<<< Updated upstream
 Knut Olav
+=======
+Knut Olav
+
+----------------------------
+
+Things left:
+- Utskriftsmulighet
+- Ramme på bilder
+>>>>>>> Stashed changes

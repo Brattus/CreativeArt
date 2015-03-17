@@ -16,7 +16,7 @@ public class DisplayFrame extends JFrame
     private JButton circleButton;
     private JButton colorPicker;
     private JButton resetButton;
-    private JButton testOle;
+    private JButton testKnapp;
 
     // Menus
     private JMenuBar menuBar;
@@ -91,7 +91,7 @@ public class DisplayFrame extends JFrame
         circleButton = new JButton( "Circles" );
         resetButton = new JButton( "Clear Canvas" );
         colorPicker = new JButton( "Color Picker" );
-        testOle = new JButton( "Test this shit");
+        testKnapp = new JButton( "Test this shit");
 
         // Initiate Menu items
         menuBar = new JMenuBar();
@@ -116,7 +116,7 @@ public class DisplayFrame extends JFrame
         this.add( circleButton );
         this.add( resetButton );
         this.add( colorPicker );
-        this.add ( testOle );
+        this.add ( testKnapp );
 
         this.setJMenuBar( menuBar );
 
@@ -141,7 +141,7 @@ public class DisplayFrame extends JFrame
         circleButton.setBounds( 230, 100, 100, 25 );
         colorPicker.setBounds( 10, 200, 120, 25 );
         resetButton.setBounds( 10, getHeight()-80, 150, 25 );
-        testOle.setBounds ( 10, 300, 150, 25);
+        testKnapp.setBounds(10, 300, 150, 25);
 
         title.setBounds( 10, 10, 300, 100 );
     }
@@ -163,8 +163,8 @@ public class DisplayFrame extends JFrame
         colorPicker.addActionListener( randomArtProcessing );
         colorPicker.setActionCommand( "color" );
 
-        testOle.addActionListener( randomArtProcessing);
-        testOle.setActionCommand("testOle");
+        testKnapp.addActionListener(randomArtProcessing);
+        testKnapp.setActionCommand("testKnapp");
     }
 }
 
