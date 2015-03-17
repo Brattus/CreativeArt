@@ -1,2 +1,2 @@
 # CreativeArt
-Processing project in course ID202712 Systemutvikling
+Processing project in course ID202712 Systemutvikling.
