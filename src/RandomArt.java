@@ -18,7 +18,8 @@ public class RandomArt extends PApplet implements ActionListener
     PGraphics pg1;
     PGraphics pg2;
     PImage img = null;
-
+    float r,g,b = 0;
+    Color cb = null;
     long time = 0;
 
     int st;
@@ -38,6 +39,19 @@ public class RandomArt extends PApplet implements ActionListener
     @Override
     public void draw()
     {
+        if( mousePressed == true){
+            if(mouseButton == RIGHT){
+                cb = JColorChooser.showDialog( null, "Choose a Color", Color.BLACK );
+                r = cb.getRed();
+                g = cb.getGreen();
+                        b = cb.getBlue();
+            }
+            if(mouseButton == LEFT){
+                stroke(r,g,b);
+                strokeWeight(5);
+                line(mouseX,mouseY,pmouseX,pmouseY);
+            }
+        }
         time = millis()/1000;
 
         if(time >= 3 && time <= 4)
@@ -79,7 +93,7 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void createCircles()
     {
-        println( "Circle clicked at: " + millis() );
+        println("Circle clicked at: " + millis());
         for(st = 0; st < 50; st++)
         {
             noStroke();
@@ -116,8 +130,11 @@ public class RandomArt extends PApplet implements ActionListener
 
     public void clearCanvas()
     {
-        clear();
-        background( 255 );
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece", "Clear Canvas?",  JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            clear();
+            background(255);
+        }
     }
 
     private void changeColor()
