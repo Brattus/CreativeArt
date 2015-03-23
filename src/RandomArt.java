@@ -5,19 +5,25 @@
 import processing.core.*;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 
-public class RandomArt extends PApplet implements ActionListener
+public class RandomArt extends PApplet implements ActionListener, MouseListener
 {
     PGraphics pg1;
     PGraphics pg2;
     PImage img = null;
+
+    Color color = null;
+    float red = 0;
+    float green = 0;
+    float blue = 0;
+
+    boolean bordersEnabled = false;
 
     long time = 0;
 
@@ -28,22 +34,26 @@ public class RandomArt extends PApplet implements ActionListener
         size( 1000, 680 );
         background( 255 );
         noStroke();
+
+        frameRate( 60 );
+
         img = loadImage( "splash.jpg" );
         imageMode( CENTER );
         image( img, width / 2, height / 2, 500, 500 );
     }
 
 
-
     @Override
     public void draw()
     {
-        time = millis()/1000;
+        time = millis() / 1000;
 
         if(time >= 3 && time <= 4)
         {
             clearCanvas();
         }
+
+        drawPencil();
     }
 
 
@@ -79,7 +89,7 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void createCircles()
     {
-        println( "Circle clicked at: " + millis() );
+        println( "Circle clicked at: " + millis() / 1000 + " s" );
         for(st = 0; st < 50; st++)
         {
             noStroke();
@@ -93,7 +103,9 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void blurFilter()
     {
-        filter(BLUR, 5);
+        println( "Blur effect clicked at: " + millis() / 1000 + " s" );
+        filter( BLUR, 5 );
+        redraw();
     }
 
     /**
@@ -101,25 +113,73 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void thresholdFilter()
     {
+        println( "Threshold filter clicked at: " + millis() / 1000 + " s" );
         filter( THRESHOLD );
+        redraw();
     }
 
     /**
-     *  Gray scale filter on canvas
+     * Gray scale filter on canvas
      */
     public void grayScaleFilter()
     {
+        println( "Gray scale filter clicked at: " + millis() / 1000 + " s" );
         filter( GRAY );
+        redraw();
     }
 
+    /**
+     * Invert filter on canvas
+     */
+    public void invertFilter()
+    {
+        println( "Invert filter clicked at: " + millis() / 1000 + " s" );
+        filter( INVERT );
+        redraw();
+    }
 
+    /**
+     * Posterize filter on canvas
+     */
+    public void posterizeFilter()
+    {
+        println( "Posterize filter clicked at: " + millis() / 1000 + " s" );
+        filter( POSTERIZE, 3 );
+        redraw();
+    }
 
+    /**
+     * Erode filter on canvas
+     */
+    public void erodeFilter()
+    {
+        println( "Erode filter clicked at: " + millis() / 1000 + " s" );
+        fill( ERODE );
+        redraw();
+    }
+
+    /**
+     * Dilate filter on canvas
+     */
+    public void dilateFilter()
+    {
+        println( "Dilate filter clicked at: " + millis() / 1000 + " s" );
+        filter( DILATE );
+        redraw();
+    }
+
+    /**
+     * Clear the canvas
+     */
     public void clearCanvas()
     {
         clear();
         background( 255 );
     }
 
+    /**
+     * Change the background color, by using a color from the palette.
+     */
     private void changeColor()
     {
         Color c = JColorChooser.showDialog( null, "Choose a Color", Color.BLACK );
@@ -149,11 +209,11 @@ public class RandomArt extends PApplet implements ActionListener
                 switch(s)
                 {
                     case "tif":
-                        JOptionPane.showMessageDialog( this, "Not an valid extension\n" + "Use .jpg, .png or .GIF" );
-                        return;
+                        //JOptionPane.showMessageDialog( this, "Not an valid extension\n" + "Use .jpg, .png or .GIF" );
+                        break;
                     default:
                         partialSave = get( 0, 0, width, height );
-                        partialSave.save( chooser.getSelectedFile().getPath() );
+                        partialSave.save( chooser.getSelectedFile().getPath() + ".jpg" );
                         break;
                 }
             }
@@ -190,7 +250,74 @@ public class RandomArt extends PApplet implements ActionListener
             case "save":
                 saveToFile();
                 break;
+            case "blur":
+                blurFilter();
+                break;
+            case "threshold":
+                thresholdFilter();
+                break;
+            case "gray":
+                grayScaleFilter();
+                break;
+            case "invert":
+                invertFilter();
+                break;
+            case "posterize":
+                posterizeFilter();
+                break;
+            case "erode":
+                erodeFilter();
+                break;
+            case "dilate":
+                dilateFilter();
+                break;
+            case "border":
+                enableBorders();
+                break;
         }
     }
 
+    public void drawPencil()
+    {
+        if(mousePressed)
+        {
+            if(mouseButton == LEFT)
+            {
+                println( "Detected Mouse Left Click!" );
+                stroke( red, green, blue );
+                strokeWeight( 10 );
+                line( mouseX, mouseY, pmouseX, pmouseY );
+            }
+            if(mouseButton == RIGHT)
+            {
+                delay( 100 );
+                color = JColorChooser.showDialog( this, "Choose a Color", Color.BLACK );
+                if(color != null)
+                {
+                    red = color.getRed();
+                    green = color.getGreen();
+                    blue = color.getBlue();
+                }
+            }
+        }
+    }
+
+    public void enableBorders()
+    {
+        bordersEnabled = true;
+        if(bordersEnabled == true)
+        {
+            borders();
+        }
+    }
+
+    public void borders()
+    {
+        stroke( 0 );
+        strokeWeight( 20 );
+        line( 0, 0, width, 0 );
+        line( width, 0, width, height );
+        line( 0, height, width, height );
+        line( 0, 0, 0, height );
+    }
 }
