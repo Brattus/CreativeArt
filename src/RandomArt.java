@@ -66,7 +66,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         for(st = 0; st < 50; st++)
         {
             fill( random( 255 ), random( 255 ), random( 255 ), 200 );
-            triangle( random( 0, width ), random( 0, height ), random( 0, (float) ( width / 1.7 ) ), random( 0, height ), (float) ( width / 2 ), height / 2 );
+            triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
         }
     }
 
@@ -80,7 +80,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         {
             noStroke();
             fill( random( 255 ), random( 255 ), random( 255 ), 170 );
-            rect( random( 0, width ), random( 0, height ), 60, 60 );
+            rect(random(0, width), random(0, height), 60, 60);
         }
     }
 
@@ -89,7 +89,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void createCircles()
     {
-        println( "Circle clicked at: " + millis() / 1000 + " s" );
+        println("Circle clicked at: " + millis() / 1000 + " s");
         for(st = 0; st < 50; st++)
         {
             noStroke();
@@ -173,8 +173,11 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void clearCanvas()
     {
-        clear();
-        background( 255 );
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Clear canvas",  JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            clear();
+            background(255);
+        }
     }
 
     /**
