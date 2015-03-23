@@ -29,15 +29,12 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
     int st;
 
-    public void setup()
-    {
-        size( 1000, 680 );
-        background( 255 );
+    public void setup() {
+        size(1000, 680);
+        background(255);
         noStroke();
 
-        frameRate( 60 );
-
-        image( img, width / 2, height / 2, 500, 500 );
+        frameRate(60);
     }
 
 
