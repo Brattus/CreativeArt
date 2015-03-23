@@ -146,7 +146,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     public void erodeFilter()
     {
         println( "Erode filter clicked at: " + millis() / 1000 + " s" );
-        fill( ERODE );
+        filter( ERODE );
         redraw();
     }
 
