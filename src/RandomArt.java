@@ -37,8 +37,6 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
         frameRate( 60 );
 
-        img = loadImage( "splash.jpg" );
-        imageMode( CENTER );
         image( img, width / 2, height / 2, 500, 500 );
     }
 
@@ -48,10 +46,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     {
         time = millis() / 1000;
 
-        if(time >= 3 && time <= 4)
-        {
-            clearCanvas();
-        }
+
 
         drawPencil();
     }
@@ -173,7 +168,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void clearCanvas()
     {
-        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Clear canvas",  JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Clear canvas ",  JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             clear();
             background(255);
