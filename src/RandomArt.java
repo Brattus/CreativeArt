@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-
+import java.util.Arrays;
 
 
 public class RandomArt extends PApplet implements ActionListener, MouseListener
@@ -31,6 +31,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     int st;
 
     boolean brush1, brush2, brush3 = false;
+    public int response;
 
 
     public void setup() {
@@ -391,13 +392,12 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
     }
 
-    public void randomBrush(){
-
-        float speed = abs(mouseX - pmouseX) + abs(mouseY-pmouseY);
+    public void randomBrush() {
+        float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
         stroke(speed);
         fill(random(255), random(255), random(255), 170);
-        rect(mouseX, mouseY, speed, speed);
-    }
+        ellipse(mouseX, mouseY, speed, speed);
+        }
 
 
     public void enableBorders()
