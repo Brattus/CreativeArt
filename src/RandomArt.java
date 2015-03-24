@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 
+
 public class RandomArt extends PApplet implements ActionListener, MouseListener
 {
     PGraphics pg1;
@@ -58,10 +59,16 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void createTriangles()
     {
+        String firstNumber =
+                JOptionPane.showInputDialog ( "Enter how many triangles you want. Max 2000" );
+        int number = Integer.parseInt (firstNumber);
+        if (number > 2000){
+            number = 2000;
+        }
         println( "Triangle clicked at: " + millis() / 1000 + " s" );
-        for(st = 0; st < 50; st++)
+        for(st = 0; st < number; st++)
         {
-            stroke(8);
+            stroke(1);
             fill( random( 255 ), random( 255 ), random( 255 ), 200 );
             triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
         }
@@ -72,8 +79,14 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void createSquares()
     {
+        String firstNumber =
+                JOptionPane.showInputDialog ( "Enter how many squares you want. Max 2000" );
+        int number = Integer.parseInt (firstNumber);
+        if (number > 2000){
+            number = 2000;
+        }
         println( "Square clicked at: " + millis() );
-        for(st = 0; st < 50; st++)
+        for(st = 0; st < number; st++)
         {
             noStroke();
             fill( random( 255 ), random( 255 ), random( 255 ), 170 );
@@ -86,8 +99,14 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void createCircles()
     {
+        String firstNumber =
+                JOptionPane.showInputDialog ( "Enter how many circles you want. Max 2000" );
+        int number = Integer.parseInt (firstNumber);
+        if (number > 2000){
+            number = 2000;
+        }
         println("Circle clicked at: " + millis() / 1000 + " s");
-        for(st = 0; st < 50; st++)
+        for(st = 0; st < number; st++)
         {
             noStroke();
             fill( random( 255 ), random( 255 ), random( 255 ), 170 );
@@ -374,8 +393,9 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
     public void randomBrush(){
         stroke(255,255,0);
-        strokeWeight(5);
-        line(mouseX, mouseY, pmouseX, pmouseY);
+        float speed = abs(mouseX - pmouseX) + abs(mouseY-pmouseY);
+        stroke(speed);
+        ellipse(mouseX, mouseY, speed, speed);
     }
 
 
