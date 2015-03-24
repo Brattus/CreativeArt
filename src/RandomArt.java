@@ -281,11 +281,9 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
             if (mouseButton == RIGHT) {
                 delay(100);
                 color = JColorChooser.showDialog(this, "Choose a Color", Color.BLACK);
-
                     red = color.getRed();
                     green = color.getGreen();
                     blue = color.getBlue();
-
             }
 
             if (mouseButton == LEFT) {
