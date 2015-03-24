@@ -29,12 +29,14 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
     int st;
 
+
     public void setup() {
         size(1000, 680);
         background(255);
         noStroke();
 
         frameRate(60);
+
     }
 
 
@@ -273,33 +275,32 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         }
     }
 
-    public void drawPencil()
-    {
-        if(mousePressed)
-        {
-            if(mouseButton == LEFT)
-            {
+    public void drawPencil() {
+        if (mousePressed) {
+
+            if (mouseButton == RIGHT) {
+                delay(100);
+                color = JColorChooser.showDialog(this, "Choose a Color", Color.BLACK);
+
+                    red = color.getRed();
+                    green = color.getGreen();
+                    blue = color.getBlue();
+
+            }
+
+            if (mouseButton == LEFT) {
                 println("Detected Mouse Left Click!");
-                int r = 10;
-                stroke(red, green, blue);
-                for(int i = 0; i<20; i++) {
+                for (int i = 0; i < 20; i++) {
+                    int r = 10;
+                    stroke(red, green, blue);
                     strokeWeight(1);
                     line(mouseX + random(r), mouseY + random(r), pmouseX + random(r), pmouseY + random(r));
                 }
             }
-            if(mouseButton == RIGHT)
-            {
-                delay( 100 );
-                color = JColorChooser.showDialog( this, "Choose a Color", Color.BLACK );
-                if(color != null)
-                {
-                    red = color.getRed();
-                    green = color.getGreen();
-                    blue = color.getBlue();
-                }
-            }
         }
     }
+
+
 
     public void enableBorders()
     {
