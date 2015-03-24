@@ -29,6 +29,10 @@ public class DisplayFrame extends JFrame
     private JButton erodeButton;
     private JButton dilateButton;
 
+    //Brush buttons
+    private JButton simpleBrush;
+    private JButton lineBrush;
+    private JButton randomBrush;
 
 
     // Menus
@@ -127,6 +131,10 @@ public class DisplayFrame extends JFrame
         save = new JMenuItem( "Save" );
         save.setMnemonic( KeyEvent.VK_S );
 
+        //Brush buttons
+        simpleBrush = new JButton( "Simple brush");
+        lineBrush = new JButton( "Pencil brush");
+        randomBrush = new JButton( "Test brush");
 
         fileMenu.add( save );
         fileMenu.setMnemonic( KeyEvent.VK_F );
@@ -170,6 +178,11 @@ public class DisplayFrame extends JFrame
         this.add( posterizeButton );
         this.add( erodeButton );
         this.add( dilateButton );
+
+        //Brush buttons
+        this.add ( simpleBrush );
+        this.add ( lineBrush );
+        this.add ( randomBrush );
 
         this.add( title );
         this.add( filters );
@@ -226,6 +239,16 @@ public class DisplayFrame extends JFrame
         dilateButton.setBounds( 10, 430, 100, 25 );
         dilateButton.setBackground( new Color( 0, 255, 0 ) );
 
+        //Brush buttons
+        simpleBrush.setBounds(10, 500, 100, 25);
+        simpleBrush.setBackground( new Color( 232, 177, 141));
+
+        lineBrush.setBounds(10, 530, 100, 25);
+        lineBrush.setBackground(new Color(232, 177, 141));
+
+        randomBrush.setBounds(10, 560, 100, 25);
+        randomBrush.setBackground(new Color(232, 177, 141));
+
 
         title.setBounds( 10, 10, 300, 100 );
         filters.setBounds( 10, 200, 100, 50 );
@@ -273,6 +296,15 @@ public class DisplayFrame extends JFrame
         dilateButton.addActionListener( randomArtProcessing );
         dilateButton.setActionCommand( "dilate" );
 
+        //Brush buttons
+        simpleBrush.addActionListener( randomArtProcessing);
+        simpleBrush.setActionCommand ("simpleBrush");
+
+        lineBrush.addActionListener( randomArtProcessing);
+        lineBrush.setActionCommand ("lineBrush");
+
+        randomBrush.addActionListener( randomArtProcessing);
+        randomBrush.setActionCommand ("randomBrush");
 
         save.addActionListener( randomArtProcessing );
         save.setActionCommand( "save" );

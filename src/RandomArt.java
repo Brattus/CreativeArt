@@ -29,6 +29,8 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
     int st;
 
+    boolean brush1, brush2, brush3 = false;
+
 
     public void setup() {
         size(1000, 680);
@@ -59,7 +61,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         println( "Triangle clicked at: " + millis() / 1000 + " s" );
         for(st = 0; st < 50; st++)
         {
-            noStroke();
+            stroke(8);
             fill( random( 255 ), random( 255 ), random( 255 ), 200 );
             triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
         }
@@ -275,6 +277,15 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
             case "border":
                 enableBorders();
                 break;
+            case "simpleBrush":
+                brush1();
+                break;
+            case "lineBrush":
+                brush2();
+                break;
+            case "randomBrush":
+                brush3();
+                break;
         }
     }
 
@@ -300,6 +311,8 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     }
 
     public void drawPencil() {
+
+
         if (mousePressed) {
 
             if (mouseButton == RIGHT) {
@@ -312,16 +325,58 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
             if (mouseButton == LEFT) {
                 println("Detected Mouse Left Click!");
-                for (int i = 0; i < 20; i++) {
-                    int r = 10;
-                    stroke(red, green, blue);
-                    strokeWeight(1);
-                    line(mouseX + random(r), mouseY + random(r), pmouseX + random(r), pmouseY + random(r));
+
+                if(brush1 == true){
+                    simpleBrush();
+                }
+                if(brush2 == true) {
+                    lineBrush();
+                }
+                if(brush3 == true) {
+                    randomBrush();
                 }
             }
         }
+        }
+
+
+    public void brush1(){
+        brush1 = true;
+        brush2 = false;
+        brush3 = false;
     }
 
+    public void brush2(){
+        brush1 = false;
+        brush2 = true;
+        brush3 = false;
+    }
+    public void brush3(){
+        brush1 = false;
+        brush2 = false;
+        brush3 = true;
+    }
+
+    public void lineBrush() {
+        for (int i = 0; i < 20; i++) {
+            int r = 10;
+            stroke(red, green, blue);
+            strokeWeight(1);
+            line(mouseX + random(r), mouseY + random(r), pmouseX + random(r), pmouseY + random(r));
+        }
+    }
+    public void simpleBrush() {
+            stroke(red, green, blue);
+            strokeWeight(5);
+            line(mouseX, mouseY, pmouseX, pmouseY);
+
+    }
+
+    public void randomBrush(){
+        stroke(255,255,0);
+        strokeWeight(5);
+        line(mouseX, mouseY, pmouseX, pmouseY);
+    }
 
 
     public void enableBorders()
