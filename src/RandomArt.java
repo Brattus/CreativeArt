@@ -88,7 +88,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         println( "Square clicked at: " + millis() );
         for(st = 0; st < number; st++)
         {
-            noStroke();
+            stroke(1);
             fill( random( 255 ), random( 255 ), random( 255 ), 170 );
             rect(random(0, width), random(0, height), 60, 60);
         }
@@ -108,7 +108,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         println("Circle clicked at: " + millis() / 1000 + " s");
         for(st = 0; st < number; st++)
         {
-            noStroke();
+            stroke(1);
             fill( random( 255 ), random( 255 ), random( 255 ), 170 );
             ellipse( random( 0, width ), random( 0, height ), 60, 60 );
         }
@@ -392,20 +392,18 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     }
 
     public void randomBrush(){
-        stroke(255,255,0);
+
         float speed = abs(mouseX - pmouseX) + abs(mouseY-pmouseY);
         stroke(speed);
-        ellipse(mouseX, mouseY, speed, speed);
+        fill(random(255), random(255), random(255), 170);
+        rect(mouseX, mouseY, speed, speed);
     }
 
 
     public void enableBorders()
     {
-        bordersEnabled = true;
-        if(bordersEnabled == true)
-        {
             borders();
-        }
+        strokeWeight(0);
     }
 
     public void borders()
@@ -417,4 +415,5 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         line( 0, height, width, height );
         line( 0, 0, 0, height );
     }
+
 }
