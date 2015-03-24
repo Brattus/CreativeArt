@@ -248,6 +248,9 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
             case "save":
                 saveToFile();
                 break;
+            case "openFile":
+                openFile();
+                break;
             case "blur":
                 blurFilter();
                 break;
@@ -272,6 +275,27 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
             case "border":
                 enableBorders();
                 break;
+        }
+    }
+
+    private void openFile()
+    {
+        PImage image = null;
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter( filter );
+        chooser.setDialogTitle( "Save file" );
+
+        String[] extensionTypes = filter.getExtensions();
+
+        int returnVal = chooser.showSaveDialog( this );
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            image = loadImage( chooser.getSelectedFile().getPath() );
+            imageMode( CENTER );
+            image( image, width / 2, height / 2, width, height );
         }
     }
 

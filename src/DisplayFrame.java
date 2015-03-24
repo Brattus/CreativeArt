@@ -35,21 +35,16 @@ public class DisplayFrame extends JFrame
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem save;
-    private JMenuItem print;
+    private JMenuItem openFile;
 
     // Labels
     private JLabel title;
     private JLabel filters;
 
 
-    public static void main(String[] args)
-    {
-        DisplayFrame displayFrame = new DisplayFrame("Random Art Generator");
-    }
-
-
     /**
      * Construct a new DisplayFrame
+     *
      * @throws HeadlessException
      */
     public DisplayFrame(String title) throws HeadlessException
@@ -67,6 +62,10 @@ public class DisplayFrame extends JFrame
 
     }
 
+    public static void main(String[] args)
+    {
+        DisplayFrame displayFrame = new DisplayFrame("Random Art Generator");
+    }
 
     /**
      * Initiate the Frame configurations
@@ -132,9 +131,9 @@ public class DisplayFrame extends JFrame
         fileMenu.add( save );
         fileMenu.setMnemonic( KeyEvent.VK_F );
 
-        print = new JMenuItem( "Print file" );
-        print.setMnemonic( KeyEvent.VK_P );
-        fileMenu.add( print );
+        openFile = new JMenuItem( "Open file" );
+        openFile.setMnemonic( KeyEvent.VK_O );
+        fileMenu.add( openFile );
 
 
         // Initiate Label
@@ -278,8 +277,8 @@ public class DisplayFrame extends JFrame
         save.addActionListener( randomArtProcessing );
         save.setActionCommand( "save" );
 
-        print.addActionListener( randomArtProcessing );
-        print.setActionCommand( "print" );
+        openFile.addActionListener( randomArtProcessing );
+        openFile.setActionCommand( "openFile" );
     }
 }
 
