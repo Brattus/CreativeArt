@@ -113,7 +113,7 @@ public class DisplayFrame extends JFrame
         circleButton = new JButton( "Circles" );
 
         resetButton = new JButton( "Clear Canvas" );
-        colorPicker = new JButton( "Color Picker" );
+        colorPicker = new JButton( "background Color" );
         borderButton = new JButton( "Enable/Disable borders" );
 
         // Initiate filter buttons

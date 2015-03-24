@@ -57,6 +57,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         println( "Triangle clicked at: " + millis() / 1000 + " s" );
         for(st = 0; st < 50; st++)
         {
+            noStroke();
             fill( random( 255 ), random( 255 ), random( 255 ), 200 );
             triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
         }
@@ -146,7 +147,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     public void erodeFilter()
     {
         println( "Erode filter clicked at: " + millis() / 1000 + " s" );
-        filter( ERODE );
+        filter(ERODE);
         redraw();
     }
 
@@ -278,10 +279,13 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         {
             if(mouseButton == LEFT)
             {
-                println( "Detected Mouse Left Click!" );
-                stroke( red, green, blue );
-                strokeWeight( 10 );
-                line( mouseX, mouseY, pmouseX, pmouseY );
+                println("Detected Mouse Left Click!");
+                int r = 10;
+                stroke(red, green, blue);
+                for(int i = 0; i<20; i++) {
+                    strokeWeight(1);
+                    line(mouseX + random(r), mouseY + random(r), pmouseX + random(r), pmouseY + random(r));
+                }
             }
             if(mouseButton == RIGHT)
             {
