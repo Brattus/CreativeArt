@@ -1,8 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
-
 /**
- * Created by Ramin on 23.03.2015.
+ * Created by Ramin, Ole-Martin og Per-Olav on 16.03.2015.
  */
 public class UndoRedo
 {

@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+
 /**
- * Created by RaminErDigg on 16.03.2015.
+ * Created by Ramin, Ole-Martin og Per-Olav on 16.03.2015.
  */
 public class DisplayFrame extends JFrame
 {
@@ -44,6 +45,7 @@ public class DisplayFrame extends JFrame
     // Labels
     private JLabel title;
     private JLabel filters;
+    private JLabel brushes;
 
 
     /**
@@ -69,8 +71,8 @@ public class DisplayFrame extends JFrame
     public static void main(String[] args)
     {
         DisplayFrame displayFrame = new DisplayFrame("Random Art Generator");
-    }
 
+    }
     /**
      * Initiate the Frame configurations
      */
@@ -79,12 +81,12 @@ public class DisplayFrame extends JFrame
         this.setSize(1366 , 768 );
         this.setMinimumSize( new Dimension( 1366, 768 ) );
 
-        this.setBackground( new Color( 116, 228, 74 ) );
+        this.setBackground( new Color( 116, 228, 74) );
 
 
         if(this != null)
         {
-            this.setResizable( false );
+            this.setResizable( true );
         }
         setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         setLocationRelativeTo( null );
@@ -152,6 +154,12 @@ public class DisplayFrame extends JFrame
         filters = new JLabel( "Filters" );
         filters.setForeground( new Color( 0, 0, 0 ) );
         filters.setFont( new Font( null, 2, 20 ) );
+
+        brushes = new JLabel("Brushes");
+        brushes.setForeground(new Color(0, 0, 0));
+        brushes.setFont( new Font( null, 2, 25 ) );
+
+
     }
 
 
@@ -252,6 +260,7 @@ public class DisplayFrame extends JFrame
 
         title.setBounds( 10, 10, 300, 100 );
         filters.setBounds( 10, 200, 100, 50 );
+        brushes.setBounds( 10, 400, 100, 50 );
     }
 
     private void addActionListeners()

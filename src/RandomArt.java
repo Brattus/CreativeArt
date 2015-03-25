@@ -1,5 +1,5 @@
 /**
- * Created by Ramin on 16.03.2015.
+ * Created by Ramin, Ole-Martin og Per-Olav on 16.03.2015.
  */
 
 import processing.core.*;
