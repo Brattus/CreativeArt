@@ -1,10 +1,9 @@
-import javax.management.JMRuntimeException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by Ramin, Per-Olav, Ole-Martin and Knut Olav on 16.03.2015.
+ * Created by RaminErDigg on 16.03.2015.
  */
 public class DisplayFrame extends JFrame
 {
@@ -57,6 +56,7 @@ public class DisplayFrame extends JFrame
     // Labels
     private JLabel title;
     private JLabel filters;
+    private JLabel shapes;
 
 
     /**
@@ -108,7 +108,7 @@ public class DisplayFrame extends JFrame
         filterMenu = new JMenu( "Filters" );
 
         this.setJMenuBar( menuBar );
-        menuBar.add( fileMenu );
+        menuBar.add(fileMenu);
         menuBar.add( filterMenu );
 
         setVisible( true );
@@ -126,12 +126,17 @@ public class DisplayFrame extends JFrame
         processingPanel = new JPanel();
 
         // Initiate shape buttons
-        triangleButton = new JButton( "Triangles" );
-        squareButton = new JButton("Squares");
-        circleButton = new JButton( "Circles" );
+        ImageIcon imageTriangle = new ImageIcon("Buttons/triangle.png");
+        triangleButton = new JButton( "", imageTriangle );
+
+        ImageIcon imageSquare = new ImageIcon("Buttons/square.png");
+        squareButton = new JButton("", imageSquare);
+
+        ImageIcon imageCircle = new ImageIcon("Buttons/circle.png");
+        circleButton = new JButton( "" , imageCircle);
 
         resetButton = new JButton( "Clear Canvas" );
-        colorPicker = new JButton( "background Color" );
+        colorPicker = new JButton( "Choose background color" );
         borderButton = new JButton( "Enable/Disable borders" );
 
         // Initiate filter buttons
@@ -147,9 +152,15 @@ public class DisplayFrame extends JFrame
         save.setMnemonic( KeyEvent.VK_S );
 
         //Brush buttons
-        simpleBrush = new JButton( "Simple brush" );
-        lineBrush = new JButton( "Pencil brush" );
-        randomBrush = new JButton( "Test brush" );
+        ImageIcon imageSimpleBrush = new ImageIcon("Buttons/plainBrush.png");
+        simpleBrush = new JButton( "", imageSimpleBrush);
+
+        ImageIcon imageRoughBrush = new ImageIcon ("Buttons/roughBrush.png");
+        lineBrush = new JButton( "", imageRoughBrush);
+
+        ImageIcon imageCircleBrush = new ImageIcon ("Buttons/circleBrush.png");
+        randomBrush = new JButton( "", imageCircleBrush);
+
     
         saveCustomRes = new JMenuItem( "Save custom resolution" );
         fileMenu.add( save );
@@ -182,9 +193,13 @@ public class DisplayFrame extends JFrame
         title.setForeground( new Color( 0, 0, 0 ) );
         title.setFont( new Font( null, 2, 25 ) );
 
-        filters = new JLabel( "Filters" );
+        filters = new JLabel( "Brushes" );
         filters.setForeground( new Color( 0, 0, 0 ) );
         filters.setFont( new Font( null, 2, 20 ) );
+
+        shapes = new JLabel( "Random shapes" );
+        shapes.setForeground( new Color( 0, 0, 0 ) );
+        shapes.setFont( new Font( null, 2, 20 ) );
     }
 
 
@@ -222,12 +237,13 @@ public class DisplayFrame extends JFrame
         filterMenu.add( threshold );
         filterMenu.add( grayScale );
         filterMenu.add( invert );
-        filterMenu.add( posterize );
-        filterMenu.add( erode );
-        filterMenu.add( dialate );
+        filterMenu.add(posterize);
+        filterMenu.add(erode);
+        filterMenu.add(dialate);
 
         this.add( title );
         this.add( filters );
+        this.add( shapes );
 
 
         processingPanel.add( randomArtProcessing );
@@ -243,23 +259,23 @@ public class DisplayFrame extends JFrame
 
         processingPanel.setBounds( getWidth() - 1030, 10, 1000, getHeight() - 500 );
 
-        triangleButton.setBounds( 10, 100, 100, 25 );
-        triangleButton.setBackground( new Color( 232, 177, 141 ) );
+        triangleButton.setBounds( 10, 250, 100, 100 );
+        //triangleButton.setBackground( new Color( 232, 177, 141 ) );
 
-        squareButton.setBounds( 120, 100, 100, 25 );
-        squareButton.setBackground( new Color( 232, 177, 141 ) );
+        squareButton.setBounds( 120, 250, 100, 100 );
+        //squareButton.setBackground( new Color( 232, 177, 141 ) );
 
-        circleButton.setBounds( 230, 100, 100, 25 );
-        circleButton.setBackground( new Color( 232, 177, 141 ) );
+        circleButton.setBounds( 230, 250, 100, 100 );
+        //circleButton.setBackground( new Color( 232, 177, 141 ) );
 
-        colorPicker.setBounds( 10, 150, 120, 25 );
+        colorPicker.setBounds( 10, 100, 315, 25 );
         colorPicker.setBackground( new Color( 232, 177, 141 ) );
 
         resetButton.setBounds( 10, getHeight() - 100, 150, 25 );
 
-        borderButton.setBounds( 140, 150, 170, 25 );
+        borderButton.setBounds( 10,135, 315, 25 );
         borderButton.setBackground( new Color( 232, 177, 141 ) );
-
+/*
         blurButton.setBounds( 10, 250, 100, 25 );
         blurButton.setBackground( new Color( 0, 255, 0 ) );
 
@@ -280,20 +296,21 @@ public class DisplayFrame extends JFrame
 
         dilateButton.setBounds( 10, 430, 100, 25 );
         dilateButton.setBackground( new Color( 0, 255, 0 ) );
-
+*/
         //Brush buttons
-        simpleBrush.setBounds(10, 500, 100, 25);
+        simpleBrush.setBounds(10, 500, 240, 48);
         simpleBrush.setBackground( new Color( 232, 177, 141));
 
-        lineBrush.setBounds(10, 530, 100, 25);
+        lineBrush.setBounds(10, 550, 240, 48);
         lineBrush.setBackground(new Color(232, 177, 141));
 
-        randomBrush.setBounds(10, 560, 100, 25);
+        randomBrush.setBounds(10, 600, 240, 48);
         randomBrush.setBackground(new Color(232, 177, 141));
 
 
         title.setBounds( 10, 10, 300, 100 );
-        filters.setBounds( 10, 200, 100, 50 );
+        filters.setBounds( 10, 460, 100, 50 );
+        shapes.setBounds ( 10, 210, 300,50);
     }
 
     private void addActionListeners()
