@@ -1,4 +1,3 @@
-import javax.management.JMRuntimeException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -30,22 +29,17 @@ public class DisplayFrame extends JFrame
     private JButton erodeButton;
     private JButton dilateButton;
 
+    //Brush buttons
+    private JButton simpleBrush;
+    private JButton lineBrush;
+    private JButton randomBrush;
+
+
     // Menus
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem save;
-    private JMenuItem saveCustomRes;
     private JMenuItem openFile;
-
-    // Filter menu
-    private JMenu filterMenu;
-    private JMenuItem blur;
-    private JMenuItem threshold;
-    private JMenuItem grayScale;
-    private JMenuItem invert;
-    private JMenuItem posterize;
-    private JMenuItem erode;
-    private JMenuItem dialate;
 
     // Labels
     private JLabel title;
@@ -98,11 +92,9 @@ public class DisplayFrame extends JFrame
         // Initiate Menu items
         menuBar = new JMenuBar();
         fileMenu = new JMenu( "File" );
-        filterMenu = new JMenu( "Filters" );
 
         this.setJMenuBar( menuBar );
         menuBar.add( fileMenu );
-        menuBar.add( filterMenu );
 
         setVisible( true );
     }
@@ -139,29 +131,17 @@ public class DisplayFrame extends JFrame
         save = new JMenuItem( "Save" );
         save.setMnemonic( KeyEvent.VK_S );
 
-        saveCustomRes = new JMenuItem( "Save custom resolution" );
+        //Brush buttons
+        simpleBrush = new JButton( "Simple brush");
+        lineBrush = new JButton( "Pencil brush");
+        randomBrush = new JButton( "Test brush");
 
         fileMenu.add( save );
         fileMenu.setMnemonic( KeyEvent.VK_F );
 
-        fileMenu.add( saveCustomRes );
-
         openFile = new JMenuItem( "Open file" );
-        KeyStroke ctrlXKeyStroke = KeyStroke.getKeyStroke( "control X" );
-        openFile.setAccelerator( ctrlXKeyStroke );
-        //openFile.setMnemonic( KeyEvent.VK_O );
-
+        openFile.setMnemonic( KeyEvent.VK_O );
         fileMenu.add( openFile );
-
-
-        // Filter
-        blur = new JMenuItem( "Blur" );
-        threshold = new JMenuItem( "Threshold" );
-        grayScale = new JMenuItem( "Gray scale" );
-        invert = new JMenuItem( "Invert colors" );
-        posterize = new JMenuItem( "Posterize" );
-        erode = new JMenuItem( "Erode" );
-        dialate = new JMenuItem( "Dialate" );
 
 
         // Initiate Label
@@ -199,14 +179,10 @@ public class DisplayFrame extends JFrame
         this.add( erodeButton );
         this.add( dilateButton );
 
-        // Filter Menu
-        filterMenu.add( blur );
-        filterMenu.add( threshold );
-        filterMenu.add( grayScale );
-        filterMenu.add( invert );
-        filterMenu.add( posterize );
-        filterMenu.add( erode );
-        filterMenu.add( dialate );
+        //Brush buttons
+        this.add ( simpleBrush );
+        this.add ( lineBrush );
+        this.add ( randomBrush );
 
         this.add( title );
         this.add( filters );
@@ -263,6 +239,16 @@ public class DisplayFrame extends JFrame
         dilateButton.setBounds( 10, 430, 100, 25 );
         dilateButton.setBackground( new Color( 0, 255, 0 ) );
 
+        //Brush buttons
+        simpleBrush.setBounds(10, 500, 100, 25);
+        simpleBrush.setBackground( new Color( 232, 177, 141));
+
+        lineBrush.setBounds(10, 530, 100, 25);
+        lineBrush.setBackground(new Color(232, 177, 141));
+
+        randomBrush.setBounds(10, 560, 100, 25);
+        randomBrush.setBackground(new Color(232, 177, 141));
+
 
         title.setBounds( 10, 10, 300, 100 );
         filters.setBounds( 10, 200, 100, 50 );
@@ -308,39 +294,23 @@ public class DisplayFrame extends JFrame
         erodeButton.setActionCommand( "erode" );
 
         dilateButton.addActionListener( randomArtProcessing );
-        dilateButton.setActionCommand( "dialate" );
+        dilateButton.setActionCommand( "dilate" );
 
+        //Brush buttons
+        simpleBrush.addActionListener( randomArtProcessing);
+        simpleBrush.setActionCommand ("simpleBrush");
+
+        lineBrush.addActionListener( randomArtProcessing);
+        lineBrush.setActionCommand ("lineBrush");
+
+        randomBrush.addActionListener( randomArtProcessing);
+        randomBrush.setActionCommand ("randomBrush");
 
         save.addActionListener( randomArtProcessing );
         save.setActionCommand( "save" );
 
-        saveCustomRes.addActionListener( randomArtProcessing );
-        saveCustomRes.setActionCommand( "saveHighRes" );
-
         openFile.addActionListener( randomArtProcessing );
         openFile.setActionCommand( "openFile" );
-
-        // Filter Memu
-        blur.addActionListener( randomArtProcessing );
-        blur.setActionCommand( "blur" );
-
-        threshold.addActionListener( randomArtProcessing );
-        threshold.setActionCommand( "threshold" );
-
-        grayScale.addActionListener( randomArtProcessing );
-        grayScale.setActionCommand( "gray" );
-
-        invert.addActionListener( randomArtProcessing );
-        invert.setActionCommand( "invert" );
-
-        posterize.addActionListener( randomArtProcessing );
-        posterize.setActionCommand( "posterize" );
-
-        erode.addActionListener( randomArtProcessing );
-        erode.setActionCommand( "erode" );
-
-        dialate.addActionListener( randomArtProcessing );
-        dialate.setActionCommand( "dialate" );
     }
 }
 
