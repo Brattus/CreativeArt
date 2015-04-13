@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by RaminErDigg on 16.03.2015.
+ * Created by Ramin, Per-Olav, Ole-Martin and Knut Olav on 16.03.2015.
  */
 public class DisplayFrame extends JFrame
 {
@@ -145,7 +145,7 @@ public class DisplayFrame extends JFrame
 
         save = new JMenuItem( "Save" );
         save.setMnemonic( KeyEvent.VK_S );
-    
+
         //Brush buttons
         simpleBrush = new JButton( "Simple brush" );
         lineBrush = new JButton( "Pencil brush" );
@@ -211,8 +211,7 @@ public class DisplayFrame extends JFrame
         this.add( posterizeButton );
         this.add( erodeButton );
         this.add( dilateButton );
-    
-    
+
         //Brush buttons
         this.add ( simpleBrush );
         this.add ( lineBrush );
@@ -283,14 +282,14 @@ public class DisplayFrame extends JFrame
         dilateButton.setBackground( new Color( 0, 255, 0 ) );
 
         //Brush buttons
-        simpleBrush.setBounds( 10, 500, 100, 25 );
-        simpleBrush.setBackground( new Color( 232, 177, 141 ) );
+        simpleBrush.setBounds(10, 500, 100, 25);
+        simpleBrush.setBackground( new Color( 232, 177, 141));
 
-        lineBrush.setBounds( 10, 530, 100, 25 );
-        lineBrush.setBackground( new Color( 232, 177, 141 ) );
+        lineBrush.setBounds(10, 530, 100, 25);
+        lineBrush.setBackground(new Color(232, 177, 141));
 
-        randomBrush.setBounds( 10, 560, 100, 25 );
-        randomBrush.setBackground( new Color( 232, 177, 141 ) );
+        randomBrush.setBounds(10, 560, 100, 25);
+        randomBrush.setBackground(new Color(232, 177, 141));
 
 
         title.setBounds( 10, 10, 300, 100 );
