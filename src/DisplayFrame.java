@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by RaminErDigg on 16.03.2015.
+ * Created by Ramin, Per-Olav, Ole-Martin and Knut Olav on 16.03.2015.
  */
 public class DisplayFrame extends JFrame
 {
@@ -91,7 +91,7 @@ public class DisplayFrame extends JFrame
 
         // Initiate Menu items
         menuBar = new JMenuBar();
-        fileMenu = new JMenu( "File" );
+        fileMenu = new JMenu( "File");
 
         this.setJMenuBar( menuBar );
         menuBar.add( fileMenu );
@@ -180,8 +180,8 @@ public class DisplayFrame extends JFrame
         this.add( dilateButton );
 
         //Brush buttons
-        this.add ( simpleBrush );
-        this.add ( lineBrush );
+        this.add ( simpleBrush);
+        this.add (lineBrush);
         this.add ( randomBrush );
 
         this.add( title );
