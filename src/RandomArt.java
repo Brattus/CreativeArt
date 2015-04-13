@@ -52,7 +52,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         camera();
 
         drawPencil();
-        eraser();
+       // eraser();
     }
 
 
