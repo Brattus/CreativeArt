@@ -55,6 +55,7 @@ public class DisplayFrame extends JFrame
     // Shortcuts
     private KeyStroke ctrlOKeyStroke = null;
     private KeyStroke ctrlSKeyStroke = null;
+    private KeyStroke ctrlShiftSKeyStroke = null;
 
     // Labels
     private JLabel title;
@@ -175,6 +176,8 @@ public class DisplayFrame extends JFrame
         fileMenu.add( openFile );
 
         saveHighres = new JMenuItem( "Save with different resolution" );
+        ctrlShiftSKeyStroke = KeyStroke.getKeyStroke( "control shift S" );
+        saveHighres.setAccelerator( ctrlShiftSKeyStroke );
         fileMenu.add( saveHighres );
 
         // Filter
