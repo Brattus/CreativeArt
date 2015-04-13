@@ -142,7 +142,7 @@ public class DisplayFrame extends JFrame
         ImageIcon imageCircle = new ImageIcon( "Buttons/alt_circle.jpg" );
         circleButton = new JButton( "" , imageCircle);
 
-        resetButton = new JButton( "Clear Canvas" );
+        resetButton = new JButton( "Clear" );
         colorPicker = new JButton( "Choose background color" );
         borderButton = new JButton( "Enable/Disable borders" );
         ereaserButton = new JButton( "Eraser" );
@@ -297,11 +297,11 @@ public class DisplayFrame extends JFrame
         colorPicker.setBounds( 10, 100, 315, 25 );
         //colorPicker.setBackground( new Color( 232, 177, 141 ) );
 
-        resetButton.setBounds( 10, getHeight() - 100, 150, 25 );
+        resetButton.setBounds( 10, getHeight() - 100, 155, 25 );
 
         borderButton.setBounds( 10,135, 315, 25 );
 
-        ereaserButton.setBounds( 165, getHeight() - 100, 100, 25 );
+        ereaserButton.setBounds( 170, getHeight() - 100, 155, 25 );
         //borderButton.setBackground( new Color( 232, 177, 141 ) );
 
         //Brush buttons
