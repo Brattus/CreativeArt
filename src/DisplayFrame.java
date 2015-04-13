@@ -144,7 +144,7 @@ public class DisplayFrame extends JFrame
 
         resetButton = new JButton( "Clear" );
         colorPicker = new JButton( "Choose background color" );
-        borderButton = new JButton( "Enable/Disable borders" );
+        borderButton = new JButton( "Enable borders" );
         ereaserButton = new JButton( "Eraser" );
 
 
