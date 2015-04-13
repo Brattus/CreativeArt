@@ -52,6 +52,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         camera();
 
         drawPencil();
+        eraser();
     }
 
 
@@ -500,23 +501,16 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         line( 0, 0, 0, height );
     }
 
-    public void eraserEnabled()
-    {
-        eraserEnabled = true;
-    }
 
     public void eraser()
     {
-        eraserEnabled();
         if(mousePressed)
         {
             if(mouseButton == LEFT)
             {
-                if(eraserEnabled == true)
-                {
+                noStroke();
                     fill( redBG, greenBG, blueBG );
-                    rect( mouseX, mouseY, 20, 20 );
-                }
+                ellipse( pmouseX, pmouseY, 50, 50 );
             }
         }
     }
