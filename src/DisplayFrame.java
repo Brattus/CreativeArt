@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+ import javax.swing.JFrame;
 
 /**
  * Created by RaminErDigg on 16.03.2015.
@@ -63,6 +64,7 @@ public class DisplayFrame extends JFrame
     private JLabel shapes;
 
 
+
     /**
      * Construct a new DisplayFrame
      *
@@ -86,6 +88,7 @@ public class DisplayFrame extends JFrame
     public static void main(String[] args)
     {
         DisplayFrame displayFrame = new DisplayFrame("Random Art Generator");
+
     }
 
     /**
@@ -117,7 +120,6 @@ public class DisplayFrame extends JFrame
 
         setVisible( true );
     }
-
 
     /**
      * Initiate the field components
@@ -199,7 +201,7 @@ public class DisplayFrame extends JFrame
         filters.setForeground( new Color( 0, 0, 0 ) );
         filters.setFont( new Font( null, 2, 20 ) );
 
-        shapes = new JLabel( "Random shapes" );
+        shapes = new JLabel( "Shapes" );
         shapes.setForeground( new Color( 0, 0, 0 ) );
         shapes.setFont( new Font( null, 2, 20 ) );
     }
