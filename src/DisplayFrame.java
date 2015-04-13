@@ -28,6 +28,9 @@ public class DisplayFrame extends JFrame
     private JButton lineBrush;
     private JButton randomBrush;
 
+    //something special
+    private JButton squareBackground;
+
 
     // Menus
     private JMenuBar menuBar;
@@ -104,7 +107,7 @@ public class DisplayFrame extends JFrame
         processingPanel = new JPanel();
 
         this.setSize( randomArtProcessing.width, randomArtProcessing.height );
-        this.setMinimumSize( new Dimension( 1366, 768 ) );
+        this.setMinimumSize(new Dimension(1366, 768));
 
 
         if(this != null)
@@ -162,7 +165,11 @@ public class DisplayFrame extends JFrame
         ImageIcon imageCircleBrush = new ImageIcon ("Buttons/circleBrush.png");
         randomBrush = new JButton( "", imageCircleBrush);
 
-        fileMenu.add( save );
+        //something special
+        ImageIcon imagesquareBackground = new ImageIcon ("Buttons/squareBackground.png");
+        squareBackground = new JButton( "", imagesquareBackground);
+
+        fileMenu.add(save);
         fileMenu.setMnemonic( KeyEvent.VK_F );
 
         openFile = new JMenuItem( "Open file" );
@@ -173,13 +180,13 @@ public class DisplayFrame extends JFrame
 
         saveHighres = new JMenuItem( "Save with different resolution" );
         ctrlShiftSKeyStroke = KeyStroke.getKeyStroke( "control shift S" );
-        saveHighres.setAccelerator( ctrlShiftSKeyStroke );
-        fileMenu.add( saveHighres );
+        saveHighres.setAccelerator(ctrlShiftSKeyStroke);
+        fileMenu.add(saveHighres);
 
         // Filter
         blur = new JMenuItem( "Blur" );
         ctrl1 = KeyStroke.getKeyStroke( "control 1" );
-        blur.setAccelerator( ctrl1 );
+        blur.setAccelerator(ctrl1);
 
         threshold = new JMenuItem( "Threshold" );
         ctrl2 = KeyStroke.getKeyStroke( "control 2" );
@@ -219,7 +226,7 @@ public class DisplayFrame extends JFrame
         shapes.setFont( new Font( null, 2, 20 ) );
 
         backgroundLabel = new JLabel( new ImageIcon( "Application pics/AppBG3.jpg" ) );
-        backgroundLabel.setBounds( 0, 0, getWidth(), getHeight() );
+        backgroundLabel.setBounds(0, 0, getWidth(), getHeight());
     }
 
 
@@ -243,6 +250,9 @@ public class DisplayFrame extends JFrame
         this.add ( simpleBrush );
         this.add ( lineBrush );
         this.add ( randomBrush );
+
+        //something special
+        this.add (squareBackground);
         
         // Filter Menu
         filterMenu.add( blur );
@@ -320,6 +330,10 @@ public class DisplayFrame extends JFrame
         randomBrush.setBounds(10, 600, 240, 48);
         randomBrush.setBackground(new Color(232, 177, 141));
 
+        //Something special
+        squareBackground.setBounds(10, 400, 240, 48);
+        squareBackground.setBackground(new Color(232, 177, 141));
+
 
         title.setBounds( 10, 10, 300, 100 );
         filters.setBounds( 10, 460, 100, 50 );
@@ -358,6 +372,10 @@ public class DisplayFrame extends JFrame
 
         randomBrush.addActionListener( randomArtProcessing );
         randomBrush.setActionCommand( "randomBrush" );
+
+        //sOMETHING SPECIAL
+        squareBackground.addActionListener( randomArtProcessing );
+        squareBackground.setActionCommand( "squareBackground");
 
         save.addActionListener( randomArtProcessing );
         save.setActionCommand( "save" );
