@@ -96,7 +96,12 @@ public class DisplayFrame extends JFrame
      */
     private void initiateFrame()
     {
-        this.setSize(1366 , 768 );
+        // Initiate processing items
+        randomArtProcessing = new RandomArt();
+        randomArtProcessing.init();
+        processingPanel = new JPanel();
+
+        this.setSize( randomArtProcessing.width, randomArtProcessing.height );
         this.setMinimumSize( new Dimension( 1366, 768 ) );
 
         this.setBackground( new Color( 116, 228, 74 ) );
@@ -126,10 +131,7 @@ public class DisplayFrame extends JFrame
      */
     private void initiateComponents()
     {
-        // Initiate processing items
-        randomArtProcessing = new RandomArt();
-        randomArtProcessing.init();
-        processingPanel = new JPanel();
+
 
         // Initiate shape buttons
         ImageIcon imageTriangle = new ImageIcon("Buttons/triangle.png");
@@ -170,7 +172,7 @@ public class DisplayFrame extends JFrame
 
         fileMenu.add( save );
         fileMenu.setMnemonic( KeyEvent.VK_F );
-        
+
         openFile = new JMenuItem( "Open file" );
         ctrlOKeyStroke = KeyStroke.getKeyStroke( "control O" );
         openFile.setAccelerator( ctrlOKeyStroke );
@@ -261,7 +263,7 @@ public class DisplayFrame extends JFrame
     {
         setLayout( null );
 
-        processingPanel.setBounds( getWidth() - 1030, 10, 1000, getHeight() - 500 );
+        processingPanel.setBounds( 350, 10, 1000, 680 );
 
         triangleButton.setBounds( 10, 250, 100, 100 );
         //triangleButton.setBackground( new Color( 232, 177, 141 ) );
