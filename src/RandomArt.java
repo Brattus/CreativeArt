@@ -19,22 +19,29 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     PGraphics pg1;
     PGraphics pg2;
     PImage img = null;
+
     Color color = null;
     float red = 0;
     float green = 0;
     float blue = 0;
+
     boolean bordersEnabled = false;
+
     long time = 0;
+
     int st;
     boolean brush1, brush2, brush3 = false;
 
-    public void setup()
-    {
-        size( 1000, 680 );
-        background( 255 );
+    boolean brush1, brush2, brush3 = false;
+    public int response;
+
+
+    public void setup() {
+        size(1000, 680);
+        background(255);
         noStroke();
 
-        frameRate( 60 );
+        frameRate(60);
 
     }
 
@@ -66,7 +73,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         {
             stroke( 1 );
             fill( random( 255 ), random( 255 ), random( 255 ), 200 );
-            triangle( random( 0, width ), random( 0, height ), random( 0, (float) ( width / 1.7 ) ), random( 0, height ), (float) ( width / 2 ), height / 2 );
+            triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
         }
     }
 
@@ -75,16 +82,17 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void createSquares()
     {
-        String firstNumber = JOptionPane.showInputDialog( "Enter how many squares you want. Max 2000" );
-        int number = Integer.parseInt( firstNumber );
-        if(number > 2000)
+        String firstNumber =
+                JOptionPane.showInputDialog ( "Enter how many squares you want. Max 2000" );
+        int number = Integer.parseInt (firstNumber);
+        if (number > 2000)
         {
             number = 2000;
         }
         println( "Square clicked at: " + millis() );
         for(st = 0; st < number; st++)
         {
-            stroke( 1 );
+            noStroke();
             fill( random( 255 ), random( 255 ), random( 255 ), 170 );
             rect( random( 0, width ), random( 0, height ), 60, 60 );
         }
@@ -166,7 +174,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     public void erodeFilter()
     {
         println( "Erode filter clicked at: " + millis() / 1000 + " s" );
-        filter( ERODE );
+        filter(ERODE);
         redraw();
     }
 
@@ -185,11 +193,10 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void clearCanvas()
     {
-        int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Clear canvas ", JOptionPane.YES_NO_OPTION );
-        if(reply == JOptionPane.YES_OPTION)
-        {
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Clear canvas ",  JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
             clear();
-            background( 255 );
+            background(255);
         }
     }
 
@@ -202,44 +209,6 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         background( c.getRGB() );
     }
 
-    /**
-     * Save the image to a file
-     */
-    private void saveToFile()
-    {
-        PImage partialSave = null;
-
-        FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
-
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter( filter );
-        chooser.setDialogTitle( "Save file" );
-
-        String[] extensionTypes = filter.getExtensions();
-
-        int returnVal = chooser.showSaveDialog( this );
-        if(returnVal == JFileChooser.APPROVE_OPTION)
-        {
-            for(String s : extensionTypes)
-            {
-                switch(s)
-                {
-                    case "tif":
-                        //JOptionPane.showMessageDialog( this, "Not an valid extension\n" + "Use .jpg, .png or .GIF" );
-                        break;
-                    default:
-                        partialSave = get( 0, 0, width, height );
-                        partialSave.save( chooser.getSelectedFile().getPath() + ".jpg" );
-                        break;
-                }
-            }
-
-        }
-    }
-
-    /**
-     * Save with a specified resolution
-     */
     public void saveHighRes()
     {
         PImage partialSave = null;
@@ -287,7 +256,38 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         }
     }
 
+    /**
+     * Save the image to a file
+     */
+    private void saveToFile()
+    {
+        PImage partialSave = null;
 
+        FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter( filter );
+        chooser.setDialogTitle( "Save file" );
+
+        String[] extensionTypes = filter.getExtensions();
+
+        int returnVal = chooser.showSaveDialog( this );
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            for(String s : extensionTypes)
+            {
+                switch(s)
+                {
+                    case "tif":
+                        break;
+                    default:
+                        partialSave = get( 0, 0, width, height );
+                        partialSave.save( chooser.getSelectedFile().getPath() + ".jpg" );
+                        break;
+                }
+            }
+        }
+    }
 
 
     /**
@@ -318,9 +318,6 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
             case "save":
                 saveToFile();
                 break;
-            case "saveHighRes":
-                saveHighRes();
-                break;
             case "openFile":
                 openFile();
                 break;
@@ -342,7 +339,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
             case "erode":
                 erodeFilter();
                 break;
-            case "dilate":
+            case "dialate":
                 dilateFilter();
                 break;
             case "border":
@@ -372,7 +369,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
         String[] extensionTypes = filter.getExtensions();
 
-        int returnVal = chooser.showSaveDialog( this );
+        int returnVal = chooser.showOpenDialog( this );
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
             image = loadImage( chooser.getSelectedFile().getPath() );
@@ -383,8 +380,6 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
     public void drawPencil()
     {
-
-
         if(mousePressed)
         {
 
@@ -397,80 +392,74 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
                 blue = color.getBlue();
             }
 
-            if(mouseButton == LEFT)
+            if (mouseButton == LEFT) 
             {
-                println( "Detected Mouse Left Click!" );
+                println("Detected Mouse Left Click!");
 
                 if(brush1 == true)
                 {
                     simpleBrush();
                 }
-                if(brush2 == true)
+                if(brush2 == true) 
                 {
                     lineBrush();
                 }
-                if(brush3 == true)
+                if(brush3 == true) 
                 {
                     randomBrush();
                 }
             }
         }
-    }
+        }
 
 
-    public void brush1()
-    {
+    public void brush1(){
         brush1 = true;
         brush2 = false;
         brush3 = false;
     }
 
-    public void brush2()
-    {
+    public void brush2(){
         brush1 = false;
         brush2 = true;
         brush3 = false;
     }
-
-    public void brush3()
-    {
+    public void brush3(){
         brush1 = false;
         brush2 = false;
         brush3 = true;
     }
 
-    public void lineBrush()
-    {
-        for(int i = 0; i < 20; i++)
-        {
+    public void lineBrush() {
+        for (int i = 0; i < 20; i++) {
             int r = 10;
-            stroke( red, green, blue );
-            strokeWeight( 1 );
-            line( mouseX + random( r ), mouseY + random( r ), pmouseX + random( r ), pmouseY + random( r ) );
+            stroke(red, green, blue);
+            strokeWeight(1);
+            line(mouseX + random(r), mouseY + random(r), pmouseX + random(r), pmouseY + random(r));
         }
     }
-
-    public void simpleBrush()
-    {
-        stroke( red, green, blue );
-        strokeWeight( 5 );
-        line( mouseX, mouseY, pmouseX, pmouseY );
+    public void simpleBrush() {
+            stroke(red, green, blue);
+            strokeWeight(5);
+            line(mouseX, mouseY, pmouseX, pmouseY);
 
     }
 
-    public void randomBrush()
-    {
-        float speed = abs( mouseX - pmouseX ) + abs( mouseY - pmouseY );
-        stroke( speed );
-        fill( random( 255 ), random( 255 ), random( 255 ), 170 );
-        ellipse( mouseX, mouseY, speed, speed );
-    }
+    public void randomBrush() {
+        float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
+        stroke(speed);
+        fill(random(255), random(255), random(255), 170);
+        ellipse(mouseX, mouseY, speed, speed);
+        }
 
 
     public void enableBorders()
     {
+        bordersEnabled = true;
+        if(bordersEnabled == true)
+        {
             borders();
-        strokeWeight( 0 );
+        }
     }
 
     public void borders()
@@ -482,5 +471,4 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         line( 0, height, width, height );
         line( 0, 0, 0, height );
     }
-
 }
