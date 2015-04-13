@@ -53,7 +53,7 @@ public class DisplayFrame extends JFrame
     private JMenuItem dialate;
 
     // Shortcuts
-    private KeyStroke ctrlPKeyStroke = null;
+    private KeyStroke ctrlOKeyStroke = null;
     private KeyStroke ctrlSKeyStroke = null;
 
     // Labels
@@ -169,8 +169,8 @@ public class DisplayFrame extends JFrame
         fileMenu.setMnemonic( KeyEvent.VK_F );
         
         openFile = new JMenuItem( "Open file" );
-        ctrlPKeyStroke = KeyStroke.getKeyStroke( "control P" );
-        openFile.setAccelerator( ctrlPKeyStroke );
+        ctrlOKeyStroke = KeyStroke.getKeyStroke( "control O" );
+        openFile.setAccelerator( ctrlOKeyStroke );
 
         fileMenu.add( openFile );
 
