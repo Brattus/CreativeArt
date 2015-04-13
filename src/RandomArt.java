@@ -424,43 +424,45 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     }
 
 
-    public void brush1(){
+    public void brush1()
+    {
         brush1 = true;
         brush2 = false;
         brush3 = false;
     }
 
-    public void brush2(){
+    public void brush2()
+    {
         brush1 = false;
         brush2 = true;
         brush3 = false;
     }
-    public void brush3(){
+
+    public void brush3()
+    {
         brush1 = false;
         brush2 = false;
         brush3 = true;
     }
 
-    public void lineBrush() {
-        for (int i = 0; i < 20; i++) {
+    public void lineBrush()
+    {
+        for(int i = 0; i < 20; i++)
+        {
             int r = 10;
             stroke(red, green, blue);
             strokeWeight(1);
             line(mouseX + random(r), mouseY + random(r), pmouseX + random(r), pmouseY + random(r));
         }
     }
-    public void simpleBrush() {
-            stroke(red, green, blue);
-            strokeWeight(5);
-            line(mouseX, mouseY, pmouseX, pmouseY);
 
     public void simpleBrush()
     {
         stroke( red, green, blue );
         strokeWeight( 5 );
         line( mouseX, mouseY, pmouseX, pmouseY );
-
     }
+
 
     public void randomBrush() {
         float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
