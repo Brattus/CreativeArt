@@ -29,6 +29,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     long time = 0;
     int st;
     boolean brush1, brush2, brush3 = false;
+    int opacity = 170;
 
     // BG colors
     int redBG, greenBG, blueBG = 0;
@@ -71,7 +72,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         for(st = 0; st < number; st++)
         {
             stroke( 1 );
-            fill( random( 255 ), random( 255 ), random( 255 ), 200 );
+            fill( random( 255 ), random( 255 ), random( 255 ), opacity );
             triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
         }
     }
@@ -92,7 +93,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         for(st = 0; st < number; st++)
         {
             noStroke();
-            fill( random( 255 ), random( 255 ), random( 255 ), 170 );
+            fill( random( 255 ), random( 255 ), random( 255 ), opacity );
             rect( random( 0, width ), random( 0, height ), 60, 60 );
         }
     }
@@ -112,7 +113,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         for(st = 0; st < number; st++)
         {
             stroke( 1 );
-            fill( random( 255 ), random( 255 ), random( 255 ), 170 );
+            fill( random( 255 ), random( 255 ), random( 255 ), opacity );
             ellipse( random( 0, width ), random( 0, height ), 60, 60 );
         }
     }
@@ -468,7 +469,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     public void randomBrush() {
         float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
         stroke(speed);
-        fill(random(255), random(255), random(255), 150);
+        fill(random(255), random(255), random(255), opacity);
         ellipse(mouseX, mouseY, speed, speed);
         }
 
