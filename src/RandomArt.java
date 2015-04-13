@@ -11,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
-import processing.video.Capture;
-
 
 public class RandomArt extends PApplet implements ActionListener, MouseListener
 {
@@ -29,10 +27,9 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     int st;
     boolean brush1, brush2, brush3 = false;
 
-    Capture cam;
 
     public void setup() {
-        size( 1009, 693 );
+        size( 1009, 710 );
         background(255);
         noStroke();
 

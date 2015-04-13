@@ -270,7 +270,7 @@ public class DisplayFrame extends JFrame
     {
         setLayout( null );
 
-        processingPanel.setBounds( 350, 0, 1009, 693 );
+        processingPanel.setBounds( 350, 0, 1009, 710 );
 
         triangleButton.setBounds( 10, 250, 100, 100 );
         //triangleButton.setBackground( new Color( 232, 177, 141 ) );
