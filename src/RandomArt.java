@@ -2,6 +2,9 @@
  * Created by Ramin, Per-Olav, Ole-Martin and Knut Olav on 16.03.2015.
  */
 
+import processing.core.PApplet;
+import processing.core.PGraphics;
+import processing.core.PImage;
 import processing.core.*;
 
 import javax.swing.*;
@@ -27,6 +30,9 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     int st;
     boolean brush1, brush2, brush3 = false;
 
+    // BG colors
+    int redBG, greenBG, blueBG = 0;
+    boolean eraserEnabled = false;
 
     public void setup() {
         size( 1009, 710 );
@@ -63,7 +69,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         println( "Triangle clicked at: " + millis() / 1000 + " s" );
         for(st = 0; st < number; st++)
         {
-            stroke(1);
+            stroke( 1 );
             fill( random( 255 ), random( 255 ), random( 255 ), 200 );
             triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
         }
@@ -86,7 +92,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         {
             noStroke();
             fill( random( 255 ), random( 255 ), random( 255 ), 170 );
-            rect(random(0, width), random(0, height), 60, 60);
+            rect( random( 0, width ), random( 0, height ), 60, 60 );
         }
     }
 
@@ -185,7 +191,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void clearCanvas()
     {
-        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Clear canvas ", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Clear canvas ", JOptionPane.YES_NO_OPTION );
         if (reply == JOptionPane.YES_OPTION) {
             clear();
             background(255);
@@ -198,7 +204,11 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     private void changeColor()
     {
         Color c = JColorChooser.showDialog( null, "Choose a Color", Color.BLACK );
-        background( c.getRGB() );
+        redBG = c.getRed();
+        greenBG = c.getGreen();
+        blueBG = c.getBlue();
+
+        background( redBG, greenBG, blueBG );
     }
 
     public void saveHighRes()
@@ -209,7 +219,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         JTextField yField = new JTextField( 5 );
 
         JPanel myPanel = new JPanel();
-        myPanel.add(new JLabel("Width:"));
+        myPanel.add( new JLabel( "Width:" ) );
         myPanel.add( xField );
         myPanel.add( Box.createHorizontalStrut( 15 ) ); // a spacer
         myPanel.add( new JLabel( "Height:" ) );
@@ -223,9 +233,9 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
         String[] extensionTypes = filter.getExtensions();
 
-        int returnVal = chooser.showSaveDialog(this);
+        int returnVal = chooser.showSaveDialog( this );
 
-        int result = JOptionPane.showConfirmDialog(null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog( null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION );
         if(result == JOptionPane.OK_OPTION)
         {
             if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -349,6 +359,9 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
             case "randomBrush":
                 brush3();
                 break;
+            case "eraser":
+                eraser();
+                break;
             case "squareBackground":
                 squareBackgroun();
                 break;
@@ -408,7 +421,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
                 }
             }
         }
-        }
+    }
 
 
     public void brush1(){
@@ -440,6 +453,12 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
             stroke(red, green, blue);
             strokeWeight(5);
             line(mouseX, mouseY, pmouseX, pmouseY);
+
+    public void simpleBrush()
+    {
+        stroke( red, green, blue );
+        strokeWeight( 5 );
+        line( mouseX, mouseY, pmouseX, pmouseY );
 
     }
 
@@ -479,8 +498,24 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         line( 0, 0, 0, height );
     }
 
-    public void camera()
+    public void eraserEnabled()
     {
+        eraserEnabled = true;
+    }
 
+    public void eraser()
+    {
+        eraserEnabled();
+        if(mousePressed)
+        {
+            if(mouseButton == LEFT)
+            {
+                if(eraserEnabled == true)
+                {
+                    fill( redBG, greenBG, blueBG );
+                    rect( mouseX, mouseY, 20, 20 );
+                }
+            }
+        }
     }
 }

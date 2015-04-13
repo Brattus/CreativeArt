@@ -10,19 +10,16 @@ import java.awt.event.KeyEvent;
  */
 public class DisplayFrame extends JFrame
 {
+    public static JButton ereaserButton;
     private RandomArt randomArtProcessing;
-
     private JPanel processingPanel;
-
     // Shape Buttons
     private JButton triangleButton;
     private JButton squareButton;
     private JButton circleButton;
-
     private JButton borderButton;
     private JButton colorPicker;
     private JButton resetButton;
-
     //Brush buttons
     private JButton simpleBrush;
     private JButton lineBrush;
@@ -149,6 +146,7 @@ public class DisplayFrame extends JFrame
         resetButton = new JButton( "Clear Canvas" );
         colorPicker = new JButton( "Choose background color" );
         borderButton = new JButton( "Enable/Disable borders" );
+        ereaserButton = new JButton( "Eraser" );
 
 
         save = new JMenuItem( "Save" );
@@ -244,6 +242,7 @@ public class DisplayFrame extends JFrame
         this.add( resetButton );
         this.add( colorPicker );
         this.add( borderButton );
+        this.add( ereaserButton );
 
 
         //Brush buttons
@@ -297,6 +296,8 @@ public class DisplayFrame extends JFrame
         resetButton.setBounds( 10, getHeight() - 100, 150, 25 );
 
         borderButton.setBounds( 10,135, 315, 25 );
+
+        ereaserButton.setBounds( 165, getHeight() - 100, 100, 25 );
         //borderButton.setBackground( new Color( 232, 177, 141 ) );
 /*
         blurButton.setBounds( 10, 250, 100, 25 );
@@ -355,6 +356,9 @@ public class DisplayFrame extends JFrame
 
         resetButton.addActionListener( randomArtProcessing );
         resetButton.setActionCommand( "clear" );
+
+        ereaserButton.addActionListener( randomArtProcessing );
+        ereaserButton.setActionCommand( "eraser" );
 
         colorPicker.addActionListener( randomArtProcessing );
         colorPicker.setActionCommand( "color" );
