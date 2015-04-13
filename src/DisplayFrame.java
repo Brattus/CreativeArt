@@ -129,7 +129,7 @@ public class DisplayFrame extends JFrame
         ImageIcon imageTriangle = new ImageIcon("Buttons/triangle.png");
         triangleButton = new JButton( "", imageTriangle );
 
-        ImageIcon imageSquare = new ImageIcon("Buttons/square.png");
+        ImageIcon imageSquare = new ImageIcon("Buttons/rectangle.png");
         squareButton = new JButton("", imageSquare);
 
         ImageIcon imageCircle = new ImageIcon("Buttons/circle.png");
