@@ -61,7 +61,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void createTriangles()
     {
-        String firstNumber = JOptionPane.showInputDialog( "Enter how many triangles you want. Max 2000" );
+        String firstNumber = JOptionPane.showInputDialog( "Enter how many triangles you want" );
         int number = Integer.parseInt( firstNumber );
         if(number > 2000)
         {
@@ -82,7 +82,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     public void createSquares()
     {
         String firstNumber =
-                JOptionPane.showInputDialog ( "Enter how many squares you want. Max 2000" );
+                JOptionPane.showInputDialog ( "Enter how many squares you want" );
         int number = Integer.parseInt (firstNumber);
         if (number > 2000)
         {
@@ -102,7 +102,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void createCircles()
     {
-        String firstNumber = JOptionPane.showInputDialog( "Enter how many circles you want. Max 2000" );
+        String firstNumber = JOptionPane.showInputDialog( "Enter how many circles you want" );
         int number = Integer.parseInt( firstNumber );
         if(number > 2000)
         {
@@ -192,7 +192,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
      */
     public void clearCanvas()
     {
-        int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Clear canvas ", JOptionPane.YES_NO_OPTION );
+        int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Clear canvas", JOptionPane.YES_NO_OPTION );
         if (reply == JOptionPane.YES_OPTION) {
             clear();
             background(255);

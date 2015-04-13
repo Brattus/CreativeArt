@@ -1,5 +1,3 @@
-import com.sun.awt.AWTUtilities;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -62,8 +60,9 @@ public class DisplayFrame extends JFrame
 
     // Labels
     private JLabel title;
-    private JLabel filters;
+    private JLabel brushes;
     private JLabel shapes;
+    private JLabel backgrounds;
 
     private JLabel backgroundLabel;
 
@@ -213,15 +212,19 @@ public class DisplayFrame extends JFrame
         // Initiate Label
         title = new JLabel( "Random Art Generator" );
         title.setForeground( new Color( 0, 0, 0 ) );
-        title.setFont( new Font( null, 2, 25 ) );
+        title.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
 
-        filters = new JLabel( "Brushes" );
-        filters.setForeground( new Color( 0, 0, 0 ) );
-        filters.setFont( new Font( null, 2, 20 ) );
+        brushes = new JLabel( "Brushes" );
+        brushes.setForeground( new Color( 0, 0, 0 ) );
+        brushes.setFont(new Font(null, 2, 20));
 
         shapes = new JLabel( "Shapes" );
         shapes.setForeground( new Color( 0, 0, 0 ) );
         shapes.setFont( new Font( null, 2, 20 ) );
+
+        backgrounds = new JLabel( "Background Options");
+        backgrounds.setForeground( new Color( 0, 0, 0));
+        backgrounds.setFont( new Font( null, 2, 20));
 
         backgroundLabel = new JLabel( new ImageIcon( "Application pics/AppBG3.jpg" ) );
         backgroundLabel.setBounds(0, 0, getWidth(), getHeight());
@@ -252,6 +255,7 @@ public class DisplayFrame extends JFrame
 
         //something special
         this.add (squareBackground);
+        this.add(backgrounds);
         
         // Filter Menu
         filterMenu.add( blur );
@@ -263,7 +267,7 @@ public class DisplayFrame extends JFrame
         filterMenu.add(dialate);
 
         this.add( title );
-        this.add( filters );
+        this.add(brushes);
         this.add( shapes );
         this.add( backgroundLabel );
 
@@ -281,13 +285,13 @@ public class DisplayFrame extends JFrame
 
         processingPanel.setBounds( 350, 0, 1009, 710 );
 
-        triangleButton.setBounds( 10, 250, 100, 100 );
+        triangleButton.setBounds( 10, 280, 100, 100 );
         //triangleButton.setBackground( new Color( 232, 177, 141 ) );
 
-        squareButton.setBounds( 120, 250, 100, 100 );
+        squareButton.setBounds( 120, 280, 100, 100 );
         //squareButton.setBackground( new Color( 232, 177, 141 ) );
 
-        circleButton.setBounds( 230, 250, 100, 100 );
+        circleButton.setBounds( 230, 280, 100, 100 );
         //circleButton.setBackground( new Color( 232, 177, 141 ) );
 
         colorPicker.setBounds( 10, 100, 315, 25 );
@@ -299,46 +303,31 @@ public class DisplayFrame extends JFrame
 
         ereaserButton.setBounds( 165, getHeight() - 100, 100, 25 );
         //borderButton.setBackground( new Color( 232, 177, 141 ) );
-/*
-        blurButton.setBounds( 10, 250, 100, 25 );
-        blurButton.setBackground( new Color( 0, 255, 0 ) );
 
-        thresholdButton.setBounds( 10, 280, 100, 25 );
-        thresholdButton.setBackground( new Color( 0, 255, 0 ) );
-
-        grayScaleButton.setBounds( 10, 310, 100, 25 );
-        grayScaleButton.setBackground( new Color( 0, 255, 0 ) );
-
-        invertButton.setBounds( 10, 340, 100, 25 );
-        invertButton.setBackground( new Color( 0, 255, 0 ) );
-
-        posterizeButton.setBounds( 10, 370, 100, 25 );
-        posterizeButton.setBackground( new Color( 0, 255, 0 ) );
-
-        erodeButton.setBounds( 10, 400, 100, 25 );
-        erodeButton.setBackground( new Color( 0, 255, 0 ) );
-
-        dilateButton.setBounds( 10, 430, 100, 25 );
-        dilateButton.setBackground( new Color( 0, 255, 0 ) );
-*/
         //Brush buttons
-        simpleBrush.setBounds(10, 500, 240, 48);
-        simpleBrush.setBackground( new Color( 232, 177, 141));
 
-        lineBrush.setBounds(10, 550, 240, 48);
-        lineBrush.setBackground(new Color(232, 177, 141));
+        brushes.setBounds(10, 410, 315, 48);
+        brushes.setBackground(new Color(255, 255, 255));
 
-        randomBrush.setBounds(10, 600, 240, 48);
-        randomBrush.setBackground(new Color(232, 177, 141));
+        simpleBrush.setBounds(10, 450, 315, 48);
+        simpleBrush.setBackground( new Color( 255, 255, 255));
+
+        lineBrush.setBounds(10, 505, 315, 48);
+        lineBrush.setBackground(new Color(255, 255, 255));
+
+        randomBrush.setBounds(10, 560, 315, 48);
+        randomBrush.setBackground(new Color(255, 255, 255));
 
         //Something special
-        squareBackground.setBounds(10, 400, 240, 48);
+        squareBackground.setBounds(10, 170, 315, 48);
         squareBackground.setBackground(new Color(232, 177, 141));
 
+        backgrounds.setBounds(10,58,240,48);
+        backgrounds.setBackground(new Color(237, 177, 141));
 
-        title.setBounds( 10, 10, 300, 100 );
-        filters.setBounds( 10, 460, 100, 50 );
-        shapes.setBounds ( 10, 210, 300,50);
+
+        title.setBounds( 10, 0, 300, 40 );
+        shapes.setBounds ( 10, 240, 300,50);
 
         backgroundLabel.setBounds( 0, 0, getWidth(), getHeight() );
     }
