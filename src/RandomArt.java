@@ -19,22 +19,14 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     PGraphics pg1;
     PGraphics pg2;
     PImage img = null;
-
     Color color = null;
     float red = 0;
     float green = 0;
     float blue = 0;
-
     boolean bordersEnabled = false;
-
     long time = 0;
-
     int st;
     boolean brush1, brush2, brush3 = false;
-
-    boolean brush1, brush2, brush3 = false;
-    public int response;
-
 
     public void setup() {
         size(1000, 680);
