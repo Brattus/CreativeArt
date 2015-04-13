@@ -21,15 +21,6 @@ public class DisplayFrame extends JFrame
     private JButton colorPicker;
     private JButton resetButton;
 
-    // Filter Buttons
-    private JButton blurButton;
-    private JButton thresholdButton;
-    private JButton grayScaleButton;
-    private JButton invertButton;
-    private JButton posterizeButton;
-    private JButton erodeButton;
-    private JButton dilateButton;
-
     //Brush buttons
     private JButton simpleBrush;
     private JButton lineBrush;
@@ -53,10 +44,19 @@ public class DisplayFrame extends JFrame
     private JMenuItem erode;
     private JMenuItem dialate;
 
-    // Shortcuts
+    // Shortcuts file menu
     private KeyStroke ctrlOKeyStroke = null;
     private KeyStroke ctrlSKeyStroke = null;
     private KeyStroke ctrlShiftSKeyStroke = null;
+
+    // Shortcuts filter menu
+    private KeyStroke ctrl1 = null;
+    private KeyStroke ctrl2 = null;
+    private KeyStroke ctrl3 = null;
+    private KeyStroke ctrl4 = null;
+    private KeyStroke ctrl5 = null;
+    private KeyStroke ctrl6 = null;
+    private KeyStroke ctrl7 = null;
 
     // Labels
     private JLabel title;
@@ -147,14 +147,6 @@ public class DisplayFrame extends JFrame
         colorPicker = new JButton( "Choose background color" );
         borderButton = new JButton( "Enable/Disable borders" );
 
-        // Initiate filter buttons
-        blurButton = new JButton( "Blur" );
-        thresholdButton = new JButton( "Threshold" );
-        grayScaleButton = new JButton( "Gray Scale" );
-        invertButton = new JButton( "Invert" );
-        posterizeButton = new JButton( "Posterize" );
-        erodeButton = new JButton( "Erode" );
-        dilateButton = new JButton( "Dilate" );
 
         save = new JMenuItem( "Save" );
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
@@ -186,13 +178,32 @@ public class DisplayFrame extends JFrame
 
         // Filter
         blur = new JMenuItem( "Blur" );
-        threshold = new JMenuItem( "Threshold" );
-        grayScale = new JMenuItem( "Gray scale" );
-        invert = new JMenuItem( "Invert colors" );
-        posterize = new JMenuItem( "Posterize" );
-        erode = new JMenuItem( "Erode" );
-        dialate = new JMenuItem( "Dialate" );
+        ctrl1 = KeyStroke.getKeyStroke( "control 1" );
+        blur.setAccelerator( ctrl1 );
 
+        threshold = new JMenuItem( "Threshold" );
+        ctrl2 = KeyStroke.getKeyStroke( "control 2" );
+        threshold.setAccelerator( ctrl2 );
+
+        grayScale = new JMenuItem( "Gray scale" );
+        ctrl3 = KeyStroke.getKeyStroke( "control 3" );
+        grayScale.setAccelerator( ctrl3 );
+
+        invert = new JMenuItem( "Invert colors" );
+        ctrl4 = KeyStroke.getKeyStroke( "control 4" );
+        invert.setAccelerator( ctrl4 );
+
+        posterize = new JMenuItem( "Posterize" );
+        ctrl5 = KeyStroke.getKeyStroke( "control 5" );
+        posterize.setAccelerator( ctrl5 );
+
+        erode = new JMenuItem( "Erode" );
+        ctrl6 = KeyStroke.getKeyStroke( "control 6" );
+        erode.setAccelerator( ctrl6 );
+
+        dialate = new JMenuItem( "Dialate" );
+        ctrl7 = KeyStroke.getKeyStroke( "control 7" );
+        dialate.setAccelerator( ctrl7 );
 
         // Initiate Label
         title = new JLabel( "Random Art Generator" );
@@ -224,14 +235,6 @@ public class DisplayFrame extends JFrame
         this.add( colorPicker );
         this.add( borderButton );
 
-        // Add the filter buttons to the frame
-        this.add( blurButton );
-        this.add( thresholdButton );
-        this.add( grayScaleButton );
-        this.add( invertButton );
-        this.add( posterizeButton );
-        this.add( erodeButton );
-        this.add( dilateButton );
 
         //Brush buttons
         this.add ( simpleBrush );
@@ -339,27 +342,6 @@ public class DisplayFrame extends JFrame
         borderButton.addActionListener( randomArtProcessing );
         borderButton.setActionCommand( "border" );
 
-
-        blurButton.addActionListener( randomArtProcessing );
-        blurButton.setActionCommand( "blur" );
-
-        thresholdButton.addActionListener( randomArtProcessing );
-        thresholdButton.setActionCommand( "threshold" );
-
-        grayScaleButton.addActionListener( randomArtProcessing );
-        grayScaleButton.setActionCommand( "gray" );
-
-        invertButton.addActionListener( randomArtProcessing );
-        invertButton.setActionCommand( "invert" );
-
-        posterizeButton.addActionListener( randomArtProcessing );
-        posterizeButton.setActionCommand( "posterize" );
-
-        erodeButton.addActionListener( randomArtProcessing );
-        erodeButton.setActionCommand( "erode" );
-
-        dilateButton.addActionListener( randomArtProcessing );
-        dilateButton.setActionCommand( "dialate" );
 
         //Brush buttons
         simpleBrush.addActionListener( randomArtProcessing );
