@@ -1,3 +1,5 @@
+import com.sun.awt.AWTUtilities;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -63,7 +65,7 @@ public class DisplayFrame extends JFrame
     private JLabel filters;
     private JLabel shapes;
 
-
+    private JLabel backgroundLabel;
 
     /**
      * Construct a new DisplayFrame
@@ -104,8 +106,6 @@ public class DisplayFrame extends JFrame
         this.setSize( randomArtProcessing.width, randomArtProcessing.height );
         this.setMinimumSize( new Dimension( 1366, 768 ) );
 
-        this.setBackground( new Color( 116, 228, 74 ) );
-
 
         if(this != null)
         {
@@ -140,7 +140,7 @@ public class DisplayFrame extends JFrame
         ImageIcon imageSquare = new ImageIcon("Buttons/rectangle.png");
         squareButton = new JButton("", imageSquare);
 
-        ImageIcon imageCircle = new ImageIcon("Buttons/circle.png");
+        ImageIcon imageCircle = new ImageIcon( "Buttons/alt_circle.jpg" );
         circleButton = new JButton( "" , imageCircle);
 
         resetButton = new JButton( "Clear Canvas" );
@@ -217,6 +217,9 @@ public class DisplayFrame extends JFrame
         shapes = new JLabel( "Shapes" );
         shapes.setForeground( new Color( 0, 0, 0 ) );
         shapes.setFont( new Font( null, 2, 20 ) );
+
+        backgroundLabel = new JLabel( new ImageIcon( "Application pics/AppBG3.jpg" ) );
+        backgroundLabel.setBounds( 0, 0, getWidth(), getHeight() );
     }
 
 
@@ -253,6 +256,7 @@ public class DisplayFrame extends JFrame
         this.add( title );
         this.add( filters );
         this.add( shapes );
+        this.add( backgroundLabel );
 
 
         processingPanel.add( randomArtProcessing );
@@ -266,7 +270,7 @@ public class DisplayFrame extends JFrame
     {
         setLayout( null );
 
-        processingPanel.setBounds( 350, 10, 1000, 680 );
+        processingPanel.setBounds( 350, 0, 1009, 693 );
 
         triangleButton.setBounds( 10, 250, 100, 100 );
         //triangleButton.setBackground( new Color( 232, 177, 141 ) );
@@ -278,12 +282,12 @@ public class DisplayFrame extends JFrame
         //circleButton.setBackground( new Color( 232, 177, 141 ) );
 
         colorPicker.setBounds( 10, 100, 315, 25 );
-        colorPicker.setBackground( new Color( 232, 177, 141 ) );
+        //colorPicker.setBackground( new Color( 232, 177, 141 ) );
 
         resetButton.setBounds( 10, getHeight() - 100, 150, 25 );
 
         borderButton.setBounds( 10,135, 315, 25 );
-        borderButton.setBackground( new Color( 232, 177, 141 ) );
+        //borderButton.setBackground( new Color( 232, 177, 141 ) );
 /*
         blurButton.setBounds( 10, 250, 100, 25 );
         blurButton.setBackground( new Color( 0, 255, 0 ) );
@@ -320,6 +324,8 @@ public class DisplayFrame extends JFrame
         title.setBounds( 10, 10, 300, 100 );
         filters.setBounds( 10, 460, 100, 50 );
         shapes.setBounds ( 10, 210, 300,50);
+
+        backgroundLabel.setBounds( 0, 0, getWidth(), getHeight() );
     }
 
     private void addActionListeners()

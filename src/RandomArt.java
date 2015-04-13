@@ -10,7 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.util.Arrays;
+
+import processing.video.Capture;
 
 
 public class RandomArt extends PApplet implements ActionListener, MouseListener
@@ -28,8 +29,10 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     int st;
     boolean brush1, brush2, brush3 = false;
 
+    Capture cam;
+
     public void setup() {
-        size(1000, 680);
+        size( 1009, 693 );
         background(255);
         noStroke();
 
@@ -43,7 +46,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     {
         time = millis() / 1000;
 
-
+        camera();
 
         drawPencil();
     }
@@ -465,5 +468,10 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         line( width, 0, width, height );
         line( 0, height, width, height );
         line( 0, 0, 0, height );
+    }
+
+    public void camera()
+    {
+
     }
 }
