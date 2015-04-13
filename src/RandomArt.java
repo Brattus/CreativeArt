@@ -310,6 +310,9 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
             case "save":
                 saveToFile();
                 break;
+            case "saveHighRes":
+                saveHighRes();
+                break;
             case "openFile":
                 openFile();
                 break;

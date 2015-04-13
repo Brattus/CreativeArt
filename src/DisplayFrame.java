@@ -39,7 +39,6 @@ public class DisplayFrame extends JFrame
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem save;
-    private JMenuItem saveCustomRes;
     private JMenuItem openFile;
     private JMenuItem saveHighres;
 
@@ -52,6 +51,10 @@ public class DisplayFrame extends JFrame
     private JMenuItem posterize;
     private JMenuItem erode;
     private JMenuItem dialate;
+
+    // Shortcuts
+    private KeyStroke ctrlPKeyStroke = null;
+    private KeyStroke ctrlSKeyStroke = null;
 
     // Labels
     private JLabel title;
@@ -149,7 +152,8 @@ public class DisplayFrame extends JFrame
         dilateButton = new JButton( "Dilate" );
 
         save = new JMenuItem( "Save" );
-        save.setMnemonic( KeyEvent.VK_S );
+        ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
+        save.setAccelerator( ctrlSKeyStroke );
 
         //Brush buttons
         ImageIcon imageSimpleBrush = new ImageIcon("Buttons/plainBrush.png");
@@ -161,17 +165,12 @@ public class DisplayFrame extends JFrame
         ImageIcon imageCircleBrush = new ImageIcon ("Buttons/circleBrush.png");
         randomBrush = new JButton( "", imageCircleBrush);
 
-    
-        saveCustomRes = new JMenuItem( "Save custom resolution" );
         fileMenu.add( save );
         fileMenu.setMnemonic( KeyEvent.VK_F );
-
-        fileMenu.add( saveCustomRes );
         
         openFile = new JMenuItem( "Open file" );
-        KeyStroke ctrlXKeyStroke = KeyStroke.getKeyStroke( "control X" );
-        openFile.setAccelerator( ctrlXKeyStroke );
-        //openFile.setMnemonic( KeyEvent.VK_O );
+        ctrlPKeyStroke = KeyStroke.getKeyStroke( "control P" );
+        openFile.setAccelerator( ctrlPKeyStroke );
 
         fileMenu.add( openFile );
 
@@ -367,9 +366,6 @@ public class DisplayFrame extends JFrame
 
         save.addActionListener( randomArtProcessing );
         save.setActionCommand( "save" );
-
-        saveCustomRes.addActionListener( randomArtProcessing );
-        saveCustomRes.setActionCommand( "saveHighRes" );
 
         openFile.addActionListener( randomArtProcessing );
         openFile.setActionCommand( "openFile" );
