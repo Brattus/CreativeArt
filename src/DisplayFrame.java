@@ -100,6 +100,7 @@ public class DisplayFrame extends JFrame
         randomArtProcessing.init();
         processingPanel = new JPanel();
 
+
         this.setSize( randomArtProcessing.width, randomArtProcessing.height );
         this.setMinimumSize(new Dimension(1366, 768));
 
