@@ -8,10 +8,11 @@ import java.awt.event.KeyEvent;
  */
 public class DisplayFrame extends JFrame
 {
-    public JButton eraserButton;
+    //Initializing variables
     private RandomArt randomArtProcessing;
     private JPanel processingPanel;
-    // Shape Buttons
+
+    // Initializing button variables
     private JButton triangleButton;
     private JButton squareButton;
     private JButton circleButton;
@@ -19,17 +20,16 @@ public class DisplayFrame extends JFrame
     private JButton colorPicker;
     private JButton resetButton;
     private JButton tunnelBrush;
-    //Brush buttons
+
     private JButton simpleBrush;
     private JButton lineRoughBrush;
     private JButton randomCirclesBrush;
     private JButton randomLineBrush;
-
-    //something special
+    public JButton eraserButton;
     private JButton squareBackground;
 
 
-    // Menus
+    // Initializing menu variables
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem save;
@@ -68,11 +68,7 @@ public class DisplayFrame extends JFrame
 
     private JLabel backgroundLabel;
 
-    /**
-     * Construct a new DisplayFrame
-     *
-     * @throws HeadlessException
-     */
+    //Display frame
     public DisplayFrame(String title) throws HeadlessException
     {
         this.setTitle( title );
@@ -87,7 +83,7 @@ public class DisplayFrame extends JFrame
 
 
     }
-
+    // Main method
     public static void main(String[] args)
     {
         DisplayFrame displayFrame = new DisplayFrame("Random Art Generator");
@@ -107,7 +103,7 @@ public class DisplayFrame extends JFrame
         this.setSize( randomArtProcessing.width, randomArtProcessing.height );
         this.setMinimumSize(new Dimension(1366, 768));
 
-
+        // Unused if. For later development.
         if(this != null)
         {
             this.setResizable( false );
@@ -157,22 +153,27 @@ public class DisplayFrame extends JFrame
         ImageIcon imageSimpleBrush = new ImageIcon("Buttons/plainBrush.png");
         simpleBrush = new JButton( "", imageSimpleBrush);
 
+        //Brush generating lines from center to mouse position
         ImageIcon imageTunnelBrush = new ImageIcon( "Buttons/tunnelBrush.jpg" );
         tunnelBrush = new JButton( "Tunnel brush", imageTunnelBrush );
 
+        //Generating a line of smaller lines.
         ImageIcon imageRoughBrush = new ImageIcon ("Buttons/roughBrush.png");
         lineRoughBrush = new JButton( "", imageRoughBrush );
 
+        //Brush making circles at mouse position.
         ImageIcon imageCircleBrush = new ImageIcon( "Buttons/randomCircleBrush.png" );
         randomCirclesBrush = new JButton( "", imageCircleBrush );
 
+        //Random line generating brush.
         ImageIcon imageRandomLineBrushBrush = new ImageIcon( "Buttons/randomLinesBrush.jpg" );
         randomLineBrush = new JButton ("", imageRandomLineBrushBrush);
 
-        //something special
+        //Button making background of squares.
         ImageIcon imagesquareBackground = new ImageIcon ("Buttons/squareBackground.png");
         squareBackground = new JButton( "", imagesquareBackground);
 
+        //Menubar buttons.
         fileMenu.add(save);
         fileMenu.setMnemonic( KeyEvent.VK_F );
 
@@ -187,7 +188,7 @@ public class DisplayFrame extends JFrame
         saveHighres.setAccelerator(ctrlShiftSKeyStroke);
         fileMenu.add(saveHighres);
 
-        // Filter
+        // Filters.
         blur = new JMenuItem( "Blur" );
         ctrl1 = KeyStroke.getKeyStroke( "control 1" );
         blur.setAccelerator(ctrl1);
@@ -216,7 +217,7 @@ public class DisplayFrame extends JFrame
         ctrl7 = KeyStroke.getKeyStroke( "control 7" );
         dialate.setAccelerator( ctrl7 );
 
-        // Initiate Label
+        // Initiate Labels
         title = new JLabel( "Random Art Generator" );
         title.setForeground( new Color( 0, 0, 0 ) );
         title.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
@@ -347,6 +348,7 @@ public class DisplayFrame extends JFrame
     }
 
 
+    //Adding action listeners.
     private void addActionListeners()
     {
         triangleButton.addActionListener( randomArtProcessing );
@@ -362,7 +364,7 @@ public class DisplayFrame extends JFrame
         resetButton.setActionCommand( "clear" );
 
         eraserButton.addActionListener( randomArtProcessing );
-        eraserButton.setActionCommand( "eraserEnabled" );
+        eraserButton.setActionCommand("eraserEnabled");
 
         colorPicker.addActionListener(randomArtProcessing);
         colorPicker.setActionCommand("color");
@@ -373,18 +375,18 @@ public class DisplayFrame extends JFrame
 
         //Brush buttons
         simpleBrush.addActionListener( randomArtProcessing );
-        simpleBrush.setActionCommand( "simpleBrushEnabled" );
+        simpleBrush.setActionCommand("simpleBrushEnabled");
 
-        lineRoughBrush.addActionListener( randomArtProcessing );
-        lineRoughBrush.setActionCommand( "lineBrushEnabled" );
+        lineRoughBrush.addActionListener(randomArtProcessing);
+        lineRoughBrush.setActionCommand("lineBrushEnabled");
 
-        randomCirclesBrush.addActionListener( randomArtProcessing );
-        randomCirclesBrush.setActionCommand( "randomCirclesBrushEnabled" );
+        randomCirclesBrush.addActionListener(randomArtProcessing);
+        randomCirclesBrush.setActionCommand("randomCirclesBrushEnabled");
 
-        randomLineBrush.addActionListener( randomArtProcessing);
-        randomLineBrush.setActionCommand( "randomLineBrushEnabled" );
+        randomLineBrush.addActionListener(randomArtProcessing);
+        randomLineBrush.setActionCommand("randomLineBrushEnabled");
 
-        tunnelBrush.addActionListener( randomArtProcessing );
+        tunnelBrush.addActionListener(randomArtProcessing);
         tunnelBrush.setActionCommand( "tunnelBrushEnabled" );
 
         //SOMETHING SPECIAL
