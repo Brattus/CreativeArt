@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class RandomArt extends PApplet implements ActionListener, ItemListener
+public class RandomArt extends PApplet implements ActionListener
 {
     public int response;
     PGraphics pg1;
@@ -25,12 +25,11 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     boolean bordersEnabled = false;
     long time = 0;
     int st;
-    boolean brush1, brush2, brush3, brush4 = false;
+    boolean simpleBrushEnabled, lineBrushEnabled, randomLineBrushEnabled, randomCircleBrush, tunnelBrush, eraseEnabled = false;
     int opacity = 170;
 
     // BG colors
     int redBG=255, greenBG =255, blueBG = 255;
-    boolean eraserEnabled = false;
 
     public void setup() {
         size(1009, 710);
@@ -51,7 +50,6 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         camera();
 
         drawPencil();
-        tunnelVision();
     }
 
 
@@ -353,23 +351,26 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
             case "border":
                 enableBorders();
                 break;
-            case "simpleBrush":
-                brush1();
+            case "simpleBrushEnabled":
+                simpleBrushEnabled();
                 break;
-            case "lineBrush":
-                brush2();
+            case "lineBrushEnabled":
+                lineBrushEnabled();
                 break;
-            case "randomBrush":
-                brush3();
+            case "randomLineBrushEnabled":
+                randomLineBrushEnabled();
                 break;
-            case "eraser":
-                eraser();
+            case "tunnelBrushEnabled":
+                tunnelBrushEnabled();
+                break;
+            case "eraserEnabled":
+                eraserEnabled();
                 break;
             case "squareBackground":
                 squareBackground();
                 break;
-            case"randomLineBrush":
-                brush4();
+            case "randomCirclesBrushEnabled":
+                randomCircleBrushEnabled();
                 break;
         }
     }
@@ -414,24 +415,29 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
             {
                 //println("Detected Mouse Left Click!");
 
-                if(brush1 == true)
+                if(simpleBrushEnabled == true)
                 {
                     simpleBrush();
                 }
-                if(brush2 == true) 
+                if(lineBrushEnabled == true)
                 {
                     lineBrush();
                 }
-                if(brush3 == true) 
+                if(randomLineBrushEnabled == true)
                 {
-                    randomBrush();
-                }
-                if(brush4 == true) {
                     randomLineBrush();
                 }
-                if(eraserEnabled == true)
+                if(randomCircleBrush == true)
+                {
+                    randomCirclesBrush();
+                }
+                if(eraseEnabled == true)
                 {
                     eraser();
+                }
+                if(tunnelBrush == true)
+                {
+                    tunnelVision();
                 }
             }
         }
@@ -443,62 +449,74 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         fill(redBG, greenBG, blueBG);
         rectMode(CENTER);
         rect(pmouseX, pmouseY, 30, 30);
-
-
     }
 
 
-    public void brush1()
+    public void lineBrushEnabled()
     {
-        brush1 = true;
-        brush2 = false;
-        brush3 = false;
-        brush4 = false;
-        eraserEnabled = false;
+        simpleBrushEnabled = false;
+        lineBrushEnabled = true;
+        randomLineBrushEnabled = false;
+        randomCircleBrush = false;
+        eraseEnabled = false;
+        tunnelBrush = false;
     }
 
-    public void brush2()
+    public void simpleBrushEnabled()
     {
-        brush1 = false;
-        brush2 = true;
-        brush3 = false;
-        brush4 = false;
-        eraserEnabled = false;
+        simpleBrushEnabled = true;
+        lineBrushEnabled = false;
+        randomLineBrushEnabled = false;
+        randomCircleBrush = false;
+        eraseEnabled = false;
+        tunnelBrush = false;
     }
 
-    public void brush3()
+    public void randomLineBrushEnabled()
     {
-        brush1 = false;
-        brush2 = false;
-        brush3 = true;
-        brush4 = false;
-        eraserEnabled = false;
+        simpleBrushEnabled = false;
+        lineBrushEnabled = false;
+        randomLineBrushEnabled = true;
+        randomCircleBrush = false;
+        eraseEnabled = false;
+        tunnelBrush = false;
+    }
+
+    public void tunnelBrushEnabled()
+    {
+        tunnelBrush = true;
+        simpleBrushEnabled = false;
+        lineBrushEnabled = false;
+        randomLineBrushEnabled = false;
+        randomCircleBrush = false;
+        eraseEnabled = false;
     }
 
     public void eraserEnabled()
     {
-        eraserEnabled = true;
-        brush1 = false;
-        brush2 = false;
-        brush3 = false;
-        brush4 = false;
+        eraseEnabled = true;
+        simpleBrushEnabled = false;
+        lineBrushEnabled = false;
+        randomLineBrushEnabled = false;
+        randomCircleBrush = false;
+        tunnelBrush = false;
     }
 
-    public void brush4()
+    public void randomCircleBrushEnabled()
     {
-        brush1 = false;
-        brush2 = false;
-        brush3 = false;
-        brush4 = true;
-        eraserEnabled = false;
+        simpleBrushEnabled = false;
+        lineBrushEnabled = false;
+        randomLineBrushEnabled = false;
+        randomCircleBrush = true;
+        eraseEnabled = false;
     }
 
     public void eraserDisabled()
     {
-        eraserEnabled = false;
-        brush1 = false;
-        brush2 = false;
-        brush3 = false;
+        eraseEnabled = false;
+        simpleBrushEnabled = false;
+        lineBrushEnabled = false;
+        randomLineBrushEnabled = false;
     }
 
     public void lineBrush()
@@ -520,7 +538,8 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     }
 
 
-    public void randomBrush() {
+    public void randomCirclesBrush()
+    {
         float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
         stroke(1);
         strokeWeight(1);
@@ -566,32 +585,10 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         line( 0, 0, 0, height );
     }
 
-    /**
-     * Invoked when an item has been selected or deselected by the user.
-     * The code written for this method performs the operations
-     * that need to occur when an item is selected (or deselected).
-     *
-     * @param itemEvent
-     */
-    @Override
-    public void itemStateChanged(ItemEvent itemEvent)
-    {
-        if(itemEvent.getStateChange() == ItemEvent.SELECTED)
-        {
-            eraserEnabled();
-            DisplayFrame.eraserButton.setText( "Eraser enabled" );
-        } else
-        {
-            eraserDisabled();
-            DisplayFrame.eraserButton.setText( "Eraser disabled" );
-        }
-    }
-
     public void tunnelVision()
     {
         if(mousePressed)
         {
-
             if(mouseButton == LEFT)
             {
                 stroke( random( 255 ), random( 255 ), random( 255 ) );

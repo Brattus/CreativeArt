@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
  */
 public class DisplayFrame extends JFrame
 {
-    public static JToggleButton eraserButton;
+    public JButton eraserButton;
     private RandomArt randomArtProcessing;
     private JPanel processingPanel;
     // Shape Buttons
@@ -18,10 +18,11 @@ public class DisplayFrame extends JFrame
     private JButton borderButton;
     private JButton colorPicker;
     private JButton resetButton;
+    private JButton tunnelBrush;
     //Brush buttons
     private JButton simpleBrush;
-    private JButton lineBrush;
-    private JButton randomBrush;
+    private JButton lineRoughBrush;
+    private JButton randomCirclesBrush;
     private JButton randomLineBrush;
 
     //something special
@@ -146,8 +147,7 @@ public class DisplayFrame extends JFrame
         resetButton = new JButton( "Start over" );
         colorPicker = new JButton( "Choose background color" );
         borderButton = new JButton( "Enable borders" );
-        eraserButton = new JToggleButton( "Eraser" );
-
+        eraserButton = new JButton( "Eraser" );
 
         save = new JMenuItem( "Save" );
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
@@ -157,13 +157,16 @@ public class DisplayFrame extends JFrame
         ImageIcon imageSimpleBrush = new ImageIcon("Buttons/plainBrush.png");
         simpleBrush = new JButton( "", imageSimpleBrush);
 
+        ImageIcon imageTunnelBrush = new ImageIcon( "Buttons/tunnelBrush.jpg" );
+        tunnelBrush = new JButton( "Tunnel brush", imageTunnelBrush );
+
         ImageIcon imageRoughBrush = new ImageIcon ("Buttons/roughBrush.png");
-        lineBrush = new JButton( "", imageRoughBrush);
+        lineRoughBrush = new JButton( "", imageRoughBrush );
 
-        ImageIcon imageCircleBrush = new ImageIcon ("Buttons/circleBrush.png");
-        randomBrush = new JButton( "", imageCircleBrush);
+        ImageIcon imageCircleBrush = new ImageIcon( "Buttons/randomCircleBrush.png" );
+        randomCirclesBrush = new JButton( "", imageCircleBrush );
 
-        ImageIcon imageRandomLineBrushBrush = new ImageIcon ("Buttons/randomLineBrush.png");
+        ImageIcon imageRandomLineBrushBrush = new ImageIcon( "Buttons/randomLinesBrush.jpg" );
         randomLineBrush = new JButton ("", imageRandomLineBrushBrush);
 
         //something special
@@ -251,12 +254,12 @@ public class DisplayFrame extends JFrame
         this.add( borderButton );
         this.add( eraserButton );
 
-
         //Brush buttons
         this.add ( simpleBrush );
-        this.add ( lineBrush );
-        this.add ( randomBrush );
+        this.add( lineRoughBrush );
+        this.add( randomCirclesBrush );
         this.add ( randomLineBrush );
+        this.add( tunnelBrush );
 
         //something special
         this.add (squareBackground);
@@ -310,20 +313,23 @@ public class DisplayFrame extends JFrame
         //borderButton.setBackground( new Color( 232, 177, 141 ) );
 
         //Brush buttons
-
-        brushes.setBounds(10, 410, 315, 48);
+        brushes.setBounds( 10, 410, 150, 48 );
         brushes.setBackground( new Color( 255, 255, 255 ) );
 
-        simpleBrush.setBounds( 10, 450, 315, 48 );
+        simpleBrush.setBounds( 10, 450, 150, 48 );
         simpleBrush.setBackground( new Color( 255, 255, 255 ) );
 
-        lineBrush.setBounds( 10, 505, 315, 48 );
-        lineBrush.setBackground( new Color( 255, 255, 255 ) );
+        lineRoughBrush.setBounds( 170, 450, 150, 48 );
+        lineRoughBrush.setBackground( new Color( 255, 255, 255 ) );
 
-        randomBrush.setBounds( 10, 560, 315, 48 );
-        randomBrush.setBackground(new Color(255, 255, 255));
+        tunnelBrush.setBounds( 170, 505, 150, 48 );
+        tunnelBrush.setBackground( new Color( 255, 255, 255 ) );
 
-        randomLineBrush.setBounds(10, 615, 315,48);
+
+        randomCirclesBrush.setBounds( 10, 560, 150, 48 );
+        randomCirclesBrush.setBackground( new Color( 255, 255, 255 ) );
+
+        randomLineBrush.setBounds( 10, 505, 150, 48 );
         randomLineBrush.setBackground(new Color(255, 255, 255));
 
         //Something special
@@ -356,8 +362,7 @@ public class DisplayFrame extends JFrame
         resetButton.setActionCommand( "clear" );
 
         eraserButton.addActionListener( randomArtProcessing );
-        eraserButton.setActionCommand( "eraser" );
-        eraserButton.addItemListener(randomArtProcessing);
+        eraserButton.setActionCommand( "eraserEnabled" );
 
         colorPicker.addActionListener(randomArtProcessing);
         colorPicker.setActionCommand("color");
@@ -368,18 +373,21 @@ public class DisplayFrame extends JFrame
 
         //Brush buttons
         simpleBrush.addActionListener( randomArtProcessing );
-        simpleBrush.setActionCommand( "simpleBrush" );
+        simpleBrush.setActionCommand( "simpleBrushEnabled" );
 
-        lineBrush.addActionListener( randomArtProcessing );
-        lineBrush.setActionCommand( "lineBrush" );
+        lineRoughBrush.addActionListener( randomArtProcessing );
+        lineRoughBrush.setActionCommand( "lineBrushEnabled" );
 
-        randomBrush.addActionListener( randomArtProcessing );
-        randomBrush.setActionCommand( "randomBrush" );
+        randomCirclesBrush.addActionListener( randomArtProcessing );
+        randomCirclesBrush.setActionCommand( "randomCirclesBrushEnabled" );
 
         randomLineBrush.addActionListener( randomArtProcessing);
-        randomLineBrush.setActionCommand("randomLineBrush");
+        randomLineBrush.setActionCommand( "randomLineBrushEnabled" );
 
-        //sOMETHING SPECIAL
+        tunnelBrush.addActionListener( randomArtProcessing );
+        tunnelBrush.setActionCommand( "tunnelBrushEnabled" );
+
+        //SOMETHING SPECIAL
         squareBackground.addActionListener( randomArtProcessing );
         squareBackground.setActionCommand( "squareBackground");
 
