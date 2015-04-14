@@ -450,9 +450,9 @@ public class RandomArt extends PApplet implements ActionListener
     //The eraser.
     private void eraser()
     {
-        strokeWeight(20);
-        stroke(redBG, greenBG, blueBG);
-        line(mouseX, mouseY, pmouseX, pmouseY);
+        strokeWeight( 20 );
+        stroke( redBG, greenBG, blueBG );
+        line( mouseX, mouseY, pmouseX, pmouseY );
     }
 
     //The line brush enabled.
@@ -513,11 +513,12 @@ public class RandomArt extends PApplet implements ActionListener
     //The random circle brush enabled.
     public void randomCircleBrushEnabled()
     {
+        randomCircleBrush = true;
         simpleBrushEnabled = false;
         lineBrushEnabled = false;
         randomLineBrushEnabled = false;
-        randomCircleBrush = true;
         eraseEnabled = false;
+        tunnelBrush = false;
     }
 
     //Eraser disabled.
@@ -604,7 +605,6 @@ public class RandomArt extends PApplet implements ActionListener
     //The tunnel vision function
     public void tunnelVision()
     {
-
         if(mousePressed)
         {
             if(mouseButton == LEFT)

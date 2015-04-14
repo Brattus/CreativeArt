@@ -8,10 +8,10 @@ import java.awt.event.KeyEvent;
  */
 public class DisplayFrame extends JFrame
 {
+    public JButton eraserButton;
     //Initializing variables
     private RandomArt randomArtProcessing;
     private JPanel processingPanel;
-
     // Initializing button variables
     private JButton triangleButton;
     private JButton squareButton;
@@ -20,12 +20,10 @@ public class DisplayFrame extends JFrame
     private JButton colorPicker;
     private JButton resetButton;
     private JButton tunnelBrush;
-
     private JButton simpleBrush;
     private JButton lineRoughBrush;
     private JButton randomCirclesBrush;
     private JButton randomLineBrush;
-    public JButton eraserButton;
     private JButton squareBackground;
 
 
@@ -80,8 +78,6 @@ public class DisplayFrame extends JFrame
         setLayout();
 
         addActionListeners();
-
-
     }
     // Main method
     public static void main(String[] args)
@@ -186,7 +182,7 @@ public class DisplayFrame extends JFrame
         saveHighres = new JMenuItem( "Save with different resolution" );
         ctrlShiftSKeyStroke = KeyStroke.getKeyStroke( "control shift S" );
         saveHighres.setAccelerator(ctrlShiftSKeyStroke);
-        fileMenu.add(saveHighres);
+        fileMenu.add( saveHighres );
 
         // Filters.
         blur = new JMenuItem( "Blur" );
@@ -353,45 +349,59 @@ public class DisplayFrame extends JFrame
     {
         triangleButton.addActionListener( randomArtProcessing );
         triangleButton.setActionCommand( "triangles" );
+        triangleButton.setToolTipText( "Draw triangles towards center" );
 
         squareButton.addActionListener( randomArtProcessing );
         squareButton.setActionCommand( "squares" );
+        squareButton.setToolTipText( "Draws squares with random positions and colors on screen" );
+        squareButton.setIconTextGap( 10 );
 
         circleButton.addActionListener( randomArtProcessing );
         circleButton.setActionCommand( "circles" );
+        circleButton.setToolTipText( "Draw circles in different location and colors" );
 
         resetButton.addActionListener( randomArtProcessing );
         resetButton.setActionCommand( "clear" );
+        resetButton.setToolTipText( "Resets the drawing board" );
 
         eraserButton.addActionListener( randomArtProcessing );
-        eraserButton.setActionCommand("eraserEnabled");
+        eraserButton.setActionCommand( "eraserEnabled" );
+        eraserButton.setToolTipText( "Erase wherever on canvas" );
 
         colorPicker.addActionListener(randomArtProcessing);
-        colorPicker.setActionCommand("color");
+        colorPicker.setActionCommand( "color" );
+        colorPicker.setToolTipText( "Choose background color" );
 
         borderButton.addActionListener(randomArtProcessing);
-        borderButton.setActionCommand("border");
+        borderButton.setActionCommand( "border" );
+        borderButton.setToolTipText( "Adds border to drawing board" );
 
 
         //Brush buttons
         simpleBrush.addActionListener( randomArtProcessing );
-        simpleBrush.setActionCommand("simpleBrushEnabled");
+        simpleBrush.setActionCommand( "simpleBrushEnabled" );
+        simpleBrush.setToolTipText( "Simple line" );
 
-        lineRoughBrush.addActionListener(randomArtProcessing);
-        lineRoughBrush.setActionCommand("lineBrushEnabled");
+        lineRoughBrush.addActionListener( randomArtProcessing );
+        lineRoughBrush.setActionCommand( "lineBrushEnabled" );
+        lineRoughBrush.setToolTipText( "Rough line" );
 
-        randomCirclesBrush.addActionListener(randomArtProcessing);
-        randomCirclesBrush.setActionCommand("randomCirclesBrushEnabled");
+        randomCirclesBrush.addActionListener( randomArtProcessing );
+        randomCirclesBrush.setActionCommand( "randomCirclesBrushEnabled" );
+        randomCirclesBrush.setToolTipText( "Random circles in different sizes and colors" );
 
-        randomLineBrush.addActionListener(randomArtProcessing);
-        randomLineBrush.setActionCommand("randomLineBrushEnabled");
+        randomLineBrush.addActionListener( randomArtProcessing );
+        randomLineBrush.setActionCommand( "randomLineBrushEnabled" );
+        randomLineBrush.setToolTipText( "Random lines in different lenghts, directions, and colors" );
 
-        tunnelBrush.addActionListener(randomArtProcessing);
+        tunnelBrush.addActionListener( randomArtProcessing );
         tunnelBrush.setActionCommand( "tunnelBrushEnabled" );
+        tunnelBrush.setToolTipText( "Draws line where ever the mouse is towards center" );
 
         //SOMETHING SPECIAL
         squareBackground.addActionListener( randomArtProcessing );
-        squareBackground.setActionCommand( "squareBackground");
+        squareBackground.setActionCommand( "squareBackground" );
+        squareBackground.setToolTipText( "Draws rectangles in different sizes and colors" );
 
         save.addActionListener( randomArtProcessing );
         save.setActionCommand( "save" );
