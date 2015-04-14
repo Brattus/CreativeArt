@@ -450,8 +450,7 @@ public class RandomArt extends PApplet implements ActionListener
         rectMode(CENTER);
         rect(pmouseX, pmouseY, 30, 30);
     }
-
-
+    
     public void lineBrushEnabled()
     {
         simpleBrushEnabled = false;
@@ -551,7 +550,7 @@ public class RandomArt extends PApplet implements ActionListener
         if (mousePressed == true) {
             strokeWeight(random(10));
             stroke(random(255), random(255), random(255), random(255));
-            line(mouseX, mouseY,random(0,1366), random(0,678));
+            line(mouseX, mouseY,random(0,1366), random(0,768));
         }
     }
 
