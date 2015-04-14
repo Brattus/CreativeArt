@@ -29,6 +29,11 @@ public class RandomArt extends PApplet implements ActionListener
     boolean simpleBrushEnabled, lineBrushEnabled, randomLineBrushEnabled, randomCircleBrush, tunnelBrush, eraseEnabled = false;
     int opacity = 170;
 
+    String tempRandomText = "";
+
+    JTextField randomTextField = new JTextField( 15 );
+    JTextField randomAmountField = new JTextField( 15 );
+
     // BG colors
     int redBG=255, greenBG =255, blueBG = 255;
 
@@ -628,43 +633,42 @@ public class RandomArt extends PApplet implements ActionListener
 
     public void randomText()
     {
-        JTextField textField = new JTextField( 15 );
-        JTextField amountField = new JTextField( 15 );
-        amountField.setText( "" );
-
         JPanel inputPanel = new JPanel();
         inputPanel.add( new JLabel( "Text:" ) );
-        inputPanel.add( textField );
+        inputPanel.add( randomTextField );
         inputPanel.add( Box.createHorizontalStrut( 15 ) ); // a spacer
         inputPanel.add( new JLabel( "Amount:" ) );
-        inputPanel.add( amountField );
+        inputPanel.add( randomAmountField );
 
-        //int amount = 0;
+        int amount = 0;
+        String text = "";
 
         int result = JOptionPane.showConfirmDialog( null, inputPanel, "Please Enter Text and amount Values", JOptionPane.OK_CANCEL_OPTION );
         if(result == JOptionPane.OK_OPTION)
         {
             try
             {
-                String text = textField.getText();
-                int amount = Integer.parseInt( amountField.getText().toString() );
+                text = randomTextField.getText();
+                amount = Integer.parseInt( randomAmountField.getText().toString() );
+                tempRandomText = text;
 
                 for(int i = 0; i < amount; i++)
                 {
                     fill( random( 255 ), random( 255 ), random( 255 ) );
                     textSize( random( 10, 70 ) );
-                    textMode(CENTER);
+                    textMode( CENTER );
                     text( text, random( width-200 ), random( height ) );
                 }
 
             } catch(NumberFormatException e)
             {
-                JOptionPane.showMessageDialog( this, "Amount must be a numeric value ", "Error", JOptionPane.ERROR_MESSAGE );
+                JOptionPane.showMessageDialog( this, e.getMessage() + " is not a numeric value \n" +
+                        "Amount must be a numeric value", "Input must be a numeric value", JOptionPane.ERROR_MESSAGE );
+
+                println( tempRandomText );
+                randomTextField.setText( randomTextField.getText() );
                 randomText();
             }
-
-
         }
-
     }
 }
