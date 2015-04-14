@@ -25,7 +25,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     boolean bordersEnabled = false;
     long time = 0;
     int st;
-    boolean brush1, brush2, brush3 = false;
+    boolean brush1, brush2, brush3, brush4 = false;
     int opacity = 170;
 
     // BG colors
@@ -367,8 +367,13 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
             case "squareBackground":
                 squareBackground();
                 break;
+            case"randomLineBrush":
+                brush4();
+                break;
         }
     }
+
+
 
     private void openFile()
     {
@@ -420,6 +425,9 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
                 {
                     randomBrush();
                 }
+                if(brush4 == true) {
+                    randomLineBrush();
+                }
                 if(eraserEnabled == true)
                 {
                     eraser();
@@ -443,6 +451,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         brush1 = true;
         brush2 = false;
         brush3 = false;
+        brush4 = false;
         eraserEnabled = false;
     }
 
@@ -451,6 +460,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         brush1 = false;
         brush2 = true;
         brush3 = false;
+        brush4 = false;
         eraserEnabled = false;
     }
 
@@ -459,6 +469,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         brush1 = false;
         brush2 = false;
         brush3 = true;
+        brush4 = false;
         eraserEnabled = false;
     }
 
@@ -468,6 +479,16 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         brush1 = false;
         brush2 = false;
         brush3 = false;
+        brush4 = false;
+    }
+
+    public void brush4()
+    {
+        brush1 = false;
+        brush2 = false;
+        brush3 = false;
+        brush4 = true;
+        eraserEnabled = false;
     }
 
     public void eraserDisabled()
@@ -501,9 +522,17 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
 
         float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
         stroke(1);
+        strokeWeight(1);
         fill(random(255), random(255), random(255), opacity);
         ellipse(mouseX, mouseY, speed, speed);
         }
+
+    public void randomLineBrush(){
+        if (mousePressed == true) {
+            stroke(random(255), random(255), random(255));
+            line(mouseX, mouseY,random(0,1366), random(0,678));
+        }
+    }
 
     public void squareBackground()
     {

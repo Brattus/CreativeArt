@@ -22,6 +22,7 @@ public class DisplayFrame extends JFrame
     private JButton simpleBrush;
     private JButton lineBrush;
     private JButton randomBrush;
+    private JButton randomLineBrush;
 
     //something special
     private JButton squareBackground;
@@ -162,6 +163,9 @@ public class DisplayFrame extends JFrame
         ImageIcon imageCircleBrush = new ImageIcon ("Buttons/circleBrush.png");
         randomBrush = new JButton( "", imageCircleBrush);
 
+        ImageIcon imageRandomLineBrushBrush = new ImageIcon ("Buttons/lorem.png");
+        randomLineBrush = new JButton ("RandomLineBrush", imageRandomLineBrushBrush);
+
         //something special
         ImageIcon imagesquareBackground = new ImageIcon ("Buttons/squareBackground.png");
         squareBackground = new JButton( "", imagesquareBackground);
@@ -252,6 +256,7 @@ public class DisplayFrame extends JFrame
         this.add ( simpleBrush );
         this.add ( lineBrush );
         this.add ( randomBrush );
+        this.add ( randomLineBrush );
 
         //something special
         this.add (squareBackground);
@@ -318,6 +323,9 @@ public class DisplayFrame extends JFrame
         randomBrush.setBounds( 10, 560, 315, 48 );
         randomBrush.setBackground(new Color(255, 255, 255));
 
+        randomLineBrush.setBounds(10, 620, 315,48);
+        randomLineBrush.setBackground(new Color(255, 255, 255));
+
         //Something special
         squareBackground.setBounds( 10, 170, 315, 48 );
         squareBackground.setBackground( new Color( 232, 177, 141 ) );
@@ -349,13 +357,13 @@ public class DisplayFrame extends JFrame
 
         eraserButton.addActionListener( randomArtProcessing );
         eraserButton.setActionCommand( "eraser" );
-        eraserButton.addItemListener( randomArtProcessing );
+        eraserButton.addItemListener(randomArtProcessing);
 
-        colorPicker.addActionListener( randomArtProcessing );
-        colorPicker.setActionCommand( "color" );
+        colorPicker.addActionListener(randomArtProcessing);
+        colorPicker.setActionCommand("color");
 
-        borderButton.addActionListener( randomArtProcessing );
-        borderButton.setActionCommand( "border" );
+        borderButton.addActionListener(randomArtProcessing);
+        borderButton.setActionCommand("border");
 
 
         //Brush buttons
@@ -367,6 +375,9 @@ public class DisplayFrame extends JFrame
 
         randomBrush.addActionListener( randomArtProcessing );
         randomBrush.setActionCommand( "randomBrush" );
+
+        randomLineBrush.addActionListener( randomArtProcessing);
+        randomLineBrush.setActionCommand("randomLineBrush");
 
         //sOMETHING SPECIAL
         squareBackground.addActionListener( randomArtProcessing );
