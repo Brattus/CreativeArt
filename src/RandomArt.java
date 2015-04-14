@@ -588,7 +588,14 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
 
     public void tunnelVision()
     {
-        stroke( 0 );
-        line( width / 2, height / 2, mouseX, mouseY );
+        if(mousePressed)
+        {
+            if(mouseButton == LEFT)
+            {
+                stroke( random( 255 ), random( 255 ), random( 255 ) );
+                strokeWeight( random( 10 ) );
+                line( width / 2, height / 2, mouseX, mouseY );
+            }
+        }
     }
 }
