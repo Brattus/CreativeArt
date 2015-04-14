@@ -28,6 +28,7 @@ public class RandomArt extends PApplet implements ActionListener
     boolean simpleBrushEnabled, lineBrushEnabled, randomLineBrushEnabled, randomCircleBrush, tunnelBrush, eraseEnabled = false;
     int opacity = 170;
 
+
     // BG colors
     int redBG=255, greenBG =255, blueBG = 255;
 
@@ -52,7 +53,6 @@ public class RandomArt extends PApplet implements ActionListener
 
         drawPencil();
     }
-
 
     /**
      * Creates random triangles
@@ -301,10 +301,8 @@ public class RandomArt extends PApplet implements ActionListener
      * @param e
      */
     @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        switch(e.getActionCommand())
-        {
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
             case "triangles":
                 createTriangles();
                 break;
@@ -379,8 +377,6 @@ public class RandomArt extends PApplet implements ActionListener
                 break;
         }
     }
-
-
 
     //Imports a file into the processing window.
     private void openFile()

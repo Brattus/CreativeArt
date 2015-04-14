@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
  import javax.swing.JFrame;
+import javax.swing.JSlider;
 
 /**
  * Created by Ramin, Per-Olav, Ole-Martin and Knut Olav on 16.03.2015.
@@ -66,6 +67,7 @@ public class DisplayFrame extends JFrame
     private JLabel backgrounds;
 
     private JLabel backgroundLabel;
+
 
     //Display frame
     public DisplayFrame(String title) throws HeadlessException
@@ -163,7 +165,7 @@ public class DisplayFrame extends JFrame
         randomCirclesBrush = new JButton( "", imageCircleBrush );
 
         //Random line generating brush.
-        ImageIcon imageRandomLineBrushBrush = new ImageIcon( "Buttons/randomLinesBrush.jpg" );
+        ImageIcon imageRandomLineBrushBrush = new ImageIcon( "Buttons/lineBrush.png" );
         randomLineBrush = new JButton ("", imageRandomLineBrushBrush);
 
         //Button making background of squares.
@@ -173,6 +175,8 @@ public class DisplayFrame extends JFrame
         // Button making text at random places
         ImageIcon imageRandomText = new ImageIcon( "Buttons/randomText.jpg" );
         randomTextButton = new JButton( "text", imageRandomText );
+
+
 
         //Menubar buttons.
         fileMenu.add(save);
