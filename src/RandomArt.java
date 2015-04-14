@@ -5,17 +5,14 @@
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
-import processing.core.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 
-public class RandomArt extends PApplet implements ActionListener, MouseListener
+public class RandomArt extends PApplet implements ActionListener, ItemListener
 {
     public int response;
     PGraphics pg1;
@@ -53,7 +50,6 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         camera();
 
         drawPencil();
-       // eraser();
     }
 
 
@@ -365,7 +361,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
                 eraser();
                 break;
             case "squareBackground":
-                squareBackgroun();
+                squareBackground();
                 break;
         }
     }
@@ -395,7 +391,6 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
     {
         if(mousePressed)
         {
-
             if(mouseButton == RIGHT)
             {
                 delay( 100 );
@@ -407,7 +402,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
 
             if (mouseButton == LEFT) 
             {
-                println("Detected Mouse Left Click!");
+                //println("Detected Mouse Left Click!");
 
                 if(brush1 == true)
                 {
@@ -421,8 +416,22 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
                 {
                     randomBrush();
                 }
+                if(eraserEnabled == true)
+                {
+                    eraser();
+                }
             }
         }
+    }
+
+    private void eraser()
+    {
+        noStroke();
+        fill( redBG, greenBG, blueBG );
+        rectMode( CENTER );
+        rect( pmouseX, pmouseY, 30, 30 );
+
+
     }
 
 
@@ -431,6 +440,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         brush1 = true;
         brush2 = false;
         brush3 = false;
+        eraserEnabled = false;
     }
 
     public void brush2()
@@ -438,6 +448,7 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         brush1 = false;
         brush2 = true;
         brush3 = false;
+        eraserEnabled = false;
     }
 
     public void brush3()
@@ -445,6 +456,15 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         brush1 = false;
         brush2 = false;
         brush3 = true;
+        eraserEnabled = false;
+    }
+
+    public void eraserEnabled()
+    {
+        eraserEnabled = true;
+        brush1 = false;
+        brush2 = false;
+        brush3 = false;
     }
 
     public void lineBrush()
@@ -473,7 +493,8 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         ellipse(mouseX, mouseY, speed, speed);
         }
 
-    public void squareBackgroun(){
+    public void squareBackground()
+    {
         noStroke();
         for (int i = 0; i < 700; i = i+(int)random(160, 200)) {
             for (int j = 0; j < 1200; j = j+(int)random(30,40) ) {
@@ -502,17 +523,24 @@ public class RandomArt extends PApplet implements ActionListener, MouseListener
         line( 0, 0, 0, height );
     }
 
-
-    public void eraser()
+    /**
+     * Invoked when an item has been selected or deselected by the user.
+     * The code written for this method performs the operations
+     * that need to occur when an item is selected (or deselected).
+     *
+     * @param itemEvent
+     */
+    @Override
+    public void itemStateChanged(ItemEvent itemEvent)
     {
-        if(mousePressed)
+        if(itemEvent.getStateChange() == ItemEvent.SELECTED)
         {
-            if(mouseButton == LEFT)
-            {
-                noStroke();
-                    fill( redBG, greenBG, blueBG );
-                ellipse( pmouseX, pmouseY, 50, 50 );
-            }
+            eraserEnabled = true;
+            DisplayFrame.eraserButton.setText( "Eraser enabled" );
+        } else
+        {
+            eraserEnabled = false;
+            DisplayFrame.eraserButton.setText( "Eraser disabled" );
         }
     }
 }

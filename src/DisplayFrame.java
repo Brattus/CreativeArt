@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
  */
 public class DisplayFrame extends JFrame
 {
-    public static JButton ereaserButton;
+    public static JToggleButton eraserButton;
     private RandomArt randomArtProcessing;
     private JPanel processingPanel;
     // Shape Buttons
@@ -145,7 +145,7 @@ public class DisplayFrame extends JFrame
         resetButton = new JButton( "Clear" );
         colorPicker = new JButton( "Choose background color" );
         borderButton = new JButton( "Enable borders" );
-        ereaserButton = new JButton( "Eraser" );
+        eraserButton = new JToggleButton( "Eraser" );
 
 
         save = new JMenuItem( "Save" );
@@ -245,7 +245,7 @@ public class DisplayFrame extends JFrame
         this.add( resetButton );
         this.add( colorPicker );
         this.add( borderButton );
-        this.add( ereaserButton );
+        this.add( eraserButton );
 
 
         //Brush buttons
@@ -301,26 +301,26 @@ public class DisplayFrame extends JFrame
 
         borderButton.setBounds( 10,135, 315, 25 );
 
-        ereaserButton.setBounds( 170, getHeight() - 100, 155, 25 );
+        eraserButton.setBounds( 170, getHeight() - 100, 155, 25 );
         //borderButton.setBackground( new Color( 232, 177, 141 ) );
 
         //Brush buttons
 
         brushes.setBounds(10, 410, 315, 48);
-        brushes.setBackground(new Color(255, 255, 255));
+        brushes.setBackground( new Color( 255, 255, 255 ) );
 
-        simpleBrush.setBounds(10, 450, 315, 48);
-        simpleBrush.setBackground( new Color( 255, 255, 255));
+        simpleBrush.setBounds( 10, 450, 315, 48 );
+        simpleBrush.setBackground( new Color( 255, 255, 255 ) );
 
-        lineBrush.setBounds(10, 505, 315, 48);
-        lineBrush.setBackground(new Color(255, 255, 255));
+        lineBrush.setBounds( 10, 505, 315, 48 );
+        lineBrush.setBackground( new Color( 255, 255, 255 ) );
 
-        randomBrush.setBounds(10, 560, 315, 48);
+        randomBrush.setBounds( 10, 560, 315, 48 );
         randomBrush.setBackground(new Color(255, 255, 255));
 
         //Something special
-        squareBackground.setBounds(10, 170, 315, 48);
-        squareBackground.setBackground(new Color(232, 177, 141));
+        squareBackground.setBounds( 10, 170, 315, 48 );
+        squareBackground.setBackground( new Color( 232, 177, 141 ) );
 
         backgrounds.setBounds(10,58,240,48);
         backgrounds.setBackground(new Color(237, 177, 141));
@@ -331,6 +331,7 @@ public class DisplayFrame extends JFrame
 
         backgroundLabel.setBounds( 0, 0, getWidth(), getHeight() );
     }
+
 
     private void addActionListeners()
     {
@@ -346,8 +347,9 @@ public class DisplayFrame extends JFrame
         resetButton.addActionListener( randomArtProcessing );
         resetButton.setActionCommand( "clear" );
 
-        ereaserButton.addActionListener( randomArtProcessing );
-        ereaserButton.setActionCommand( "eraser" );
+        eraserButton.addActionListener( randomArtProcessing );
+        eraserButton.setActionCommand( "eraser" );
+        eraserButton.addItemListener( randomArtProcessing );
 
         colorPicker.addActionListener( randomArtProcessing );
         colorPicker.setActionCommand( "color" );
