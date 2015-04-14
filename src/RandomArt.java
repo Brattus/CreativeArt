@@ -55,7 +55,6 @@ public class RandomArt extends PApplet implements ActionListener
         noStroke();
         time = millis() / 1000;
 
-        camera();
 
         drawPencil();
     }
@@ -182,7 +181,7 @@ public class RandomArt extends PApplet implements ActionListener
         println( "Erode filter clicked at: " + millis() / 1000 + " s" );
         filter(ERODE);
         redraw();
-    }
+}
 
     /**
      * Dilate filter on canvas
