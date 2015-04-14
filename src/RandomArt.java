@@ -94,7 +94,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
             stroke(1);
             strokeWeight(1);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
-            rect( random( 0, width ), random( 0, height ), 60, 60 );
+            rect(random(0, width), random(0, height), 60, 60);
         }
     }
 
@@ -222,7 +222,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         JTextField yField = new JTextField( 5 );
 
         JPanel myPanel = new JPanel();
-        myPanel.add( new JLabel( "Width:" ) );
+        myPanel.add(new JLabel("Width:"));
         myPanel.add( xField );
         myPanel.add( Box.createHorizontalStrut( 15 ) ); // a spacer
         myPanel.add( new JLabel( "Height:" ) );
@@ -236,9 +236,9 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
 
         String[] extensionTypes = filter.getExtensions();
 
-        int returnVal = chooser.showSaveDialog( this );
+        int returnVal = chooser.showSaveDialog(this);
 
-        int result = JOptionPane.showConfirmDialog( null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION );
+        int result = JOptionPane.showConfirmDialog(null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION);
         if(result == JOptionPane.OK_OPTION)
         {
             if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -439,11 +439,9 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
 
     private void eraser()
     {
-        noStroke();
-        fill(redBG, greenBG, blueBG);
-        rectMode(CENTER);
-        rect(pmouseX, pmouseY, 30, 30);
-
+        strokeWeight(20);
+        stroke(redBG, greenBG, blueBG);
+        line(mouseX, mouseY, pmouseX, pmouseY);
 
     }
 
@@ -532,7 +530,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         if (mousePressed == true) {
             strokeWeight(random(10));
             stroke(random(255), random(255), random(255), random(255));
-            line(mouseX, mouseY,random(0,1366), random(0,678));
+            line(mouseX, mouseY,random(0,1366), random(0,768));
         }
     }
 
