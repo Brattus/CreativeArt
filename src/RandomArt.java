@@ -530,7 +530,8 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
 
     public void randomLineBrush(){
         if (mousePressed == true) {
-            stroke(random(255), random(255), random(255));
+            strokeWeight(random(10));
+            stroke(random(255), random(255), random(255), random(255));
             line(mouseX, mouseY,random(0,1366), random(0,678));
         }
     }

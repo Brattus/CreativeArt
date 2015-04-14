@@ -163,8 +163,8 @@ public class DisplayFrame extends JFrame
         ImageIcon imageCircleBrush = new ImageIcon ("Buttons/circleBrush.png");
         randomBrush = new JButton( "", imageCircleBrush);
 
-        ImageIcon imageRandomLineBrushBrush = new ImageIcon ("Buttons/lorem.png");
-        randomLineBrush = new JButton ("RandomLineBrush", imageRandomLineBrushBrush);
+        ImageIcon imageRandomLineBrushBrush = new ImageIcon ("Buttons/randomLineBrush.png");
+        randomLineBrush = new JButton ("", imageRandomLineBrushBrush);
 
         //something special
         ImageIcon imagesquareBackground = new ImageIcon ("Buttons/squareBackground.png");
@@ -323,7 +323,7 @@ public class DisplayFrame extends JFrame
         randomBrush.setBounds( 10, 560, 315, 48 );
         randomBrush.setBackground(new Color(255, 255, 255));
 
-        randomLineBrush.setBounds(10, 620, 315,48);
+        randomLineBrush.setBounds(10, 615, 315,48);
         randomLineBrush.setBackground(new Color(255, 255, 255));
 
         //Something special
