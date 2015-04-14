@@ -142,7 +142,7 @@ public class DisplayFrame extends JFrame
         ImageIcon imageCircle = new ImageIcon( "Buttons/alt_circle.jpg" );
         circleButton = new JButton( "" , imageCircle);
 
-        resetButton = new JButton( "Clear" );
+        resetButton = new JButton( "Start over" );
         colorPicker = new JButton( "Choose background color" );
         borderButton = new JButton( "Enable borders" );
         eraserButton = new JToggleButton( "Eraser" );

@@ -29,11 +29,11 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     int opacity = 170;
 
     // BG colors
-    int redBG, greenBG, blueBG = 0;
+    int redBG=255, greenBG =255, blueBG = 255;
     boolean eraserEnabled = false;
 
     public void setup() {
-        size( 1009, 710 );
+        size(1009, 710);
         background(255);
         noStroke();
 
@@ -45,6 +45,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     @Override
     public void draw()
     {
+        noStroke();
         time = millis() / 1000;
 
         camera();
@@ -189,7 +190,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
      */
     public void clearCanvas()
     {
-        int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION );
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             clear();
             background(255);
@@ -201,7 +202,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
      */
     private void changeColor()
     {
-        Color c = JColorChooser.showDialog( null, "Choose a Color", Color.BLACK );
+        Color c = JColorChooser.showDialog( null, "Choose a Color", Color.WHITE );
         redBG = c.getRed();
         greenBG = c.getGreen();
         blueBG = c.getBlue();
@@ -427,9 +428,9 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     private void eraser()
     {
         noStroke();
-        fill( redBG, greenBG, blueBG );
-        rectMode( CENTER );
-        rect( pmouseX, pmouseY, 30, 30 );
+        fill(redBG, greenBG, blueBG);
+        rectMode(CENTER);
+        rect(pmouseX, pmouseY, 30, 30);
 
 
     }
@@ -467,6 +468,14 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         brush3 = false;
     }
 
+    public void eraserDisabled()
+    {
+        eraserEnabled = false;
+        brush1 = false;
+        brush2 = false;
+        brush3 = false;
+    }
+
     public void lineBrush()
     {
         for(int i = 0; i < 20; i++)
@@ -487,8 +496,9 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
 
 
     public void randomBrush() {
+
         float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
-        stroke(speed);
+        stroke(1);
         fill(random(255), random(255), random(255), opacity);
         ellipse(mouseX, mouseY, speed, speed);
         }
@@ -535,11 +545,11 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     {
         if(itemEvent.getStateChange() == ItemEvent.SELECTED)
         {
-            eraserEnabled = true;
+            eraserEnabled();
             DisplayFrame.eraserButton.setText( "Eraser enabled" );
         } else
         {
-            eraserEnabled = false;
+            eraserDisabled();
             DisplayFrame.eraserButton.setText( "Eraser disabled" );
         }
     }
