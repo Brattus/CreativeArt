@@ -9,7 +9,8 @@ import processing.core.PImage;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class RandomArt extends PApplet implements ActionListener
@@ -28,17 +29,17 @@ public class RandomArt extends PApplet implements ActionListener
     boolean simpleBrushEnabled, lineBrushEnabled, randomLineBrushEnabled, randomCircleBrush, tunnelBrush, eraseEnabled = false;
     int opacity = 170;
 
-
     // BG colors
     int redBG=255, greenBG =255, blueBG = 255;
 
     //Setting up the processing window.
-    public void setup() {
-        size(1009, 710);
-        background(255);
+    public void setup()
+    {
+        size( 1009, 710 );
+        background( 255 );
         noStroke();
 
-        frameRate(60);
+        frameRate( 60 );
 
     }
 
@@ -301,8 +302,10 @@ public class RandomArt extends PApplet implements ActionListener
      * @param e
      */
     @Override
-    public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()) {
+    public void actionPerformed(ActionEvent e)
+    {
+        switch(e.getActionCommand())
+        {
             case "triangles":
                 createTriangles();
                 break;
@@ -377,7 +380,7 @@ public class RandomArt extends PApplet implements ActionListener
                 break;
         }
     }
-
+    
     //Imports a file into the processing window.
     private void openFile()
     {
@@ -560,8 +563,10 @@ public class RandomArt extends PApplet implements ActionListener
         }
 
     //The random line brush function.
-    public void randomLineBrush(){
-        if (mousePressed == true) {
+    public void randomLineBrush()
+    {
+        if(mousePressed == true)
+        {
             strokeWeight(random(10));
             stroke(random(255), random(255), random(255), opacity);
             line(mouseX, mouseY,random(0,1366), random(0,768));
@@ -572,10 +577,12 @@ public class RandomArt extends PApplet implements ActionListener
     public void squareBackground()
     {
         noStroke();
-        for (int i = 0; i < 700; i = i+(int)random(160, 200)) {
-            for (int j = 0; j < 1200; j = j+(int)random(30,40) ) {
-                fill(random(255),random(255), random(255),200);
-                rect(j, i, 40, 200 );
+        for(int i = 0; i < 700; i = i + (int) random( 160, 200 ))
+        {
+            for(int j = 0; j < 1200; j = j + (int) random( 30, 40 ))
+            {
+                fill( random( 255 ), random( 255 ), random( 255 ), 200 );
+                rect( j, i, 40, 200 );
             }
         }
     }
@@ -615,15 +622,44 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+
     public void randomText()
     {
-        String text = JOptionPane.showInputDialog( this, "Type in your desired text to draw" );
+        JTextField textField = new JTextField( 15 );
+        JTextField amountField = new JTextField( 15 );
+        amountField.setText( "" );
 
-        for(int i = 0; i < 30; i++)
+        JPanel inputPanel = new JPanel();
+        inputPanel.add( new JLabel( "Text:" ) );
+        inputPanel.add( textField );
+        inputPanel.add( Box.createHorizontalStrut( 15 ) ); // a spacer
+        inputPanel.add( new JLabel( "Amount:" ) );
+        inputPanel.add( amountField );
+
+        //int amount = 0;
+
+        int result = JOptionPane.showConfirmDialog( null, inputPanel, "Please Enter Text and amount Values", JOptionPane.OK_CANCEL_OPTION );
+        if(result == JOptionPane.OK_OPTION)
         {
-            fill( random( 255 ), random( 255 ), random( 255 ) );
-            textSize( random( 10, 70 ) );
-            text( text, random( 1368 ), random( 768 ) );
+            try
+            {
+                String text = textField.getText();
+                int amount = Integer.parseInt( amountField.getText().toString() );
+
+                for(int i = 0; i < amount; i++)
+                {
+                    fill( random( 255 ), random( 255 ), random( 255 ) );
+                    textSize( random( 10, 70 ) );
+                    text( text, random( width ), random( height ) );
+                }
+
+            } catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog( this, e.getMessage() + "is not a number!", "Not a number!", JOptionPane.ERROR_MESSAGE );
+            }
+
+
         }
+
     }
 }
