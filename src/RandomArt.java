@@ -33,7 +33,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     boolean eraserEnabled = false;
 
     public void setup() {
-        size( 1009, 710 );
+        size(1009, 710);
         background(255);
         noStroke();
 
@@ -46,7 +46,6 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     public void draw()
     {
         noStroke();
-
         time = millis() / 1000;
 
         camera();
@@ -71,9 +70,9 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         for(st = 0; st < number; st++)
         {
             stroke( 1 );
-            strokeWeight( 1 );
+            strokeWeight(1);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
-            triangle( random( 0, width ), random( 0, height ), random( 0, (float) ( width / 1.7 ) ), random( 0, height ), (float) ( width / 2 ), height / 2 );
+            triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
         }
     }
 
@@ -93,7 +92,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         for(st = 0; st < number; st++)
         {
             stroke(1);
-            strokeWeight( 1 );
+            strokeWeight(1);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
             rect( random( 0, width ), random( 0, height ), 60, 60 );
         }
@@ -114,7 +113,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         for(st = 0; st < number; st++)
         {
             stroke( 1 );
-            strokeWeight( 1 );
+            strokeWeight(1);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
             ellipse( random( 0, width ), random( 0, height ), 60, 60 );
         }
@@ -195,7 +194,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
      */
     public void clearCanvas()
     {
-        int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION );
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             clear();
             background(255);
@@ -441,9 +440,9 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     private void eraser()
     {
         noStroke();
-        fill( redBG, greenBG, blueBG );
-        rectMode( CENTER );
-        rect( pmouseX, pmouseY, 30, 30 );
+        fill(redBG, greenBG, blueBG);
+        rectMode(CENTER);
+        rect(pmouseX, pmouseY, 30, 30);
 
 
     }
