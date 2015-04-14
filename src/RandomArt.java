@@ -591,6 +591,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
     {
         if(mousePressed)
         {
+
             if(mouseButton == LEFT)
             {
                 stroke( random( 255 ), random( 255 ), random( 255 ) );
