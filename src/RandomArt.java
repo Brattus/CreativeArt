@@ -655,7 +655,7 @@ public class RandomArt extends PApplet implements ActionListener
 
             } catch(NumberFormatException e)
             {
-                JOptionPane.showMessageDialog( this, e.getMessage() + "is not a number!", "Not a number!", JOptionPane.ERROR_MESSAGE );
+                JOptionPane.showMessageDialog( this, "Amount must be a numeric value ", "Error", JOptionPane.ERROR_MESSAGE );
             }
 
 
