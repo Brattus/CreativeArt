@@ -586,6 +586,7 @@ public class RandomArt extends PApplet implements ActionListener
 
     public void tunnelVision()
     {
+
         if(mousePressed)
         {
             if(mouseButton == LEFT)
