@@ -51,7 +51,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         camera();
 
         drawPencil();
-        tunnelVision();
+       // tunnelVision();
     }
 
 
