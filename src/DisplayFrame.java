@@ -37,6 +37,7 @@ public class DisplayFrame extends JFrame
     private JMenuItem openFile;
     private JMenuItem saveHighres;
 
+
     // Filter menu
     private JMenu filterMenu;
     private JMenuItem blur;
