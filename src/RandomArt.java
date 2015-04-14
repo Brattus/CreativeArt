@@ -451,6 +451,7 @@ public class RandomArt extends PApplet implements ActionListener
         chooser.setFileFilter( filter );
         chooser.setDialogTitle( "Save file" );
 
+
         String[] extensionTypes = filter.getExtensions();
 
         int returnVal = chooser.showOpenDialog( this );
