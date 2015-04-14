@@ -31,6 +31,7 @@ public class RandomArt extends PApplet implements ActionListener
     // BG colors
     int redBG=255, greenBG =255, blueBG = 255;
 
+    //Setting up the processing window.
     public void setup() {
         size(1009, 710);
         background(255);
@@ -40,7 +41,7 @@ public class RandomArt extends PApplet implements ActionListener
 
     }
 
-
+    //Processing draw function.
     @Override
     public void draw()
     {
@@ -212,6 +213,7 @@ public class RandomArt extends PApplet implements ActionListener
         background( redBG, greenBG, blueBG );
     }
 
+    //Function to save the art with preferred resolution.
     public void saveHighRes()
     {
         PImage partialSave = null;
@@ -377,6 +379,7 @@ public class RandomArt extends PApplet implements ActionListener
 
 
 
+    //Imports a file into the processing window.
     private void openFile()
     {
         PImage image = null;
@@ -398,6 +401,7 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+    //The drawing function.
     public void drawPencil()
     {
         if(mousePressed)
@@ -443,13 +447,15 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+    //The eraser.
     private void eraser()
     {
         strokeWeight(20);
         stroke(redBG, greenBG, blueBG);
         line(mouseX, mouseY, pmouseX, pmouseY);
     }
-    
+
+    //The line brush enabled.
     public void lineBrushEnabled()
     {
         simpleBrushEnabled = false;
@@ -460,6 +466,7 @@ public class RandomArt extends PApplet implements ActionListener
         tunnelBrush = false;
     }
 
+    //The simple brush enabled.
     public void simpleBrushEnabled()
     {
         simpleBrushEnabled = true;
@@ -470,6 +477,7 @@ public class RandomArt extends PApplet implements ActionListener
         tunnelBrush = false;
     }
 
+    //The random line brush enabled.
     public void randomLineBrushEnabled()
     {
         simpleBrushEnabled = false;
@@ -480,6 +488,7 @@ public class RandomArt extends PApplet implements ActionListener
         tunnelBrush = false;
     }
 
+    //The tunnel brush enabled.
     public void tunnelBrushEnabled()
     {
         tunnelBrush = true;
@@ -490,6 +499,7 @@ public class RandomArt extends PApplet implements ActionListener
         eraseEnabled = false;
     }
 
+    //The eraser enabled.
     public void eraserEnabled()
     {
         eraseEnabled = true;
@@ -500,6 +510,7 @@ public class RandomArt extends PApplet implements ActionListener
         tunnelBrush = false;
     }
 
+    //The random circle brush enabled.
     public void randomCircleBrushEnabled()
     {
         simpleBrushEnabled = false;
@@ -509,6 +520,7 @@ public class RandomArt extends PApplet implements ActionListener
         eraseEnabled = false;
     }
 
+    //Eraser disabled.
     public void eraserDisabled()
     {
         eraseEnabled = false;
@@ -517,6 +529,7 @@ public class RandomArt extends PApplet implements ActionListener
         randomLineBrushEnabled = false;
     }
 
+    //The line brush function.
     public void lineBrush()
     {
         for(int i = 0; i < 20; i++)
@@ -528,6 +541,7 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+    //The simple brush function.
     public void simpleBrush()
     {
         stroke( red, green, blue );
@@ -535,7 +549,7 @@ public class RandomArt extends PApplet implements ActionListener
         line( mouseX, mouseY, pmouseX, pmouseY );
     }
 
-
+    //The random circle brush function.
     public void randomCirclesBrush()
     {
         float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
@@ -545,6 +559,7 @@ public class RandomArt extends PApplet implements ActionListener
         ellipse(mouseX, mouseY, speed, speed);
         }
 
+    //The random line brush function.
     public void randomLineBrush(){
         if (mousePressed == true) {
             strokeWeight(random(10));
@@ -553,6 +568,7 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+    //The square background function.
     public void squareBackground()
     {
         noStroke();
@@ -564,6 +580,7 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+    //The enable borders.
     public void enableBorders()
     {
         bordersEnabled = true;
@@ -573,6 +590,7 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+    //The border function.
     public void borders()
     {
         stroke( 0 );
@@ -583,6 +601,7 @@ public class RandomArt extends PApplet implements ActionListener
         line( 0, 0, 0, height );
     }
 
+    //The tunnel vision function
     public void tunnelVision()
     {
 
