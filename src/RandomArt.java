@@ -3,7 +3,6 @@
  */
 
 import processing.core.PApplet;
-import processing.core.PGraphics;
 import processing.core.PImage;
 
 import javax.swing.*;
@@ -15,10 +14,6 @@ import java.awt.event.ActionListener;
 
 public class RandomArt extends PApplet implements ActionListener
 {
-    public int response;
-    PGraphics pg1;
-    PGraphics pg2;
-    PImage img = null;
     Color color = null;
     float red = 0;
     float green = 0;
@@ -29,10 +24,14 @@ public class RandomArt extends PApplet implements ActionListener
     boolean simpleBrushEnabled, lineBrushEnabled, randomLineBrushEnabled, randomCircleBrush, tunnelBrush, eraseEnabled = false;
     int opacity = 170;
 
-    String tempRandomText = "";
-
+    // Variables for randomText()
     JTextField randomTextField = new JTextField( 15 );
     JTextField randomAmountField = new JTextField( 15 );
+
+    // We need these to know if CTRL/SHIFT are pressed
+    boolean controlDown = false;
+    boolean shiftDown = false;
+    UndoRedo undoRedo;
 
     // BG colors
     int redBG=255, greenBG =255, blueBG = 255;
@@ -43,7 +42,7 @@ public class RandomArt extends PApplet implements ActionListener
         size( 1009, 710 );
         background( 255 );
         noStroke();
-
+        undoRedo = new UndoRedo( 10 );
         frameRate( 60 );
 
     }
@@ -57,6 +56,54 @@ public class RandomArt extends PApplet implements ActionListener
 
 
         drawPencil();
+    }
+
+    public void mouseReleased()
+    {
+        // Save each line we draw to our stack of UNDOs
+        undoRedo.takeSnapshot();
+    }
+
+    public void keyPressed()
+    {
+        // Remember if CTRL or SHIFT are pressed or not
+        if(key == CODED)
+        {
+            if(keyCode == CONTROL)
+                controlDown = true;
+            if(keyCode == SHIFT)
+                shiftDown = true;
+            return;
+        }
+        // Check if we pressed CTRL+Z or CTRL+SHIFT+Z
+        if(controlDown)
+        {
+            if(keyCode == 'Z')
+            {
+                if(shiftDown)
+                    undoRedo.redo();
+                else
+                    undoRedo.undo();
+            }
+            return;
+        }
+        // Check if we pressed the S key
+        if(key == 's')
+        {
+            saveFrame( "image####.png" );
+        }
+    }
+
+    public void keyReleased()
+    {
+        // Remember if CTRL or SHIFT are pressed or not
+        if(key == CODED)
+        {
+            if(keyCode == CONTROL)
+                controlDown = false;
+            if(keyCode == SHIFT)
+                shiftDown = false;
+        }
     }
 
     /**
@@ -76,7 +123,7 @@ public class RandomArt extends PApplet implements ActionListener
             stroke( 1 );
             strokeWeight(1);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
-            triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
+            triangle( random( 0, width ), random( 0, height ), random( 0, (float) ( width / 1.7 ) ), random( 0, height ), (float) ( width / 2 ), height / 2 );
         }
     }
 
@@ -98,7 +145,7 @@ public class RandomArt extends PApplet implements ActionListener
             stroke(1);
             strokeWeight(1);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
-            rect(random(0, width), random(0, height), 60, 60);
+            rect( random( 0, width ), random( 0, height ), 60, 60 );
         }
     }
 
@@ -198,7 +245,7 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void clearCanvas()
     {
-        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION );
         if (reply == JOptionPane.YES_OPTION) {
             clear();
             background(255);
@@ -230,7 +277,7 @@ public class RandomArt extends PApplet implements ActionListener
         JTextField yField = new JTextField( 5 );
 
         JPanel myPanel = new JPanel();
-        myPanel.add(new JLabel("Width:"));
+        myPanel.add( new JLabel( "Width:" ) );
         myPanel.add( xField );
         myPanel.add( Box.createHorizontalStrut( 15 ) ); // a spacer
         myPanel.add( new JLabel( "Height:" ) );
@@ -244,9 +291,9 @@ public class RandomArt extends PApplet implements ActionListener
 
         String[] extensionTypes = filter.getExtensions();
 
-        int returnVal = chooser.showSaveDialog(this);
+        int returnVal = chooser.showSaveDialog( this );
 
-        int result = JOptionPane.showConfirmDialog(null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog( null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION );
         if(result == JOptionPane.OK_OPTION)
         {
             if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -649,7 +696,6 @@ public class RandomArt extends PApplet implements ActionListener
             {
                 text = randomTextField.getText();
                 amount = Integer.parseInt( randomAmountField.getText().toString() );
-                tempRandomText = text;
 
                 for(int i = 0; i < amount; i++)
                 {
@@ -664,10 +710,100 @@ public class RandomArt extends PApplet implements ActionListener
                 JOptionPane.showMessageDialog( this, e.getMessage().substring( 18, e.getMessage().length() ) + " is not a numeric value. \n" +
                         "Amount must be a numeric value", "Input must be a numeric value", JOptionPane.ERROR_MESSAGE );
 
-                println( tempRandomText );
                 randomTextField.setText( randomTextField.getText() );
                 randomText();
             }
         }
     }
+
+    /**
+     * Undo class
+     */
+    class UndoRedo
+    {
+        // Number of currently available undo and redo snapshots
+        int undoSteps = 0, redoSteps = 0;
+        CircImgCollection images;
+
+        UndoRedo(int stepsBackAndForth)
+        {
+            images = new CircImgCollection( stepsBackAndForth );
+        }
+
+        public void takeSnapshot()
+        {
+            undoSteps = min( undoSteps + 1, images.amount - 1 );
+            // each time we draw we disable redo
+            redoSteps = 0;
+            images.next();
+            images.capture();
+        }
+
+        public void undo()
+        {
+            if(undoSteps > 0)
+            {
+                undoSteps--;
+                redoSteps++;
+                images.prev();
+                images.show();
+            }
+        }
+
+        public void redo()
+        {
+            if(redoSteps > 0)
+            {
+                undoSteps++;
+                redoSteps--;
+                images.next();
+                images.show();
+            }
+        }
+    }
+
+    /**
+     * Circle image collection class
+     */
+    class CircImgCollection
+    {
+        int amount, current;
+        PImage[] img;
+
+        CircImgCollection(int amountOfImages)
+        {
+            amount = amountOfImages;
+
+            // Initialize all images as copies of the current display
+            img = new PImage[ amount ];
+            for(int i = 0; i < amount; i++)
+            {
+                img[ i ] = createImage( width, height, RGB );
+                img[ i ] = get();
+            }
+        }
+
+        void next()
+        {
+            current = ( current + 1 ) % amount;
+        }
+
+        void prev()
+        {
+            current = ( current - 1 + amount ) % amount;
+        }
+
+        void capture()
+        {
+            img[ current ] = get();
+        }
+
+        void show()
+        {
+            image( img[ current ], 0, 0 );
+        }
+    }
+
+
+
 }
