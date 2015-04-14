@@ -432,6 +432,11 @@ public class RandomArt extends PApplet implements ActionListener
             case "randomText":
                 randomText();
                 break;
+            case "undo":
+                undoRedo.undo();
+                break;
+            case "redo":
+                undoRedo.redo();
         }
     }
     
@@ -723,11 +728,11 @@ public class RandomArt extends PApplet implements ActionListener
     {
         // Number of currently available undo and redo snapshots
         int undoSteps = 0, redoSteps = 0;
-        CircImgCollection images;
+        ImgCollection images;
 
         UndoRedo(int stepsBackAndForth)
         {
-            images = new CircImgCollection( stepsBackAndForth );
+            images = new ImgCollection( stepsBackAndForth );
         }
 
         public void takeSnapshot()
@@ -765,12 +770,12 @@ public class RandomArt extends PApplet implements ActionListener
     /**
      * Circle image collection class
      */
-    class CircImgCollection
+    class ImgCollection
     {
         int amount, current;
         PImage[] img;
 
-        CircImgCollection(int amountOfImages)
+        ImgCollection(int amountOfImages)
         {
             amount = amountOfImages;
 

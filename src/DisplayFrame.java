@@ -9,11 +9,11 @@ import javax.swing.JSlider;
  */
 public class DisplayFrame extends JFrame
 {
+    // Initializing button variables
     public JButton eraserButton;
     //Initializing variables
     private RandomArt randomArtProcessing;
     private JPanel processingPanel;
-    // Initializing button variables
     private JButton triangleButton;
     private JButton squareButton;
     private JButton circleButton;
@@ -27,7 +27,8 @@ public class DisplayFrame extends JFrame
     private JButton randomLineBrush;
     private JButton squareBackground;
     private JButton randomTextButton;
-
+    private JButton undoButton;
+    private JButton redoButton;
 
     // Initializing menu variables
     private JMenuBar menuBar;
@@ -61,7 +62,6 @@ public class DisplayFrame extends JFrame
     private KeyStroke ctrl7 = null;
 
     // Labels
-    private JLabel title;
     private JLabel brushes;
     private JLabel shapes;
     private JLabel backgrounds;
@@ -112,6 +112,7 @@ public class DisplayFrame extends JFrame
 
         // Initiate Menu items
         menuBar = new JMenuBar();
+        menuBar.setSize( getWidth(), 100 );
         fileMenu = new JMenu( "File" );
         filterMenu = new JMenu( "Filters" );
 
@@ -176,7 +177,11 @@ public class DisplayFrame extends JFrame
         ImageIcon imageRandomText = new ImageIcon( "Buttons/randomText.jpg" );
         randomTextButton = new JButton( "text", imageRandomText );
 
+        ImageIcon imageUndoButton = new ImageIcon( "" );
+        undoButton = new JButton( "Undo", imageUndoButton );
 
+        ImageIcon imageRedoButton = new ImageIcon( "" );
+        redoButton = new JButton( "Redo", imageRedoButton );
 
         //Menubar buttons.
         fileMenu.add(save);
@@ -223,10 +228,6 @@ public class DisplayFrame extends JFrame
         dialate.setAccelerator( ctrl7 );
 
         // Initiate Labels
-        title = new JLabel( "Random Art Generator" );
-        title.setForeground( new Color( 0, 0, 0 ) );
-        title.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
-
         brushes = new JLabel( "Brushes" );
         brushes.setForeground( new Color( 0, 0, 0 ) );
         brushes.setFont(new Font(null, 2, 20));
@@ -281,11 +282,12 @@ public class DisplayFrame extends JFrame
         filterMenu.add(erode);
         filterMenu.add(dialate);
 
-        this.add( title );
+        menuBar.add( undoButton );
+        menuBar.add( redoButton );
+
         this.add(brushes);
         this.add( shapes );
         this.add( backgroundLabel );
-
 
         processingPanel.add( randomArtProcessing );
     }
@@ -348,8 +350,6 @@ public class DisplayFrame extends JFrame
         backgrounds.setBounds(10,58,240,48);
         backgrounds.setBackground(new Color(237, 177, 141));
 
-
-        title.setBounds( 10, 0, 300, 40 );
         shapes.setBounds ( 10, 240, 300,50);
 
         backgroundLabel.setBounds( 0, 0, getWidth(), getHeight() );
@@ -359,6 +359,12 @@ public class DisplayFrame extends JFrame
     //Adding action listeners.
     private void addActionListeners()
     {
+        undoButton.addActionListener( randomArtProcessing );
+        undoButton.setActionCommand( "undo" );
+
+        redoButton.addActionListener( randomArtProcessing );
+        redoButton.setActionCommand( "redo" );
+
         triangleButton.addActionListener( randomArtProcessing );
         triangleButton.setActionCommand( "triangles" );
         triangleButton.setToolTipText( "Draw triangles towards center" );
@@ -412,6 +418,7 @@ public class DisplayFrame extends JFrame
 
         randomTextButton.addActionListener( randomArtProcessing );
         randomTextButton.setActionCommand( "randomText" );
+        randomTextButton.setToolTipText( "Generate custom text in different locations and colors" );
 
         //SOMETHING SPECIAL
         squareBackground.addActionListener( randomArtProcessing );
