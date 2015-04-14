@@ -430,10 +430,9 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
 
     private void eraser()
     {
-        noStroke();
-        fill(redBG, greenBG, blueBG);
-        rectMode(CENTER);
-        rect(pmouseX, pmouseY, 30, 30);
+        stroke(redBG, greenBG, blueBG);
+        strokeWeight(20);
+        line(mouseX, mouseY, pmouseX, pmouseY);
 
 
     }
