@@ -198,6 +198,9 @@ public class RandomArt extends PApplet implements ActionListener
         if (reply == JOptionPane.YES_OPTION) {
             clear();
             background(255);
+            redBG = 255;
+            greenBG = 255;
+            blueBG = 255;
         }
     }
 
