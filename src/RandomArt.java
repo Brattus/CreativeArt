@@ -439,6 +439,7 @@ public class RandomArt extends PApplet implements ActionListener
                 undoRedo.redo();
         }
     }
+
     
     //Imports a file into the processing window.
     private void openFile()
