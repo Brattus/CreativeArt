@@ -650,7 +650,8 @@ public class RandomArt extends PApplet implements ActionListener
                 {
                     fill( random( 255 ), random( 255 ), random( 255 ) );
                     textSize( random( 10, 70 ) );
-                    text( text, random( width-180 ), random( height ) );
+                    textMode(CENTER);
+                    text( text, random( width-200 ), random( height ) );
                 }
 
             } catch(NumberFormatException e)
