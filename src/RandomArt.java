@@ -69,6 +69,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         for(st = 0; st < number; st++)
         {
             stroke( 1 );
+            strokeWeight(1);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
             triangle(random(0, width), random(0, height), random(0, (float) (width / 1.7)), random(0, height), (float) (width / 2), height / 2);
         }
@@ -89,7 +90,8 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         println( "Square clicked at: " + millis() );
         for(st = 0; st < number; st++)
         {
-            noStroke();
+            stroke(1);
+            strokeWeight(1);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
             rect( random( 0, width ), random( 0, height ), 60, 60 );
         }
@@ -110,6 +112,7 @@ public class RandomArt extends PApplet implements ActionListener, ItemListener
         for(st = 0; st < number; st++)
         {
             stroke( 1 );
+            strokeWeight(1);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
             ellipse( random( 0, width ), random( 0, height ), 60, 60 );
         }
