@@ -374,6 +374,9 @@ public class RandomArt extends PApplet implements ActionListener
             case "randomCirclesBrushEnabled":
                 randomCircleBrushEnabled();
                 break;
+            case "randomText":
+                randomText();
+                break;
         }
     }
 
@@ -613,6 +616,18 @@ public class RandomArt extends PApplet implements ActionListener
                 strokeWeight( random( 10 ) );
                 line( width / 2, height / 2, mouseX, mouseY );
             }
+        }
+    }
+
+    public void randomText()
+    {
+        String text = JOptionPane.showInputDialog( this, "Type in your desired text to draw" );
+
+        for(int i = 0; i < 30; i++)
+        {
+            fill( random( 255 ), random( 255 ), random( 255 ) );
+            textSize( random( 10, 70 ) );
+            text( text, random( width ), random( height ) );
         }
     }
 }

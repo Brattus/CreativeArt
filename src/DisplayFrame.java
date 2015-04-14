@@ -25,6 +25,7 @@ public class DisplayFrame extends JFrame
     private JButton randomCirclesBrush;
     private JButton randomLineBrush;
     private JButton squareBackground;
+    private JButton randomTextButton;
 
 
     // Initializing menu variables
@@ -169,6 +170,10 @@ public class DisplayFrame extends JFrame
         ImageIcon imagesquareBackground = new ImageIcon ("Buttons/squareBackground.png");
         squareBackground = new JButton( "", imagesquareBackground);
 
+        // Button making text at random places
+        ImageIcon imageRandomText = new ImageIcon( "Buttons/randomText.jpg" );
+        randomTextButton = new JButton( "text", imageRandomText );
+
         //Menubar buttons.
         fileMenu.add(save);
         fileMenu.setMnemonic( KeyEvent.VK_F );
@@ -257,6 +262,7 @@ public class DisplayFrame extends JFrame
         this.add( randomCirclesBrush );
         this.add ( randomLineBrush );
         this.add( tunnelBrush );
+        this.add( randomTextButton );
 
         //something special
         this.add (squareBackground);
@@ -322,9 +328,11 @@ public class DisplayFrame extends JFrame
         tunnelBrush.setBounds( 170, 505, 150, 48 );
         tunnelBrush.setBackground( new Color( 255, 255, 255 ) );
 
-
         randomCirclesBrush.setBounds( 10, 560, 150, 48 );
         randomCirclesBrush.setBackground( new Color( 255, 255, 255 ) );
+
+        randomTextButton.setBounds( 170, 560, 150, 48 );
+        randomTextButton.setBackground( new Color( 255, 255, 255 ) );
 
         randomLineBrush.setBounds( 10, 505, 150, 48 );
         randomLineBrush.setBackground(new Color(255, 255, 255));
@@ -397,6 +405,9 @@ public class DisplayFrame extends JFrame
         tunnelBrush.addActionListener( randomArtProcessing );
         tunnelBrush.setActionCommand( "tunnelBrushEnabled" );
         tunnelBrush.setToolTipText( "Draws line where ever the mouse is towards center" );
+
+        randomTextButton.addActionListener( randomArtProcessing );
+        randomTextButton.setActionCommand( "randomText" );
 
         //SOMETHING SPECIAL
         squareBackground.addActionListener( randomArtProcessing );
