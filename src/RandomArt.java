@@ -444,13 +444,11 @@ public class RandomArt extends PApplet implements ActionListener
     private void openFile()
     {
         PImage image = null;
-
         FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
 
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter( filter );
         chooser.setDialogTitle( "Save file" );
-
 
         String[] extensionTypes = filter.getExtensions();
 
