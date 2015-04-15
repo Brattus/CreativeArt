@@ -27,8 +27,6 @@ public class DisplayFrame extends JFrame
     private JButton randomLineBrush;
     private JButton squareBackground;
     private JButton randomTextButton;
-    private JButton undoButton;
-    private JButton redoButton;
 
     // Initializing menu variables
     private JMenuBar menuBar;
@@ -36,6 +34,8 @@ public class DisplayFrame extends JFrame
     private JMenuItem save;
     private JMenuItem openFile;
     private JMenuItem saveHighres;
+    private JMenuItem undoButton;
+    private JMenuItem redoButton;
 
 
     // Filter menu
@@ -52,6 +52,8 @@ public class DisplayFrame extends JFrame
     private KeyStroke ctrlOKeyStroke = null;
     private KeyStroke ctrlSKeyStroke = null;
     private KeyStroke ctrlShiftSKeyStroke = null;
+    private KeyStroke ctrlZKeystroke = null;
+    private KeyStroke ctrlYKeyStroke = null;
 
     // Shortcuts filter menu
     private KeyStroke ctrl1 = null;
@@ -151,6 +153,14 @@ public class DisplayFrame extends JFrame
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
         save.setAccelerator( ctrlSKeyStroke );
 
+        undoButton = new JMenuItem( "Undo");
+        ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z");
+        save.setAccelerator(ctrlZKeystroke);
+
+        redoButton = new JMenuItem( "Redo");
+        ctrlYKeyStroke = KeyStroke.getKeyStroke( "control Y");
+        save.setAccelerator(ctrlYKeyStroke);
+
         //Brush buttons
         ImageIcon imageSimpleBrush = new ImageIcon("Buttons/plainBrush.png");
         simpleBrush = new JButton( "", imageSimpleBrush);
@@ -179,12 +189,6 @@ public class DisplayFrame extends JFrame
         ImageIcon imageRandomText = new ImageIcon( "Buttons/randomText.jpg" );
         randomTextButton = new JButton( "text", imageRandomText );
 
-        ImageIcon imageUndoButton = new ImageIcon( "" );
-        undoButton = new JButton( "Undo", imageUndoButton );
-
-        ImageIcon imageRedoButton = new ImageIcon( "" );
-        redoButton = new JButton( "Redo", imageRedoButton );
-
         //Menubar buttons.
         fileMenu.add(save);
         fileMenu.setMnemonic( KeyEvent.VK_F );
@@ -194,11 +198,14 @@ public class DisplayFrame extends JFrame
         openFile.setAccelerator( ctrlOKeyStroke );
 
         fileMenu.add( openFile );
+        fileMenu.add ( undoButton);
+        fileMenu.add (redoButton);
 
         saveHighres = new JMenuItem( "Save with different resolution" );
         ctrlShiftSKeyStroke = KeyStroke.getKeyStroke( "control shift S" );
         saveHighres.setAccelerator(ctrlShiftSKeyStroke);
         fileMenu.add( saveHighres );
+
 
         // Filters.
         blur = new JMenuItem( "Blur" );
@@ -284,8 +291,6 @@ public class DisplayFrame extends JFrame
         filterMenu.add(erode);
         filterMenu.add(dialate);
 
-        menuBar.add( undoButton );
-        menuBar.add( redoButton );
 
         this.add(brushes);
         this.add( shapes );
@@ -361,12 +366,6 @@ public class DisplayFrame extends JFrame
     //Adding action listeners.
     private void addActionListeners()
     {
-        undoButton.addActionListener( randomArtProcessing );
-        undoButton.setActionCommand( "undo" );
-
-        redoButton.addActionListener( randomArtProcessing );
-        redoButton.setActionCommand( "redo" );
-
         triangleButton.addActionListener( randomArtProcessing );
         triangleButton.setActionCommand( "triangles" );
         triangleButton.setToolTipText( "Draw triangles towards center" );
@@ -432,6 +431,14 @@ public class DisplayFrame extends JFrame
 
         openFile.addActionListener( randomArtProcessing );
         openFile.setActionCommand( "openFile" );
+
+        undoButton.addActionListener( randomArtProcessing );
+        undoButton.setActionCommand( "undo" );
+
+        redoButton.addActionListener( randomArtProcessing );
+        redoButton.setActionCommand( "redo" );
+
+
 
         // Filter Memu
         blur.addActionListener( randomArtProcessing );
