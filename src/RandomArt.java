@@ -8,8 +8,7 @@ import processing.core.PImage;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 
 public class RandomArt extends PApplet implements ActionListener
@@ -122,12 +121,13 @@ public class RandomArt extends PApplet implements ActionListener
         inputPanel.add( Box.createHorizontalStrut( 2 ) ); // a spacer
         inputPanel.add(numberOftrianglesfField);
 
-        numberOftrianglesfField.requestFocusInWindow();
 
         int amount = 0;
         String text = "";
 
         int result = JOptionPane.showConfirmDialog( null, inputPanel, "Please Enter an amount of triangles", JOptionPane.OK_CANCEL_OPTION );
+
+
         if(result == JOptionPane.OK_OPTION)
         {
             try

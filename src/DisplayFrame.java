@@ -148,34 +148,27 @@ public class DisplayFrame extends JFrame
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
         save.setAccelerator( ctrlSKeyStroke );
 
-        ImageIcon imageUndoButton = new ImageIcon( "Application pics/undo.png" );
-        undoButton = new JButton( "", imageUndoButton );
+        undoButton = new JButton( "", new ImageIcon( "Application pics/undo.png" ) );
         ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z");
 
-        ImageIcon imageRedoButton = new ImageIcon( "Application pics/redo.png" );
-        redoButton = new JButton( "", imageRedoButton );
+        redoButton = new JButton( "", new ImageIcon( "Application pics/redo.png" ) );
         ctrlYKeyStroke = KeyStroke.getKeyStroke( "control Y");
         //redoButton.setAccelerator(ctrlYKeyStroke);
 
         //Brush buttons
-        ImageIcon imageSimpleBrush = new ImageIcon("Buttons/plainBrush.png");
-        simpleBrush = new JButton( "", imageSimpleBrush);
+        simpleBrush = new JButton( "", new ImageIcon( "Buttons/plainBrush.png" ) );
 
         //Brush generating lines from center to mouse position
-        ImageIcon imageTunnelBrush = new ImageIcon( "Buttons/tunnelBrush.jpg" );
-        tunnelBrush = new JButton( "Tunnel brush", imageTunnelBrush );
+        tunnelBrush = new JButton( "Tunnel brush", new ImageIcon( "Buttons/tunnelBrush.jpg" ) );
 
         //Generating a line of smaller lines.
-        ImageIcon imageRoughBrush = new ImageIcon ("Buttons/roughBrush.png");
-        lineRoughBrush = new JButton( "", imageRoughBrush );
+        lineRoughBrush = new JButton( "", new ImageIcon( "Buttons/roughBrush.png" ) );
 
         //Brush making circles at mouse position.
-        ImageIcon imageCircleBrush = new ImageIcon( "Buttons/randomCircleBrush.png" );
-        randomCirclesBrush = new JButton( "", imageCircleBrush );
+        randomCirclesBrush = new JButton( "", new ImageIcon( "Buttons/randomCircleBrush.png" ) );
 
         //Random line generating brush.
-        ImageIcon imageRandomLineBrushBrush = new ImageIcon( "Buttons/lineBrush.png" );
-        randomLineBrush = new JButton ("", imageRandomLineBrushBrush);
+        randomLineBrush = new JButton( "", new ImageIcon( "Buttons/lineBrush.png" ) );
 
         //Button making background of squares.
         ImageIcon imagesquareBackground = new ImageIcon ("Buttons/squareBackground.png");
