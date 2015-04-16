@@ -1,3 +1,5 @@
+import javafx.geometry.HorizontalDirection;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -11,7 +13,7 @@ public class DisplayFrame extends JFrame
 {
     // Initializing button variables
     public JButton eraserButton;
-    //Initializing variables
+    // Initializing variables
     private RandomArt randomArtProcessing;
     private JPanel processingPanel;
     private JButton triangleButton;
@@ -27,6 +29,8 @@ public class DisplayFrame extends JFrame
     private JButton randomLineBrush;
     private JButton squareBackground;
     private JButton randomTextButton;
+    private JButton undoButton;
+    private JButton redoButton;
 
     // Initializing menu variables
     private JMenuBar menuBar;
@@ -34,9 +38,6 @@ public class DisplayFrame extends JFrame
     private JMenuItem save;
     private JMenuItem openFile;
     private JMenuItem saveHighres;
-    private JMenuItem undoButton;
-    private JMenuItem redoButton;
-
 
     // Filter menu
     private JMenu filterMenu;
@@ -89,7 +90,6 @@ public class DisplayFrame extends JFrame
     public static void main(String[] args)
     {
         DisplayFrame displayFrame = new DisplayFrame("Random Art Generator");
-
     }
 
     /**
@@ -104,7 +104,7 @@ public class DisplayFrame extends JFrame
 
 
         this.setSize( randomArtProcessing.width, randomArtProcessing.height );
-        this.setMinimumSize(new Dimension(1366, 768));
+        this.setMinimumSize( new Dimension( 1366, 830 ) );
 
         // Unused if. For later development.
         if(this != null)
@@ -132,17 +132,10 @@ public class DisplayFrame extends JFrame
      */
     private void initiateComponents()
     {
-
-
         // Initiate shape buttons
-        ImageIcon imageTriangle = new ImageIcon("Buttons/triangle.png");
-        triangleButton = new JButton( "", imageTriangle );
-
-        ImageIcon imageSquare = new ImageIcon("Buttons/rectangle.png");
-        squareButton = new JButton("", imageSquare);
-
-        ImageIcon imageCircle = new ImageIcon( "Buttons/alt_circle.jpg" );
-        circleButton = new JButton( "" , imageCircle);
+        triangleButton = new JButton( "Triangle", new ImageIcon( "Buttons/triangle.png" ) );
+        squareButton = new JButton( "", new ImageIcon( "Buttons/rectangle.png" ) );
+        circleButton = new JButton( "", new ImageIcon( "Buttons/alt_circle.jpg" ) );
 
         resetButton = new JButton( "Start over" );
         colorPicker = new JButton( "Choose background color" );
@@ -153,13 +146,12 @@ public class DisplayFrame extends JFrame
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
         save.setAccelerator( ctrlSKeyStroke );
 
-        undoButton = new JMenuItem( "Undo");
+        undoButton = new JButton( "Undo" );
         ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z");
-        save.setAccelerator(ctrlZKeystroke);
 
-        redoButton = new JMenuItem( "Redo");
+        redoButton = new JButton( "Redo" );
         ctrlYKeyStroke = KeyStroke.getKeyStroke( "control Y");
-        save.setAccelerator(ctrlYKeyStroke);
+        //redoButton.setAccelerator(ctrlYKeyStroke);
 
         //Brush buttons
         ImageIcon imageSimpleBrush = new ImageIcon("Buttons/plainBrush.png");
@@ -198,8 +190,6 @@ public class DisplayFrame extends JFrame
         openFile.setAccelerator( ctrlOKeyStroke );
 
         fileMenu.add( openFile );
-        fileMenu.add ( undoButton);
-        fileMenu.add (redoButton);
 
         saveHighres = new JMenuItem( "Save with different resolution" );
         ctrlShiftSKeyStroke = KeyStroke.getKeyStroke( "control shift S" );
@@ -250,7 +240,6 @@ public class DisplayFrame extends JFrame
         backgrounds.setFont( new Font( null, 2, 20));
 
         backgroundLabel = new JLabel( new ImageIcon( "Application pics/AppBG3.jpg" ) );
-        backgroundLabel.setBounds(0, 0, getWidth(), getHeight());
     }
 
 
@@ -260,6 +249,9 @@ public class DisplayFrame extends JFrame
     private void addComponents()
     {
         this.add( processingPanel );
+
+        this.add( undoButton );
+        this.add( redoButton );
 
         this.add( triangleButton );
         this.add( squareButton );
@@ -306,8 +298,8 @@ public class DisplayFrame extends JFrame
     private void setLayout()
     {
         setLayout( null );
-
-        processingPanel.setBounds( 350, 0, 1009, 710 );
+        backgroundLabel.setBounds( 0, 0, getWidth(), getHeight() );
+        processingPanel.setBounds( 350, 45, 1009, 722 );
 
         triangleButton.setBounds( 10, 280, 100, 100 );
         //triangleButton.setBackground( new Color( 232, 177, 141 ) );
@@ -321,11 +313,11 @@ public class DisplayFrame extends JFrame
         colorPicker.setBounds( 10, 100, 315, 25 );
         //colorPicker.setBackground( new Color( 232, 177, 141 ) );
 
-        resetButton.setBounds( 10, getHeight() - 100, 155, 25 );
+        resetButton.setBounds( 10, getHeight() - 88, 155, 25 );
 
         borderButton.setBounds( 10,135, 315, 25 );
 
-        eraserButton.setBounds( 170, getHeight() - 100, 155, 25 );
+        eraserButton.setBounds( 170, getHeight() - 88, 155, 25 );
         //borderButton.setBackground( new Color( 232, 177, 141 ) );
 
         //Brush buttons
@@ -359,7 +351,11 @@ public class DisplayFrame extends JFrame
 
         shapes.setBounds ( 10, 240, 300,50);
 
-        backgroundLabel.setBounds( 0, 0, getWidth(), getHeight() );
+        undoButton.setBounds( 0, 0, 100, 50 );
+        redoButton.setBounds( 110, 0, 100, 50 );
+
+
+
     }
 
 

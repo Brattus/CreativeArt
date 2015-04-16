@@ -27,6 +27,9 @@ public class RandomArt extends PApplet implements ActionListener
     boolean simpleBrushEnabled, lineBrushEnabled, randomLineBrushEnabled, randomCircleBrush, tunnelBrush, eraseEnabled = false;
     int opacity = 170;
 
+    // Variables for createTriangle
+    JTextField numberOftrianglesfField = new JTextField( 15 );
+
     // Variables for randomText()
     JTextField randomTextField = new JTextField( 15 );
     JTextField randomAmountField = new JTextField( 15 );
@@ -114,21 +117,45 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void createTriangles()
     {
-        String firstNumber = JOptionPane.showInputDialog( "Enter how many triangles you want. Max 2000" );
-        int number = Integer.parseInt( firstNumber );
+        JPanel inputPanel = new JPanel();
+        inputPanel.add( new JLabel( "Number of triangles:" ) );
+        inputPanel.add( Box.createHorizontalStrut( 2 ) ); // a spacer
+        inputPanel.add( numberOftrianglesfField );
 
-                if(number > 2000)
+        numberOftrianglesfField.requestFocusInWindow();
+
+        int amount = 0;
+        String text = "";
+
+        int result = JOptionPane.showConfirmDialog( null, inputPanel, "Please Enter an amount of triangles", JOptionPane.OK_CANCEL_OPTION );
+        if(result == JOptionPane.OK_OPTION)
+        {
+            try
+            {
+                text = numberOftrianglesfField.getText();
+                amount = Integer.parseInt( numberOftrianglesfField.getText().toString() );
+
+                if(amount > 2000)
                 {
-                    number = 2000;
+                    amount = 2000;
                 }
                 println( "Triangle clicked at: " + millis() / 1000 + " s" );
-                for(st = 0; st < number; st++)
+                for(st = 0; st < amount; st++)
                 {
-                    stroke( stroke0 );
-                    strokeWeight(stroke0);
+                    stroke( 1 );
+                    strokeWeight( 1 );
                     fill( random( 255 ), random( 255 ), random( 255 ), opacity );
                     triangle( random( 0, width ), random( 0, height ), random( 0, (float) ( width / 1.7 ) ), random( 0, height ), (float) ( width / 2 ), height / 2 );
                 }
+            } catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog( this, e.getMessage().substring( 18, e.getMessage().length() ) + " is not a numeric value. \n" +
+                        "Amount must be a numeric value", "Input must be a numeric value", JOptionPane.ERROR_MESSAGE );
+
+                numberOftrianglesfField.setText( numberOftrianglesfField.getText() );
+                createTriangles();
+            }
+        }
     }
 
 
@@ -137,10 +164,9 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void createSquares()
     {
-        String firstNumber =
-                JOptionPane.showInputDialog ( "Enter how many squares you want. Max 2000" );
-        int number = Integer.parseInt (firstNumber);
-        if (number > 2000)
+        String firstNumber = JOptionPane.showInputDialog( "Enter how many squares you want. Max 2000" );
+        int number = Integer.parseInt( firstNumber );
+        if(number > 2000)
         {
             number = 2000;
         }
@@ -159,7 +185,6 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void createCircles()
     {
-
         String firstNumber = JOptionPane.showInputDialog( "Enter how many circles you want. Max 2000" );
         int number = Integer.parseInt( firstNumber );
 
@@ -233,9 +258,9 @@ public class RandomArt extends PApplet implements ActionListener
     public void erodeFilter()
     {
         println( "Erode filter clicked at: " + millis() / 1000 + " s" );
-        filter(ERODE);
+        filter( ERODE );
         redraw();
-}
+    }
 
     /**
      * Dilate filter on canvas
@@ -253,9 +278,10 @@ public class RandomArt extends PApplet implements ActionListener
     public void clearCanvas()
     {
         int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION );
-        if (reply == JOptionPane.YES_OPTION) {
+        if(reply == JOptionPane.YES_OPTION)
+        {
             clear();
-            background(255);
+            background( 255 );
             redBG = 255;
             greenBG = 255;
             blueBG = 255;
@@ -619,7 +645,8 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     //The random circle brush function.
-    public void randomCirclesBrush() {
+    public void randomCirclesBrush()
+    {
         float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
         stroke(1);
         strokeWeight(1);
@@ -632,9 +659,9 @@ public class RandomArt extends PApplet implements ActionListener
     {
         if(mousePressed == true)
         {
-            strokeWeight(random(10));
-            stroke(random(255), random(255), random(255), opacity);
-            line(mouseX, mouseY,random(0,1366), random(0,768));
+            strokeWeight( random( 10 ) );
+            stroke( random( 255 ), random( 255 ), random( 255 ), opacity );
+            line( mouseX, mouseY, random( 0, 1366 ), random( 0, 768 ) );
         }
     }
 
@@ -713,7 +740,7 @@ public class RandomArt extends PApplet implements ActionListener
                     fill( random( 255 ), random( 255 ), random( 255 ) );
                     textSize( random( 10, 70 ) );
                     textMode( CENTER );
-                    text( text, random( width-200 ), random( height ) );
+                    text( text, random( width - 200 ), random( height ) );
                 }
 
             } catch(NumberFormatException e)
@@ -752,6 +779,7 @@ public class RandomArt extends PApplet implements ActionListener
 
         public void undo()
         {
+            println( "Undo" );
             if(undoSteps > 0)
             {
                 undoSteps--;
@@ -763,6 +791,7 @@ public class RandomArt extends PApplet implements ActionListener
 
         public void redo()
         {
+            println( "Redo" );
             if(redoSteps > 0)
             {
                 undoSteps++;
@@ -814,7 +843,6 @@ public class RandomArt extends PApplet implements ActionListener
             image( img[ current ], 0, 0 );
         }
     }
-
 
 
 }
