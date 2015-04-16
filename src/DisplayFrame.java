@@ -2,6 +2,7 @@ import javafx.geometry.HorizontalDirection;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
  import javax.swing.JFrame;
 import javax.swing.JSlider;
@@ -85,6 +86,7 @@ public class DisplayFrame extends JFrame
         setLayout();
 
         addActionListeners();
+
     }
     // Main method
     public static void main(String[] args)
@@ -146,10 +148,12 @@ public class DisplayFrame extends JFrame
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
         save.setAccelerator( ctrlSKeyStroke );
 
-        undoButton = new JButton( "Undo" );
+        ImageIcon imageUndoButton = new ImageIcon( "Buttons/undo.png" );
+        undoButton = new JButton( "", imageUndoButton );
         ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z");
 
-        redoButton = new JButton( "Redo" );
+        ImageIcon imageRedoButton = new ImageIcon( "Buttons/redo.png" );
+        redoButton = new JButton( "", imageRedoButton );
         ctrlYKeyStroke = KeyStroke.getKeyStroke( "control Y");
         //redoButton.setAccelerator(ctrlYKeyStroke);
 
@@ -187,9 +191,9 @@ public class DisplayFrame extends JFrame
 
         openFile = new JMenuItem( "Open file" );
         ctrlOKeyStroke = KeyStroke.getKeyStroke( "control O" );
-        openFile.setAccelerator( ctrlOKeyStroke );
+        openFile.setAccelerator(ctrlOKeyStroke);
 
-        fileMenu.add( openFile );
+        fileMenu.add(openFile);
 
         saveHighres = new JMenuItem( "Save with different resolution" );
         ctrlShiftSKeyStroke = KeyStroke.getKeyStroke( "control shift S" );
@@ -228,11 +232,11 @@ public class DisplayFrame extends JFrame
 
         // Initiate Labels
         brushes = new JLabel( "Brushes" );
-        brushes.setForeground( new Color( 0, 0, 0 ) );
+        brushes.setForeground(new Color(0, 0, 0));
         brushes.setFont(new Font(null, 2, 20));
 
         shapes = new JLabel( "Shapes" );
-        shapes.setForeground( new Color( 0, 0, 0 ) );
+        shapes.setForeground(new Color(0, 0, 0));
         shapes.setFont( new Font( null, 2, 20 ) );
 
         backgrounds = new JLabel( "Background Options");
@@ -321,42 +325,43 @@ public class DisplayFrame extends JFrame
         //borderButton.setBackground( new Color( 232, 177, 141 ) );
 
         //Brush buttons
-        brushes.setBounds( 10, 410, 150, 48 );
-        brushes.setBackground( new Color( 255, 255, 255 ) );
+        brushes.setBounds(10, 410, 150, 48);
+        brushes.setBackground(new Color(255, 255, 255));
 
-        simpleBrush.setBounds( 10, 450, 150, 48 );
-        simpleBrush.setBackground( new Color( 255, 255, 255 ) );
+        simpleBrush.setBounds(10, 450, 150, 48);
+        simpleBrush.setBackground(new Color(255, 255, 255));
 
-        lineRoughBrush.setBounds( 170, 450, 150, 48 );
-        lineRoughBrush.setBackground( new Color( 255, 255, 255 ) );
+        lineRoughBrush.setBounds(170, 450, 150, 48);
+        lineRoughBrush.setBackground(new Color(255, 255, 255));
 
-        tunnelBrush.setBounds( 170, 505, 150, 48 );
-        tunnelBrush.setBackground( new Color( 255, 255, 255 ) );
+        tunnelBrush.setBounds(170, 505, 150, 48);
+        tunnelBrush.setBackground(new Color(255, 255, 255));
 
-        randomCirclesBrush.setBounds( 10, 560, 150, 48 );
-        randomCirclesBrush.setBackground( new Color( 255, 255, 255 ) );
+        randomCirclesBrush.setBounds(10, 560, 150, 48);
+        randomCirclesBrush.setBackground(new Color(255, 255, 255));
 
-        randomTextButton.setBounds( 170, 560, 150, 48 );
-        randomTextButton.setBackground( new Color( 255, 255, 255 ) );
+        randomTextButton.setBounds(170, 560, 150, 48);
+        randomTextButton.setBackground(new Color(255, 255, 255));
 
-        randomLineBrush.setBounds( 10, 505, 150, 48 );
+        randomLineBrush.setBounds(10, 505, 150, 48);
         randomLineBrush.setBackground(new Color(255, 255, 255));
 
         //Something special
-        squareBackground.setBounds( 10, 170, 315, 48 );
-        squareBackground.setBackground( new Color( 232, 177, 141 ) );
+        squareBackground.setBounds(10, 170, 315, 48);
+        squareBackground.setBackground(new Color(232, 177, 141));
 
-        backgrounds.setBounds(10,58,240,48);
+        backgrounds.setBounds(10, 58, 240, 48);
         backgrounds.setBackground(new Color(237, 177, 141));
 
         shapes.setBounds ( 10, 240, 300,50);
 
-        undoButton.setBounds( 0, 0, 100, 50 );
-        redoButton.setBounds( 110, 0, 100, 50 );
+        undoButton.setBounds( 0, 0, 50, 30 );
+        redoButton.setBounds( 55, 0, 50, 30 );
 
 
 
     }
+
 
 
     //Adding action listeners.
