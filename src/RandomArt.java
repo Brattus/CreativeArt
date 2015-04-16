@@ -45,7 +45,7 @@ public class RandomArt extends PApplet implements ActionListener
     //Setting up the processing window.
     public void setup()
     {
-        size( 1009, 710 );
+        size(1009, 710);
         background( 255 );
         noStroke();
         undoRedo = new UndoRedo( 10 );
@@ -120,7 +120,7 @@ public class RandomArt extends PApplet implements ActionListener
         JPanel inputPanel = new JPanel();
         inputPanel.add( new JLabel( "Number of triangles:" ) );
         inputPanel.add( Box.createHorizontalStrut( 2 ) ); // a spacer
-        inputPanel.add( numberOftrianglesfField );
+        inputPanel.add(numberOftrianglesfField);
 
         numberOftrianglesfField.requestFocusInWindow();
 
@@ -173,9 +173,9 @@ public class RandomArt extends PApplet implements ActionListener
         println( "Square clicked at: " + millis() );
         for(st = 0; st < number; st++)
         {
-            int squares = (int) random( 30, 130 );
-            stroke( stroke0 );
-            strokeWeight(stroke0);
+            int squares = (int) random( 400 );
+            noStroke();
+           // strokeWeight(stroke0);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
             rect( random( 0, width ), random( 0, height ), squares, squares );
         }
@@ -196,10 +196,11 @@ public class RandomArt extends PApplet implements ActionListener
         println( "Circle clicked at: " + millis() / 1000 + " s" );
         for(st = 0; st < number; st++)
         {
+            int circles = (int) random( 400 );
             stroke( stroke0 );
             strokeWeight(stroke0);
             fill(random(255), random( 255 ), random( 255 ), opacity );
-            ellipse( random( 0, width ), random( 0, height ), random(300), random(300) );
+            ellipse( random( 0, width ), random( 0, height ),circles, circles );
         }
     }
 
@@ -278,7 +279,7 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void clearCanvas()
     {
-        int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION );
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION );
         if(reply == JOptionPane.YES_OPTION)
         {
             clear();
@@ -327,7 +328,7 @@ public class RandomArt extends PApplet implements ActionListener
 
         int returnVal = chooser.showSaveDialog( this );
 
-        int result = JOptionPane.showConfirmDialog( null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION );
+        int result = JOptionPane.showConfirmDialog(null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION );
         if(result == JOptionPane.OK_OPTION)
         {
             if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -641,7 +642,7 @@ public class RandomArt extends PApplet implements ActionListener
     public void simpleBrush()
     {
         stroke( red, green, blue );
-        strokeWeight( 5 );
+        strokeWeight(5);
         line( mouseX, mouseY, pmouseX, pmouseY );
     }
 
@@ -790,8 +791,7 @@ public class RandomArt extends PApplet implements ActionListener
             }
         }
 
-        public void redo()
-        {
+        public void redo() {
             println( "Redo" );
             if(redoSteps > 0)
             {
