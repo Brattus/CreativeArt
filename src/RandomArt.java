@@ -21,6 +21,9 @@ public class RandomArt extends PApplet implements ActionListener
     boolean bordersEnabled = false;
     long time = 0;
     int st;
+    int stroke0 = 0;
+    int stroke1 = 1;
+    int stroke5 = 5;
     boolean simpleBrushEnabled, lineBrushEnabled, randomLineBrushEnabled, randomCircleBrush, tunnelBrush, eraseEnabled = false;
     int opacity = 170;
 
@@ -113,19 +116,21 @@ public class RandomArt extends PApplet implements ActionListener
     {
         String firstNumber = JOptionPane.showInputDialog( "Enter how many triangles you want. Max 2000" );
         int number = Integer.parseInt( firstNumber );
-        if(number > 2000)
-        {
-            number = 2000;
-        }
-        println( "Triangle clicked at: " + millis() / 1000 + " s" );
-        for(st = 0; st < number; st++)
-        {
-            stroke( 1 );
-            strokeWeight(1);
-            fill( random( 255 ), random( 255 ), random( 255 ), opacity );
-            triangle( random( 0, width ), random( 0, height ), random( 0, (float) ( width / 1.7 ) ), random( 0, height ), (float) ( width / 2 ), height / 2 );
-        }
+
+                if(number > 2000)
+                {
+                    number = 2000;
+                }
+                println( "Triangle clicked at: " + millis() / 1000 + " s" );
+                for(st = 0; st < number; st++)
+                {
+                    stroke( stroke0 );
+                    strokeWeight(stroke0);
+                    fill( random( 255 ), random( 255 ), random( 255 ), opacity );
+                    triangle( random( 0, width ), random( 0, height ), random( 0, (float) ( width / 1.7 ) ), random( 0, height ), (float) ( width / 2 ), height / 2 );
+                }
     }
+
 
     /**
      * Creates random squares
@@ -142,10 +147,10 @@ public class RandomArt extends PApplet implements ActionListener
         println( "Square clicked at: " + millis() );
         for(st = 0; st < number; st++)
         {
-            stroke(1);
-            strokeWeight(1);
+            stroke(stroke0);
+            strokeWeight(stroke0);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
-            rect( random( 0, width ), random( 0, height ), 60, 60 );
+            rect( random( 0, width ), random( 0, height ), random(30,130), random(30,130) );
         }
     }
 
@@ -154,8 +159,10 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void createCircles()
     {
+
         String firstNumber = JOptionPane.showInputDialog( "Enter how many circles you want. Max 2000" );
         int number = Integer.parseInt( firstNumber );
+
         if(number > 2000)
         {
             number = 2000;
@@ -163,10 +170,10 @@ public class RandomArt extends PApplet implements ActionListener
         println( "Circle clicked at: " + millis() / 1000 + " s" );
         for(st = 0; st < number; st++)
         {
-            stroke( 1 );
-            strokeWeight(1);
-            fill( random( 255 ), random( 255 ), random( 255 ), opacity );
-            ellipse( random( 0, width ), random( 0, height ), 60, 60 );
+            stroke( stroke0 );
+            strokeWeight(stroke0);
+            fill(random(255), random( 255 ), random( 255 ), opacity );
+            ellipse( random( 0, width ), random( 0, height ), random(300), random(300) );
         }
     }
 
@@ -326,8 +333,8 @@ public class RandomArt extends PApplet implements ActionListener
         FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
 
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter( filter );
-        chooser.setDialogTitle( "Save file" );
+        chooser.setFileFilter(filter );
+        chooser.setDialogTitle( "Save file");
 
         String[] extensionTypes = filter.getExtensions();
 
@@ -612,8 +619,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     //The random circle brush function.
-    public void randomCirclesBrush()
-    {
+    public void randomCirclesBrush() {
         float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
         stroke(1);
         strokeWeight(1);
