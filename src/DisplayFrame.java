@@ -336,7 +336,7 @@ public class DisplayFrame extends JFrame
 
         tunnelBrush.setBounds(170, 505, 150, 48);
         tunnelBrush.setBackground(new Color(255, 255, 255));
-///
+
         randomCirclesBrush.setBounds(10, 560, 150, 48);
         randomCirclesBrush.setBackground(new Color(255, 255, 255));
 
