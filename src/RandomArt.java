@@ -173,10 +173,11 @@ public class RandomArt extends PApplet implements ActionListener
         println( "Square clicked at: " + millis() );
         for(st = 0; st < number; st++)
         {
-            stroke(stroke0);
+            int squares = (int) random( 30, 130 );
+            stroke( stroke0 );
             strokeWeight(stroke0);
             fill( random( 255 ), random( 255 ), random( 255 ), opacity );
-            rect( random( 0, width ), random( 0, height ), random(30,130), random(30,130) );
+            rect( random( 0, width ), random( 0, height ), squares, squares );
         }
     }
 
