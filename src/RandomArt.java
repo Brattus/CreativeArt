@@ -28,6 +28,9 @@ public class RandomArt extends PApplet implements ActionListener
 
     // Variables for createTriangle
     JTextField numberOftrianglesfField = new JTextField( 15 );
+    JTextField numberOfsquaresfField = new JTextField( 15 );
+    JTextField numberOfellipsefField = new JTextField( 15 );
+
 
     // Variables for randomText()
     JTextField randomTextField = new JTextField( 15 );
@@ -158,51 +161,113 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
-
     /**
      * Creates random squares
      */
     public void createSquares()
     {
-        String firstNumber = JOptionPane.showInputDialog( "Enter how many squares you want. Max 2000" );
-        int number = Integer.parseInt( firstNumber );
-        if(number > 2000)
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.add( new JLabel( "Number of squares:" ) );
+        inputPanel.add( Box.createHorizontalStrut( 2 ) ); // a spacer
+        inputPanel.add(numberOfsquaresfField);
+
+
+        int amount = 0;
+        String text = "";
+
+        int result = JOptionPane.showConfirmDialog( null, inputPanel, "Please Enter an amount of squares", JOptionPane.OK_CANCEL_OPTION );
+
+
+        if(result == JOptionPane.OK_OPTION)
         {
-            number = 2000;
-        }
-        println( "Square clicked at: " + millis() );
-        for(st = 0; st < number; st++)
-        {
-            int squares = (int) random( 400 );
-            noStroke();
-           // strokeWeight(stroke0);
-            fill( random( 255 ), random( 255 ), random( 255 ), opacity );
-            rect( random( 0, width ), random( 0, height ), squares, squares );
+            try
+            {
+                text = numberOfsquaresfField.getText();
+                amount = Integer.parseInt( numberOfsquaresfField.getText().toString() );
+                if(amount > 2000)
+                {
+                    amount = 2000;
+                }
+                println( "Square clicked at: " + millis() );
+                for(st = 0; st < amount; st++)
+                {
+                    int squares = (int) random( 400 );
+                    noStroke();
+                    // strokeWeight(stroke0);
+                    fill(random(255), random(255), random(255), opacity);
+                    rect( random( 0, width ), random( 0, height ), squares, squares );
+                }
+            } catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog( this, e.getMessage().substring( 18, e.getMessage().length() ) + " is not a numeric value. \n" +
+                        "Amount must be a numeric value", "Input must be a numeric value", JOptionPane.ERROR_MESSAGE );
+
+                numberOfsquaresfField.setText( numberOfsquaresfField.getText() );
+                createSquares();
+            }
         }
     }
+
+
+
 
     /**
      * Creates random circles
      */
-    public void createCircles()
-    {
-        String firstNumber = JOptionPane.showInputDialog( "Enter how many circles you want. Max 2000" );
-        int number = Integer.parseInt( firstNumber );
+    public void createCircles() {
 
-        if(number > 2000)
-        {
-            number = 2000;
+        JPanel inputPanel = new JPanel();
+        inputPanel.add(new JLabel("Number of circles:"));
+        inputPanel.add(Box.createHorizontalStrut(2)); // a spacer
+        inputPanel.add(numberOfellipsefField);
+
+
+        int amount = 0;
+        String text = "";
+
+        int result = JOptionPane.showConfirmDialog(null, inputPanel, "Please Enter an amount of triangles", JOptionPane.OK_CANCEL_OPTION);
+
+
+        if (result == JOptionPane.OK_OPTION) {
+            try {
+                text = numberOfellipsefField.getText();
+                amount = Integer.parseInt(numberOfellipsefField.getText().toString());
+
+                if(amount > 2000)
+                {
+                    amount = 2000;
+                }
+                println( "Circle clicked at: " + millis() / 1000 + " s" );
+                for(st = 0; st < amount; st++)
+                {
+                    int circles = (int) random( 400 );
+                    stroke( stroke0 );
+                    strokeWeight(stroke0);
+                    fill(random(255), random( 255 ), random( 255 ), opacity );
+                    ellipse( random( 0, width ), random( 0, height ),circles, circles );
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage().substring(18, e.getMessage().length()) + " is not a numeric value. \n" +
+                        "Amount must be a numeric value", "Input must be a numeric value", JOptionPane.ERROR_MESSAGE);
+
+                numberOfellipsefField.setText(numberOfellipsefField.getText());
+                createCircles();
+            }
         }
-        println( "Circle clicked at: " + millis() / 1000 + " s" );
-        for(st = 0; st < number; st++)
-        {
-            int circles = (int) random( 400 );
-            stroke( stroke0 );
-            strokeWeight(stroke0);
-            fill(random(255), random( 255 ), random( 255 ), opacity );
-            ellipse( random( 0, width ), random( 0, height ),circles, circles );
-        }
+
     }
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Blur filter on canvas
@@ -300,7 +365,7 @@ public class RandomArt extends PApplet implements ActionListener
         greenBG = c.getGreen();
         blueBG = c.getBlue();
 
-        background( redBG, greenBG, blueBG );
+        background(redBG, greenBG, blueBG);
     }
 
     //Function to save the art with preferred resolution.
@@ -366,7 +431,7 @@ public class RandomArt extends PApplet implements ActionListener
 
         String[] extensionTypes = filter.getExtensions();
 
-        int returnVal = chooser.showSaveDialog( this );
+        int returnVal = chooser.showSaveDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
             for(String s : extensionTypes)
@@ -484,11 +549,11 @@ public class RandomArt extends PApplet implements ActionListener
 
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter( filter );
-        chooser.setDialogTitle( "Save file" );
+        chooser.setDialogTitle("Save file");
 
         String[] extensionTypes = filter.getExtensions();
 
-        int returnVal = chooser.showOpenDialog( this );
+        int returnVal = chooser.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
             image = loadImage( chooser.getSelectedFile().getPath() );
