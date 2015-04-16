@@ -148,11 +148,11 @@ public class DisplayFrame extends JFrame
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
         save.setAccelerator( ctrlSKeyStroke );
 
-        ImageIcon imageUndoButton = new ImageIcon( "Buttons/undo.png" );
+        ImageIcon imageUndoButton = new ImageIcon( "Application pics/undo.png" );
         undoButton = new JButton( "", imageUndoButton );
         ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z");
 
-        ImageIcon imageRedoButton = new ImageIcon( "Buttons/redo.png" );
+        ImageIcon imageRedoButton = new ImageIcon( "Application pics/redo.png" );
         redoButton = new JButton( "", imageRedoButton );
         ctrlYKeyStroke = KeyStroke.getKeyStroke( "control Y");
         //redoButton.setAccelerator(ctrlYKeyStroke);
