@@ -136,8 +136,8 @@ public class DisplayFrame extends JFrame
     {
         // Initiate shape buttons
         triangleButton = new JButton( "Triangle", new ImageIcon( "Buttons/triangle.png" ) );
-        squareButton = new JButton( "", new ImageIcon( "Buttons/rectangle.png" ) );
-        circleButton = new JButton( "", new ImageIcon( "Buttons/alt_circle.jpg" ) );
+        squareButton = new JButton( "", new ImageIcon( "Buttons/squares.png" ) );
+        circleButton = new JButton( "", new ImageIcon( "Buttons/circles.png" ) );
 
         resetButton = new JButton( "Start over" );
         colorPicker = new JButton( "Choose background color" );
@@ -173,6 +173,7 @@ public class DisplayFrame extends JFrame
         //Button making background of squares.
         ImageIcon imagesquareBackground = new ImageIcon ("Buttons/squareBackground.png");
         squareBackground = new JButton( "", imagesquareBackground);
+
 
         // Button making text at random places
         ImageIcon imageRandomText = new ImageIcon( "Buttons/randomText.jpg" );
@@ -343,6 +344,7 @@ public class DisplayFrame extends JFrame
         squareBackground.setBounds(10, 170, 315, 48);
         squareBackground.setBackground(new Color(232, 177, 141));
 
+
         backgrounds.setBounds(10, 58, 240, 48);
         backgrounds.setBackground(new Color(237, 177, 141));
 
@@ -350,7 +352,6 @@ public class DisplayFrame extends JFrame
 
         undoButton.setBounds( 0, 0, 50, 30 );
         redoButton.setBounds( 55, 0, 50, 30 );
-
 
 
     }
