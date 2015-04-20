@@ -50,7 +50,7 @@ public class RandomArt extends PApplet implements ActionListener
     //Setting up the processing window.
     public void setup()
     {
-        size( 1009, 710 );
+        size( 1024, 768 );
         background( 255 );
         noStroke();
         undoRedo = new UndoRedo( 10 );
@@ -58,7 +58,7 @@ public class RandomArt extends PApplet implements ActionListener
 
     }
 
-    //Processing draw function.
+    //Drawing the objects to canvas.
     @Override
     public void draw()
     {
@@ -69,23 +69,38 @@ public class RandomArt extends PApplet implements ActionListener
         drawPencil();
     }
 
+
+    /**
+     * When the mouse is leased, undoRedo calls to its method
+     * takeSnapshot(), which take a snapshot of the canvas and stores it
+     * in a arraylist.
+     */
     public void mouseReleased()
     {
         // Save each line we draw to our stack of UNDOs
         undoRedo.takeSnapshot();
     }
 
+
+    /**
+     *
+     */
     public void keyPressed()
     {
         // Remember if CTRL or SHIFT are pressed or not
         if(key == CODED)
         {
             if(keyCode == CONTROL)
+            {
                 controlDown = true;
+            }
             if(keyCode == SHIFT)
+            {
                 shiftDown = true;
+            }
             return;
         }
+
         // Check if we pressed CTRL+Z or CTRL+SHIFT+Z
         if(controlDown)
         {

@@ -17,6 +17,7 @@ public class DisplayFrame extends JFrame
     // Initializing variables
     private RandomArt randomArtProcessing;
     private JPanel processingPanel;
+
     private JButton triangleButton;
     private JButton squareButton;
     private JButton circleButton;
@@ -30,8 +31,6 @@ public class DisplayFrame extends JFrame
     private JButton randomLineBrush;
     private JButton squareBackground;
     private JButton randomTextButton;
-    private JButton undoButton;
-    private JButton redoButton;
 
     // Initializing menu variables
     private JMenuBar menuBar;
@@ -54,6 +53,11 @@ public class DisplayFrame extends JFrame
     private JMenu helpMenu;
     private JMenuItem about;
     private JMenuItem sysDocumentation;
+
+    // Edit menu
+    private JMenu editMenu;
+    private JMenuItem undo;
+    private JMenuItem redo;
 
     // Shortcuts file menu
     private KeyStroke ctrlOKeyStroke = null;
@@ -109,11 +113,8 @@ public class DisplayFrame extends JFrame
         randomArtProcessing.init();
         processingPanel = new JPanel();
 
-        backgroundLabel = new JLabel( new ImageIcon( "Application pics/AppBG3.jpg" ) );
-
-
         this.setSize( randomArtProcessing.width, randomArtProcessing.height );
-        this.setMinimumSize( new Dimension( 1366, 830 ) );
+        this.setMinimumSize( new Dimension( 1366, 835 ) );
 
         // Unused if. For later development.
         if(this != null)
@@ -141,6 +142,9 @@ public class DisplayFrame extends JFrame
      */
     private void initiateComponents()
     {
+        ImageIcon appBG = new ImageIcon( "Application pics/AppBG4.jpg" );
+        backgroundLabel = new JLabel( appBG );
+
         // Initiate shape buttons
         triangleButton = new JButton( "Triangle", new ImageIcon( "Buttons/triangles.png" ) );
         squareButton = new JButton( "", new ImageIcon( "Buttons/squares.png" ) );
@@ -155,16 +159,21 @@ public class DisplayFrame extends JFrame
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
         save.setAccelerator( ctrlSKeyStroke );
 
+        // Edit menu
+        editMenu = new JMenu( "Edit" );
+        undo = new JMenuItem( "Undo" );
+        ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z" );
+        undo.setAccelerator( ctrlZKeystroke );
+
+        redo = new JMenuItem( "Redo" );
+        ctrlYKeyStroke = KeyStroke.getKeyStroke( "control Y" );
+        redo.setAccelerator( ctrlYKeyStroke );
+
+
         // Help menu
         helpMenu = new JMenu( "Help" );
         about = new JMenuItem( "About" );
         sysDocumentation = new JMenuItem( "Documentation.txt" );
-
-        undoButton = new JButton( "", new ImageIcon( "Application pics/undo.png" ) );
-        ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z");
-
-        redoButton = new JButton( "", new ImageIcon( "Application pics/redo.png" ) );
-        ctrlYKeyStroke = KeyStroke.getKeyStroke( "control Y");
 
         //Brush buttons
         simpleBrush = new JButton( "", new ImageIcon( "Buttons/plainBrush.png" ) );
@@ -256,9 +265,7 @@ public class DisplayFrame extends JFrame
     private void addComponents()
     {
         this.add( processingPanel );
-
-        this.add( undoButton );
-        this.add( redoButton );
+        processingPanel.add( randomArtProcessing );
 
         this.add( triangleButton );
         this.add( squareButton );
@@ -276,11 +283,14 @@ public class DisplayFrame extends JFrame
         this.add ( randomLineBrush );
         this.add( tunnelBrush );
         this.add( randomTextButton );
-
-        //something special
         this.add (squareBackground);
         this.add(backgrounds);
-        
+
+        // Edit menu
+        menuBar.add( editMenu );
+        editMenu.add( undo );
+        editMenu.add( redo );
+
         // Filter Menu
         filterMenu.add( blur );
         filterMenu.add( threshold );
@@ -295,11 +305,7 @@ public class DisplayFrame extends JFrame
         helpMenu.add( about );
         helpMenu.add( sysDocumentation );
 
-        this.add( brushes );
-        this.add( shapes );
         this.add( backgroundLabel );
-
-        processingPanel.add( randomArtProcessing );
     }
 
 
@@ -309,8 +315,10 @@ public class DisplayFrame extends JFrame
     private void setLayout()
     {
         setLayout( null );
+
         backgroundLabel.setBounds( 0, 0, getWidth(), getHeight() );
-        processingPanel.setBounds( 350, 45, 1009, 722 );
+
+        processingPanel.setBounds( 335, 0, 1024, 773 );
 
         triangleButton.setBounds( 10, 280, 100, 100 );
         //triangleButton.setBackground( new Color( 232, 177, 141 ) );
@@ -362,11 +370,6 @@ public class DisplayFrame extends JFrame
         backgrounds.setBackground(new Color(237, 177, 141));
 
         shapes.setBounds ( 10, 240, 300,50);
-
-        undoButton.setBounds( 0, 0, 50, 30 );
-        redoButton.setBounds( 55, 0, 50, 30 );
-
-
     }
 
 
@@ -440,13 +443,12 @@ public class DisplayFrame extends JFrame
         openFile.addActionListener( randomArtProcessing );
         openFile.setActionCommand( "openFile" );
 
-        undoButton.addActionListener( randomArtProcessing );
-        undoButton.setActionCommand( "undo" );
+        // Edit menu
+        undo.addActionListener( randomArtProcessing );
+        undo.setActionCommand( "undo" );
 
-        redoButton.addActionListener( randomArtProcessing );
-        redoButton.setActionCommand( "redo" );
-
-
+        redo.addActionListener( randomArtProcessing );
+        redo.setActionCommand( "redo" );
 
         // Filter Memu
         blur.addActionListener( randomArtProcessing );
