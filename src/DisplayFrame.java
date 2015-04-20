@@ -141,7 +141,7 @@ public class DisplayFrame extends JFrame
      */
     protected void initiateComponents()
     {
-        ImageIcon appBG = new ImageIcon( "Application pics/AppBG5.jpg" );
+        ImageIcon appBG = new ImageIcon( "Application pics/background.jpg" );
         backgroundLabel = new JLabel( appBG );
 
         // Initiate shape buttons

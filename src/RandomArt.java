@@ -798,9 +798,12 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void simpleBrush()
     {
+
         stroke( red, green, blue );
         strokeWeight( 5 );
         line( mouseX, mouseY, pmouseX, pmouseY );
+
+
     }
 
     /**
