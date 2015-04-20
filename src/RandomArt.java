@@ -837,12 +837,12 @@ public class RandomArt extends PApplet implements ActionListener
     public void squareBackground()
     {
         noStroke();
-        for(int i = 0; i < 700; i = i + (int) random( 160, 200 ))
+        for(int i = 0; i < 800; i = i + (int) random( 160, 210 ))
         {
             for(int j = 0; j < 1200; j = j + (int) random( 30, 40 ))
             {
-                fill( random( 255 ), random( 255 ), random( 255 ), 200 );
-                rect( j, i, 40, 200 );
+                fill( random( 255 ), random( 255 ), random( 255 ), 210 );
+                rect( j, i, 40, 210 );
             }
         }
     }
