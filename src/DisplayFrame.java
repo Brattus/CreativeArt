@@ -103,12 +103,9 @@ public class DisplayFrame extends JFrame
         randomArtProcessing = new RandomArt();
         randomArtProcessing.init();
         processingPanel = new JPanel();
-        //
-        // Maximizing JFrame
-        //        Rectangle rec = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        //        this.setSize(rec.width, rec.height);
 
-        //this.setSize( randomArtProcessing.width, randomArtProcessing.height );
+
+        this.setSize( randomArtProcessing.width, randomArtProcessing.height );
         this.setMinimumSize( new Dimension( 1366, 830 ) );
 
         // Unused if. For later development.
@@ -139,8 +136,8 @@ public class DisplayFrame extends JFrame
     {
         // Initiate shape buttons
         triangleButton = new JButton( "Triangle", new ImageIcon( "Buttons/triangle.png" ) );
-        squareButton = new JButton( "", new ImageIcon( "Buttons/rectangle.png" ) );
-        circleButton = new JButton( "", new ImageIcon( "Buttons/circle.jpg" ) );
+        squareButton = new JButton( "", new ImageIcon( "Buttons/squares.png" ) );
+        circleButton = new JButton( "", new ImageIcon( "Buttons/circles.png" ) );
 
         resetButton = new JButton( "Start over" );
         colorPicker = new JButton( "Choose background color" );
@@ -152,8 +149,11 @@ public class DisplayFrame extends JFrame
         save.setAccelerator( ctrlSKeyStroke );
 
         undoButton = new JButton( "", new ImageIcon( "Application pics/undo.png" ) );
+        ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z");
 
         redoButton = new JButton( "", new ImageIcon( "Application pics/redo.png" ) );
+        ctrlYKeyStroke = KeyStroke.getKeyStroke( "control Y");
+        //redoButton.setAccelerator(ctrlYKeyStroke);
 
         //Brush buttons
         simpleBrush = new JButton( "", new ImageIcon( "Buttons/plainBrush.png" ) );
@@ -171,10 +171,13 @@ public class DisplayFrame extends JFrame
         randomLineBrush = new JButton( "", new ImageIcon( "Buttons/lineBrush.png" ) );
 
         //Button making background of squares.
-        squareBackground = new JButton( "", new ImageIcon( "Buttons/squareBackground.png" ) );
+        ImageIcon imagesquareBackground = new ImageIcon ("Buttons/squareBackground.png");
+        squareBackground = new JButton( "", imagesquareBackground);
+
 
         // Button making text at random places
-        randomTextButton = new JButton( "text", new ImageIcon( "Buttons/randomText.jpg" ) );
+        ImageIcon imageRandomText = new ImageIcon( "Buttons/randomText.jpg" );
+        randomTextButton = new JButton( "text", imageRandomText );
 
         //Menubar buttons.
         fileMenu.add(save);
@@ -243,8 +246,6 @@ public class DisplayFrame extends JFrame
      */
     private void addComponents()
     {
-        this.add( backgroundLabel );
-
         this.add( processingPanel );
 
         this.add( undoButton );
@@ -263,7 +264,7 @@ public class DisplayFrame extends JFrame
         this.add ( simpleBrush );
         this.add( lineRoughBrush );
         this.add( randomCirclesBrush );
-        this.add( randomLineBrush );
+        this.add ( randomLineBrush );
         this.add( tunnelBrush );
         this.add( randomTextButton );
 
@@ -283,6 +284,7 @@ public class DisplayFrame extends JFrame
 
         this.add(brushes);
         this.add( shapes );
+        this.add( backgroundLabel );
 
         processingPanel.add( randomArtProcessing );
     }
@@ -342,6 +344,7 @@ public class DisplayFrame extends JFrame
         squareBackground.setBounds(10, 170, 315, 48);
         squareBackground.setBackground(new Color(232, 177, 141));
 
+
         backgrounds.setBounds(10, 58, 240, 48);
         backgrounds.setBackground(new Color(237, 177, 141));
 
@@ -349,6 +352,8 @@ public class DisplayFrame extends JFrame
 
         undoButton.setBounds( 0, 0, 50, 30 );
         redoButton.setBounds( 55, 0, 50, 30 );
+
+
     }
 
 
@@ -384,6 +389,7 @@ public class DisplayFrame extends JFrame
         borderButton.addActionListener(randomArtProcessing);
         borderButton.setActionCommand( "border" );
         borderButton.setToolTipText( "Adds border to drawing board" );
+
 
         //Brush buttons
         simpleBrush.addActionListener( randomArtProcessing );
@@ -426,6 +432,8 @@ public class DisplayFrame extends JFrame
 
         redoButton.addActionListener( randomArtProcessing );
         redoButton.setActionCommand( "redo" );
+
+
 
         // Filter Memu
         blur.addActionListener( randomArtProcessing );

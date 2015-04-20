@@ -172,7 +172,6 @@ public class RandomArt extends PApplet implements ActionListener
         inputPanel.add( Box.createHorizontalStrut( 2 ) ); // a spacer
         inputPanel.add(numberOfsquaresfField);
 
-
         int amount = 0;
         String text = "";
 
@@ -208,7 +207,6 @@ public class RandomArt extends PApplet implements ActionListener
             }
         }
     }
-
 
 
 
