@@ -244,7 +244,7 @@ public class DisplayFrame extends JFrame
         shapes.setForeground(new Color(0, 0, 0));
         shapes.setFont( new Font( null, 2, 20 ) );
 
-        backgrounds = new JLabel( "Background Options");
+        backgrounds = new JLabel( "Background options");
         backgrounds.setForeground( new Color( 0, 0, 0));
         backgrounds.setFont( new Font( null, 2, 20));
     }
