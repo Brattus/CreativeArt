@@ -139,7 +139,7 @@ public class DisplayFrame extends JFrame
     private void initiateComponents()
     {
         // Initiate shape buttons
-        triangleButton = new JButton( "Triangle", new ImageIcon( "Buttons/triangle.png" ) );
+        triangleButton = new JButton( "Triangle", new ImageIcon( "Buttons/triangles.png" ) );
         squareButton = new JButton( "", new ImageIcon( "Buttons/squares.png" ) );
         circleButton = new JButton( "", new ImageIcon( "Buttons/circles.png" ) );
 
