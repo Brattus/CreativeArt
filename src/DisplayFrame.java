@@ -50,6 +50,10 @@ public class DisplayFrame extends JFrame
     private JMenuItem erode;
     private JMenuItem dialate;
 
+    // Help menu
+    private JMenu helpMenu;
+    private JMenuItem about;
+
     // Shortcuts file menu
     private KeyStroke ctrlOKeyStroke = null;
     private KeyStroke ctrlSKeyStroke = null;
@@ -282,7 +286,7 @@ public class DisplayFrame extends JFrame
         filterMenu.add(dialate);
 
 
-        this.add(brushes);
+        this.add( brushes );
         this.add( shapes );
         this.add( backgroundLabel );
 
