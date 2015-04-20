@@ -145,8 +145,7 @@ public class RandomArt extends PApplet implements ActionListener
                 println( "Triangle clicked at: " + millis() / 1000 + " s" );
                 for(st = 0; st < amount; st++)
                 {
-                    stroke( 1 );
-                    strokeWeight( 1 );
+                    noStroke();
                     fill( random( 255 ), random( 255 ), random( 255 ), opacity );
                     triangle( random( 0, width ), random( 0, height ), random( 0, (float) ( width / 1.7 ) ), random( 0, height ), (float) ( width / 2 ), height / 2 );
                 }
