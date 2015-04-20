@@ -1,5 +1,7 @@
 /**
  * Created by Ramin, Per-Olav, Ole-Martin and Knut Olav on 16.03.2015.
+ *
+ * RandomArt class is responsible for the drawing functions.
  */
 
 import processing.core.PApplet;
@@ -47,7 +49,9 @@ public class RandomArt extends PApplet implements ActionListener
     // BG colors
     int redBG = 255, greenBG = 255, blueBG = 255;
 
-    //Setting up the processing window.
+    /**
+     * Setting up the processing window.
+     */
     public void setup()
     {
         size( 1024, 768 );
@@ -58,7 +62,9 @@ public class RandomArt extends PApplet implements ActionListener
 
     }
 
-    //Drawing the objects to canvas.
+    /**
+     * Drawing the objects on canvas. Updates the canvas for every loop.
+     */
     @Override
     public void draw()
     {
@@ -133,7 +139,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Creates random triangles
+     * Draws an amount of triangles of own choosing.
      */
     public void createTriangles()
     {
@@ -178,8 +184,10 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+
     /**
-     * Creates random squares
+     * Draws an amount of Squares of own choosing.
+     * The Squares are in different sizes and colors.
      */
     public void createSquares()
     {
@@ -227,7 +235,8 @@ public class RandomArt extends PApplet implements ActionListener
 
 
     /**
-     * Creates random circles
+     * Draws an amount of Circles of own choosing.
+     * The Circles are in different sizes and colors.
      */
     public void createCircles()
     {
@@ -273,11 +282,13 @@ public class RandomArt extends PApplet implements ActionListener
                 createCircles();
             }
         }
-
     }
 
 
-    public void aboutMenu()
+    /**
+     * The about menu method shows information about the application
+     */
+    protected void aboutMenu()
     {
         JOptionPane.showMessageDialog( this, "Team:\n" +
                 "Ramin Esfandiari\n" +
@@ -286,7 +297,11 @@ public class RandomArt extends PApplet implements ActionListener
                 "Knut-Olav Skaret", "About", JOptionPane.INFORMATION_MESSAGE );
     }
 
-    public void systemDocumentation()
+
+    /**
+     * This is a link to a guide for the application
+     */
+    protected void systemDocumentation()
     {
         if(Desktop.isDesktopSupported())
         {
@@ -303,7 +318,7 @@ public class RandomArt extends PApplet implements ActionListener
 
 
     /**
-     * Blur filter on canvas
+     * Draws a blur filter on canvas
      */
     public void blurFilter()
     {
@@ -313,7 +328,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Threshold filter on canvas
+     * Draws threshold filter on canvas
      */
     public void thresholdFilter()
     {
@@ -323,7 +338,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Gray scale filter on canvas
+     * Draws gray scale filter on canvas
      */
     public void grayScaleFilter()
     {
@@ -333,7 +348,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Invert filter on canvas
+     * Draws invert filter on canvas
      */
     public void invertFilter()
     {
@@ -343,7 +358,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Posterize filter on canvas
+     * Draws posterize filter on canvas
      */
     public void posterizeFilter()
     {
@@ -353,7 +368,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Erode filter on canvas
+     * Draws erode filter on canvas
      */
     public void erodeFilter()
     {
@@ -363,7 +378,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Dilate filter on canvas
+     * Draws dilate filter on canvas
      */
     public void dilateFilter()
     {
@@ -373,7 +388,8 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Clear the canvas
+     * The method clears the canvas. Which means it removes all the objects drawn
+     * and resets the canvas to default color.
      */
     public void clearCanvas()
     {
@@ -389,9 +405,9 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Change the background color, by using a color from the palette.
+     * Changes the background color of the canvas, by using a color from the palette.
      */
-    private void changeColor()
+    private void changeBackgroundColor()
     {
         Color c = JColorChooser.showDialog( null, "Choose a Color", Color.WHITE );
         redBG = c.getRed();
@@ -401,7 +417,10 @@ public class RandomArt extends PApplet implements ActionListener
         background( redBG, greenBG, blueBG );
     }
 
-    //Function to save the art with preferred resolution.
+    /**
+     * This method saves the art with preferred resolution.
+     * save first by name, then give the preferred resolution.
+     */
     public void saveHighRes()
     {
         PImage partialSave = null;
@@ -449,8 +468,9 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+
     /**
-     * Save the image to a file
+     * Save the art with with the default resolution of the canvas.
      */
     private void saveToFile()
     {
@@ -485,8 +505,9 @@ public class RandomArt extends PApplet implements ActionListener
 
     /**
      * Invoked when an action occurs.
+     * Used for actionListening the buttons.
      *
-     * @param e
+     * @param e the event that is performed.
      */
     @Override
     public void actionPerformed(ActionEvent e)
@@ -506,7 +527,7 @@ public class RandomArt extends PApplet implements ActionListener
                 clearCanvas();
                 break;
             case "color":
-                changeColor();
+                changeBackgroundColor();
                 break;
             case "save":
                 saveToFile();
@@ -581,7 +602,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     
-    //Imports a file into the processing window.
+    //Imports a file and draws it on canvas.
     private void openFile()
     {
         PImage image = null;
@@ -602,7 +623,11 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
-    //The drawing function.
+    /**
+     * Draw line, wherever the mouse is, when left button is clicked. Just like a pencil.
+     * If the right button on the mouse is clicked, the is a popup menu with colors to choose pencil
+     * color.
+     */
     public void drawPencil()
     {
         if(mousePressed)
@@ -618,7 +643,7 @@ public class RandomArt extends PApplet implements ActionListener
 
             if(mouseButton == LEFT)
             {
-                //println("Detected Mouse Left Click!");
+                println( "Detected Mouse Left Click!" );
 
                 if(simpleBrushEnabled == true)
                 {
@@ -648,7 +673,9 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
-    //The eraser.
+    /**
+     * Erasing where ever the mouse is, if the leftButton is clicked.
+     */
     private void eraser()
     {
         strokeWeight( 20 );
@@ -656,7 +683,11 @@ public class RandomArt extends PApplet implements ActionListener
         line( mouseX, mouseY, pmouseX, pmouseY );
     }
 
-    //The line brush enabled.
+
+    /**
+     * Enables the line brush variable and disables the other
+     * related brush-variables.
+     */
     public void lineBrushEnabled()
     {
         simpleBrushEnabled = false;
@@ -667,7 +698,11 @@ public class RandomArt extends PApplet implements ActionListener
         tunnelBrush = false;
     }
 
-    //The simple brush enabled.
+
+    /**
+     * Enables the simple brush variable and disables the other
+     * related brush-variables.
+     */
     public void simpleBrushEnabled()
     {
         simpleBrushEnabled = true;
@@ -678,7 +713,10 @@ public class RandomArt extends PApplet implements ActionListener
         tunnelBrush = false;
     }
 
-    //The random line brush enabled.
+    /**
+     * Enables the random-line brush variable and disables the other
+     * related brush-variables.
+     */
     public void randomLineBrushEnabled()
     {
         simpleBrushEnabled = false;
@@ -689,7 +727,10 @@ public class RandomArt extends PApplet implements ActionListener
         tunnelBrush = false;
     }
 
-    //The tunnel brush enabled.
+    /**
+     * Enables the tunnel brush variable and disables the other
+     * related brush-variables.
+     */
     public void tunnelBrushEnabled()
     {
         tunnelBrush = true;
@@ -700,7 +741,9 @@ public class RandomArt extends PApplet implements ActionListener
         eraseEnabled = false;
     }
 
-    //The eraser enabled.
+    /**
+     * Enables the eraser variable.
+     */
     public void eraserEnabled()
     {
         eraseEnabled = true;
@@ -711,7 +754,10 @@ public class RandomArt extends PApplet implements ActionListener
         tunnelBrush = false;
     }
 
-    //The random circle brush enabled.
+    /**
+     * Enables the random-circles brush variable and disables the other
+     * related brush-variables.
+     */
     public void randomCircleBrushEnabled()
     {
         randomCircleBrush = true;
@@ -722,7 +768,9 @@ public class RandomArt extends PApplet implements ActionListener
         tunnelBrush = false;
     }
 
-    //Eraser disabled.
+    /**
+     * Disables the eraser variable.
+     */
     public void eraserDisabled()
     {
         eraseEnabled = false;
@@ -731,7 +779,9 @@ public class RandomArt extends PApplet implements ActionListener
         randomLineBrushEnabled = false;
     }
 
-    //The line brush function.
+    /**
+     * Draws a brush illustrating a real brush by drawing not straight lines.
+     */
     public void lineBrush()
     {
         for(int i = 0; i < 20; i++)
@@ -743,7 +793,9 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
-    //The simple brush function.
+    /**
+     * Draws a line, wherever the mouse is.
+     */
     public void simpleBrush()
     {
         stroke( red, green, blue );
@@ -751,7 +803,10 @@ public class RandomArt extends PApplet implements ActionListener
         line( mouseX, mouseY, pmouseX, pmouseY );
     }
 
-    //The random circle brush function.
+    /**
+     * Draws random circles with different colors wherever the mouse goes. If the speed of
+     * the mouse increases, so does the size of the circles.
+     */
     public void randomCirclesBrush()
     {
         float speed = abs( mouseX - pmouseX ) + abs( mouseY - pmouseY );
@@ -761,7 +816,10 @@ public class RandomArt extends PApplet implements ActionListener
         ellipse( mouseX, mouseY, speed, speed );
     }
 
-    //The random line brush function.
+    /**
+     * Draws lines with different colors and lengths in every direction wherever
+     * the mouse is.
+     */
     public void randomLineBrush()
     {
         if(mousePressed == true)
@@ -772,7 +830,10 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
-    //The square background function.
+    /**
+     * Draws squares with different sizes and colors, all over the canvas.
+     * Illustrating a tv-program with no program.
+     */
     public void squareBackground()
     {
         noStroke();
@@ -786,7 +847,10 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
-    //The enable borders.
+    /**
+     * Enables the borders-variable and if the borders-variable is enabled
+     * call the borders method.
+     */
     public void enableBorders()
     {
         bordersEnabled = true;
@@ -796,7 +860,9 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
-    //The border function.
+    /**
+     * Draws black border around the canvas.
+     */
     public void borders()
     {
         stroke( 0 );
@@ -807,7 +873,10 @@ public class RandomArt extends PApplet implements ActionListener
         line( 0, 0, 0, height );
     }
 
-    //The tunnel vision function
+    /**
+     * Draws lines lines that points in center of canvas, wherever the mouse is.
+     * Illustrating a tunnel-ish experience.
+     */
     public void tunnelVision()
     {
         if(mousePressed)
@@ -822,6 +891,10 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
 
+    /**
+     * Draws text on canvas. Choose the text you want to display and hoe many times.
+     * The text will display in different sizes and colors.
+     */
     public void randomText()
     {
         JPanel inputPanel = new JPanel();
@@ -862,7 +935,7 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
     /**
-     * Undo class
+     * Undo/Redo class responsible for making the program undo or redo an action.
      */
     class UndoRedo
     {
@@ -870,11 +943,19 @@ public class RandomArt extends PApplet implements ActionListener
         int undoSteps = 0, redoSteps = 0;
         ImgCollection images;
 
+        /**
+         * Constructing a UndoRedo object.
+         *
+         * @param stepsBackAndForth: How many steps back or forth it is possible to store.
+         */
         UndoRedo(int stepsBackAndForth)
         {
             images = new ImgCollection( stepsBackAndForth );
         }
 
+        /**
+         * Takes a snapshot of the canvas to store.
+         */
         public void takeSnapshot()
         {
             undoSteps = min( undoSteps + 1, images.amount - 1 );
@@ -884,6 +965,9 @@ public class RandomArt extends PApplet implements ActionListener
             images.capture();
         }
 
+        /**
+         * Shows the previous drawing stored before the current drawing.
+         */
         public void undo()
         {
             println( "Undo" );
@@ -896,6 +980,9 @@ public class RandomArt extends PApplet implements ActionListener
             }
         }
 
+        /**
+         * Goes forth in the stored snapshots of canvas in the array and draws it on canvas.
+         */
         public void redo()
         {
             println( "Redo" );
@@ -909,14 +996,20 @@ public class RandomArt extends PApplet implements ActionListener
         }
     }
 
+
     /**
-     * Circle image collection class
+     * ImgCollection responsible for storing the snapshots taken of the canvas by the UndoRedo class.
      */
     class ImgCollection
     {
         int amount, current;
         PImage[] img;
 
+        /**
+         * Constructing a ImgCollection object.
+         *
+         * @param amountOfImages: The mount of images to store.
+         */
         ImgCollection(int amountOfImages)
         {
             amount = amountOfImages;
@@ -930,26 +1023,36 @@ public class RandomArt extends PApplet implements ActionListener
             }
         }
 
+        /**
+         * Goes to the next picture stored in the array list.
+         */
         void next()
         {
             current = ( current + 1 ) % amount;
         }
 
+        /**
+         * Goes to the previous picture stored in the array list.
+         */
         void prev()
         {
             current = ( current - 1 + amount ) % amount;
         }
 
+        /**
+         * Takes a screenshot of the current version of canvas.
+         */
         void capture()
         {
             img[ current ] = get();
         }
 
+        /**
+         * Show the current picture stored in the array.
+         */
         void show()
         {
             image( img[ current ], 0, 0 );
         }
     }
-
-
 }

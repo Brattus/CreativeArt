@@ -1,15 +1,16 @@
-import javafx.geometry.HorizontalDirection;
+/**
+ * Created by Ramin, Per-Olav, Ole-Martin and Knut Olav on 16.03.2015.
+ *
+ * DisplayFrame is responsible for the graphical user interface of the application.
+ * It's responsible for he buttons, layout and listeners.
+ * This class is an extension of JFrame.
+ */
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
- import javax.swing.JFrame;
-import javax.swing.JSlider;
+import javax.swing.JFrame;
 
-/**
- * Created by Ramin, Per-Olav, Ole-Martin and Knut Olav on 16.03.2015.
- */
+
 public class DisplayFrame extends JFrame
 {
     // Initializing button variables
@@ -17,7 +18,6 @@ public class DisplayFrame extends JFrame
     // Initializing variables
     private RandomArt randomArtProcessing;
     private JPanel processingPanel;
-
     private JButton triangleButton;
     private JButton squareButton;
     private JButton circleButton;
@@ -35,11 +35,13 @@ public class DisplayFrame extends JFrame
     // Initializing menu variables
     private JMenuBar menuBar;
     private JMenu fileMenu;
+
+    // Initializing File menu variables
     private JMenuItem save;
     private JMenuItem openFile;
     private JMenuItem saveHighres;
 
-    // Filter menu
+    // Initializing filter menu variables
     private JMenu filterMenu;
     private JMenuItem blur;
     private JMenuItem threshold;
@@ -49,24 +51,26 @@ public class DisplayFrame extends JFrame
     private JMenuItem erode;
     private JMenuItem dialate;
 
-    // Help menu
+    // Initializing help menu variables
     private JMenu helpMenu;
     private JMenuItem about;
     private JMenuItem sysDocumentation;
 
-    // Edit menu
+    // Initializing edit menu variables
     private JMenu editMenu;
     private JMenuItem undo;
     private JMenuItem redo;
 
-    // Shortcuts file menu
+    // Shortcuts for file menu
     private KeyStroke ctrlOKeyStroke = null;
     private KeyStroke ctrlSKeyStroke = null;
     private KeyStroke ctrlShiftSKeyStroke = null;
+
+    // Shortcuts for edit menu
     private KeyStroke ctrlZKeystroke = null;
     private KeyStroke ctrlYKeyStroke = null;
 
-    // Shortcuts filter menu
+    // Shortcuts for filter menu
     private KeyStroke ctrl1 = null;
     private KeyStroke ctrl2 = null;
     private KeyStroke ctrl3 = null;
@@ -80,11 +84,16 @@ public class DisplayFrame extends JFrame
     private JLabel shapes;
     private JLabel backgrounds;
 
+    // Label used to set background picture in JFrame
     private JLabel backgroundLabel;
 
 
-    //Display frame
-    public DisplayFrame(String title) throws HeadlessException
+    /**
+     * Constructs a new DisplayFrame object.
+     *
+     * @param title of the window.
+     */
+    public DisplayFrame(String title)
     {
         this.setTitle( title );
         initiateFrame();
@@ -97,16 +106,11 @@ public class DisplayFrame extends JFrame
         addActionListeners();
 
     }
-    // Main method
-    public static void main(String[] args)
-    {
-        DisplayFrame displayFrame = new DisplayFrame("Random Art Generator");
-    }
 
     /**
      * Initiate the Frame configurations
      */
-    private void initiateFrame()
+    protected void initiateFrame()
     {
         // Initiate processing items
         randomArtProcessing = new RandomArt();
@@ -124,29 +128,24 @@ public class DisplayFrame extends JFrame
         setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         setLocationRelativeTo( null );
 
-        // Initiate Menu items
+        // Initiate the Menu bar
         menuBar = new JMenuBar();
-        menuBar.setSize( getWidth(), 100 );
-        fileMenu = new JMenu( "File" );
-        filterMenu = new JMenu( "Filters" );
 
         this.setJMenuBar( menuBar );
-        menuBar.add(fileMenu);
-        menuBar.add( filterMenu );
 
         setVisible( true );
     }
 
     /**
-     * Initiate the field components
+     * Initiating the field components.
      */
-    private void initiateComponents()
+    protected void initiateComponents()
     {
-        ImageIcon appBG = new ImageIcon( "Application pics/AppBG4.jpg" );
+        ImageIcon appBG = new ImageIcon( "Application pics/AppBG5.jpg" );
         backgroundLabel = new JLabel( appBG );
 
         // Initiate shape buttons
-        triangleButton = new JButton( "Triangle", new ImageIcon( "Buttons/triangles.png" ) );
+        triangleButton = new JButton( "", new ImageIcon( "Buttons/triangles.png" ) );
         squareButton = new JButton( "", new ImageIcon( "Buttons/squares.png" ) );
         circleButton = new JButton( "", new ImageIcon( "Buttons/circles.png" ) );
 
@@ -155,12 +154,26 @@ public class DisplayFrame extends JFrame
         borderButton = new JButton( "Enable borders" );
         eraserButton = new JButton( "Eraser" );
 
+        // File menu
+        fileMenu = new JMenu( "File" );
+
         save = new JMenuItem( "Save" );
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
         save.setAccelerator( ctrlSKeyStroke );
 
+
+        openFile = new JMenuItem( "Open file" );
+        ctrlOKeyStroke = KeyStroke.getKeyStroke( "control O" );
+        openFile.setAccelerator( ctrlOKeyStroke );
+
+
+        saveHighres = new JMenuItem( "Save with custom resolution" );
+        ctrlShiftSKeyStroke = KeyStroke.getKeyStroke( "control shift S" );
+        saveHighres.setAccelerator( ctrlShiftSKeyStroke );
+
         // Edit menu
         editMenu = new JMenu( "Edit" );
+
         undo = new JMenuItem( "Undo" );
         ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z" );
         undo.setAccelerator( ctrlZKeystroke );
@@ -173,49 +186,12 @@ public class DisplayFrame extends JFrame
         // Help menu
         helpMenu = new JMenu( "Help" );
         about = new JMenuItem( "About" );
-        sysDocumentation = new JMenuItem( "Documentation.txt" );
-
-        //Brush buttons
-        simpleBrush = new JButton( "", new ImageIcon( "Buttons/plainBrush.png" ) );
-
-        //Brush generating lines from center to mouse position
-        tunnelBrush = new JButton( "Tunnel brush", new ImageIcon( "Buttons/tunnelBrush.jpg" ) );
-
-        //Generating a line of smaller lines.
-        lineRoughBrush = new JButton( "", new ImageIcon( "Buttons/roughBrush.png" ) );
-
-        //Brush making circles at mouse position.
-        randomCirclesBrush = new JButton( "", new ImageIcon( "Buttons/randomCircleBrush.png" ) );
-
-        //Random line generating brush.
-        randomLineBrush = new JButton( "", new ImageIcon( "Buttons/lineBrush.png" ) );
-
-        //Button making background of squares.
-        ImageIcon imagesquareBackground = new ImageIcon ("Buttons/squareBackground.png");
-        squareBackground = new JButton( "", imagesquareBackground);
+        sysDocumentation = new JMenuItem( "Documentation" );
 
 
-        // Button making text at random places
-        ImageIcon imageRandomText = new ImageIcon( "Buttons/randomText.jpg" );
-        randomTextButton = new JButton( "text", imageRandomText );
+        // Filters menu.
+        filterMenu = new JMenu( "Filters" );
 
-        //Menubar buttons.
-        fileMenu.add(save);
-        fileMenu.setMnemonic( KeyEvent.VK_F );
-
-        openFile = new JMenuItem( "Open file" );
-        ctrlOKeyStroke = KeyStroke.getKeyStroke( "control O" );
-        openFile.setAccelerator(ctrlOKeyStroke);
-
-        fileMenu.add(openFile);
-
-        saveHighres = new JMenuItem( "Save with different resolution" );
-        ctrlShiftSKeyStroke = KeyStroke.getKeyStroke( "control shift S" );
-        saveHighres.setAccelerator(ctrlShiftSKeyStroke);
-        fileMenu.add( saveHighres );
-
-
-        // Filters.
         blur = new JMenuItem( "Blur" );
         ctrl1 = KeyStroke.getKeyStroke( "control 1" );
         blur.setAccelerator(ctrl1);
@@ -246,23 +222,47 @@ public class DisplayFrame extends JFrame
 
         // Initiate Labels
         brushes = new JLabel( "Brushes" );
-        brushes.setForeground(new Color(0, 0, 0));
+        brushes.setForeground( new Color( 255, 255, 255 ) );
         brushes.setFont(new Font(null, 2, 20));
 
         shapes = new JLabel( "Shapes" );
-        shapes.setForeground(new Color(0, 0, 0));
+        shapes.setForeground( new Color( 255, 255, 255 ) );
         shapes.setFont( new Font( null, 2, 20 ) );
 
-        backgrounds = new JLabel( "Background options");
-        backgrounds.setForeground( new Color( 0, 0, 0));
-        backgrounds.setFont( new Font( null, 2, 20));
+        backgrounds = new JLabel( "Background options" );
+        backgrounds.setForeground( new Color( 255, 255, 255 ) );
+        backgrounds.setFont( new Font( null, 2, 20 ) );
+
+        //Brush buttons
+        simpleBrush = new JButton( "", new ImageIcon( "Buttons\\simpleBrush.png" ) );
+
+        //Brush generating lines from center to mouse position
+        tunnelBrush = new JButton( "Tunnel brush", new ImageIcon( "Buttons/tunnelBrush.jpg" ) );
+
+        //Generating a line of smaller lines.
+        lineRoughBrush = new JButton( "", new ImageIcon( "Buttons/roughBrush.png" ) );
+
+        //Brush making circles at mouse position.
+        randomCirclesBrush = new JButton( "", new ImageIcon( "Buttons/randomCircleBrush.png" ) );
+
+        //Random line generating brush.
+        randomLineBrush = new JButton( "", new ImageIcon( "Buttons/lineBrush.png" ) );
+
+        //Button making background of squares.
+        ImageIcon imagesquareBackground = new ImageIcon( "Buttons/squareBackground.png" );
+        squareBackground = new JButton( "", imagesquareBackground );
+
+
+        // Button making text at random places
+        ImageIcon imageRandomText = new ImageIcon( "Buttons/randomText.jpg" );
+        randomTextButton = new JButton( "text", imageRandomText );
     }
 
 
     /**
-     * Add the components to the frame
+     * Adding the field components to the JFrame
      */
-    private void addComponents()
+    protected void addComponents()
     {
         this.add( processingPanel );
         processingPanel.add( randomArtProcessing );
@@ -284,7 +284,18 @@ public class DisplayFrame extends JFrame
         this.add( tunnelBrush );
         this.add( randomTextButton );
         this.add (squareBackground);
-        this.add(backgrounds);
+        this.add( backgrounds );
+
+        // Adding labels
+        this.add( brushes );
+        this.add( shapes );
+        this.add( backgroundLabel );
+
+        // File Menu
+        menuBar.add( fileMenu );
+        fileMenu.add( saveHighres );
+        fileMenu.add( save );
+        fileMenu.add( openFile );
 
         // Edit menu
         menuBar.add( editMenu );
@@ -292,6 +303,7 @@ public class DisplayFrame extends JFrame
         editMenu.add( redo );
 
         // Filter Menu
+        menuBar.add( filterMenu );
         filterMenu.add( blur );
         filterMenu.add( threshold );
         filterMenu.add( grayScale );
@@ -310,9 +322,9 @@ public class DisplayFrame extends JFrame
 
 
     /**
-     * Set the layout for the components
+     * Sets the static position and size of the components within the JFrame.
      */
-    private void setLayout()
+    protected void setLayout()
     {
         setLayout( null );
 
@@ -373,9 +385,10 @@ public class DisplayFrame extends JFrame
     }
 
 
-
-    //Adding action listeners.
-    private void addActionListeners()
+    /**
+     * Adding action listeners and action commands to the following field components in JFrame
+     */
+    protected void addActionListeners()
     {
         triangleButton.addActionListener( randomArtProcessing );
         triangleButton.setActionCommand( "triangles" );
