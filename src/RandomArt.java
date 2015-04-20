@@ -8,7 +8,10 @@ import processing.core.PImage;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 
 public class RandomArt extends PApplet implements ActionListener
@@ -42,12 +45,12 @@ public class RandomArt extends PApplet implements ActionListener
     UndoRedo undoRedo;
 
     // BG colors
-    int redBG=255, greenBG =255, blueBG = 255;
+    int redBG = 255, greenBG = 255, blueBG = 255;
 
     //Setting up the processing window.
     public void setup()
     {
-        size(1009, 710);
+        size( 1009, 710 );
         background( 255 );
         noStroke();
         undoRedo = new UndoRedo( 10 );
@@ -122,7 +125,7 @@ public class RandomArt extends PApplet implements ActionListener
         JPanel inputPanel = new JPanel();
         inputPanel.add( new JLabel( "Number of triangles:" ) );
         inputPanel.add( Box.createHorizontalStrut( 2 ) ); // a spacer
-        inputPanel.add(numberOftrianglesfField);
+        inputPanel.add( numberOftrianglesfField );
 
 
         int amount = 0;
@@ -169,7 +172,7 @@ public class RandomArt extends PApplet implements ActionListener
         JPanel inputPanel = new JPanel();
         inputPanel.add( new JLabel( "Number of squares:" ) );
         inputPanel.add( Box.createHorizontalStrut( 2 ) ); // a spacer
-        inputPanel.add(numberOfsquaresfField);
+        inputPanel.add( numberOfsquaresfField );
 
         int amount = 0;
         String text = "";
@@ -193,7 +196,7 @@ public class RandomArt extends PApplet implements ActionListener
                     int squares = (int) random( 400 );
                     noStroke();
                     // strokeWeight(stroke0);
-                    fill(random(255), random(255), random(255), opacity);
+                    fill( random( 255 ), random( 255 ), random( 255 ), opacity );
                     rect( random( 0, width ), random( 0, height ), squares, squares );
                 }
             } catch(NumberFormatException e)
@@ -208,28 +211,30 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
 
-
     /**
      * Creates random circles
      */
-    public void createCircles() {
+    public void createCircles()
+    {
 
         JPanel inputPanel = new JPanel();
-        inputPanel.add(new JLabel("Number of circles:"));
-        inputPanel.add(Box.createHorizontalStrut(2)); // a spacer
-        inputPanel.add(numberOfellipsefField);
+        inputPanel.add( new JLabel( "Number of circles:" ) );
+        inputPanel.add( Box.createHorizontalStrut( 2 ) ); // a spacer
+        inputPanel.add( numberOfellipsefField );
 
 
         int amount = 0;
         String text = "";
 
-        int result = JOptionPane.showConfirmDialog(null, inputPanel, "Please Enter an amount of triangles", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog( null, inputPanel, "Please Enter an amount of triangles", JOptionPane.OK_CANCEL_OPTION );
 
 
-        if (result == JOptionPane.OK_OPTION) {
-            try {
+        if(result == JOptionPane.OK_OPTION)
+        {
+            try
+            {
                 text = numberOfellipsefField.getText();
-                amount = Integer.parseInt(numberOfellipsefField.getText().toString());
+                amount = Integer.parseInt( numberOfellipsefField.getText().toString() );
 
                 if(amount > 2000)
                 {
@@ -240,15 +245,16 @@ public class RandomArt extends PApplet implements ActionListener
                 {
                     int circles = (int) random( 400 );
                     stroke( stroke0 );
-                    strokeWeight(stroke0);
-                    fill(random(255), random( 255 ), random( 255 ), opacity );
-                    ellipse( random( 0, width ), random( 0, height ),circles, circles );
+                    strokeWeight( stroke0 );
+                    fill( random( 255 ), random( 255 ), random( 255 ), opacity );
+                    ellipse( random( 0, width ), random( 0, height ), circles, circles );
                 }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage().substring(18, e.getMessage().length()) + " is not a numeric value. \n" +
-                        "Amount must be a numeric value", "Input must be a numeric value", JOptionPane.ERROR_MESSAGE);
+            } catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog( this, e.getMessage().substring( 18, e.getMessage().length() ) + " is not a numeric value. \n" +
+                        "Amount must be a numeric value", "Input must be a numeric value", JOptionPane.ERROR_MESSAGE );
 
-                numberOfellipsefField.setText(numberOfellipsefField.getText());
+                numberOfellipsefField.setText( numberOfellipsefField.getText() );
                 createCircles();
             }
         }
@@ -256,14 +262,29 @@ public class RandomArt extends PApplet implements ActionListener
     }
 
 
+    public void aboutMenu()
+    {
+        JOptionPane.showMessageDialog( this, "Team:\n" +
+                "Ramin Esfandiari\n" +
+                "Ole Martin Bratteberg\n" +
+                "Per-Olav Eikrem\n" +
+                "Knut-Olav Skaret", "About", JOptionPane.INFORMATION_MESSAGE );
+    }
 
-
-
-
-
-
-
-
+    public void systemDocumentation()
+    {
+        if(Desktop.isDesktopSupported())
+        {
+            try
+            {
+                File myFile = new File( "Documentation/SystemDocumentation.pdf" );
+                Desktop.getDesktop().open( myFile );
+            } catch(IOException ex)
+            {
+                // no application registered for PDFs
+            }
+        }
+    }
 
 
     /**
@@ -341,7 +362,7 @@ public class RandomArt extends PApplet implements ActionListener
      */
     public void clearCanvas()
     {
-        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION );
+        int reply = JOptionPane.showConfirmDialog( null, "Are you sure you want to discard your masterpiece?", "Discard Masterpiece", JOptionPane.YES_NO_OPTION );
         if(reply == JOptionPane.YES_OPTION)
         {
             clear();
@@ -362,7 +383,7 @@ public class RandomArt extends PApplet implements ActionListener
         greenBG = c.getGreen();
         blueBG = c.getBlue();
 
-        background(redBG, greenBG, blueBG);
+        background( redBG, greenBG, blueBG );
     }
 
     //Function to save the art with preferred resolution.
@@ -390,7 +411,7 @@ public class RandomArt extends PApplet implements ActionListener
 
         int returnVal = chooser.showSaveDialog( this );
 
-        int result = JOptionPane.showConfirmDialog(null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION );
+        int result = JOptionPane.showConfirmDialog( null, myPanel, "Please select a resolution to save", JOptionPane.OK_CANCEL_OPTION );
         if(result == JOptionPane.OK_OPTION)
         {
             if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -423,12 +444,12 @@ public class RandomArt extends PApplet implements ActionListener
         FileNameExtensionFilter filter = new FileNameExtensionFilter( "Only JPG, GIF & png Images", "jpg", "gif", "png", "tif" );
 
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter(filter );
-        chooser.setDialogTitle( "Save file");
+        chooser.setFileFilter( filter );
+        chooser.setDialogTitle( "Save file" );
 
         String[] extensionTypes = filter.getExtensions();
 
-        int returnVal = chooser.showSaveDialog(this);
+        int returnVal = chooser.showSaveDialog( this );
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
             for(String s : extensionTypes)
@@ -534,6 +555,13 @@ public class RandomArt extends PApplet implements ActionListener
                 break;
             case "redo":
                 undoRedo.redo();
+                break;
+            case "about":
+                aboutMenu();
+                break;
+            case "sysdoc":
+                systemDocumentation();
+                break;
         }
     }
 
@@ -546,11 +574,11 @@ public class RandomArt extends PApplet implements ActionListener
 
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter( filter );
-        chooser.setDialogTitle("Save file");
+        chooser.setDialogTitle( "Save file" );
 
         String[] extensionTypes = filter.getExtensions();
 
-        int returnVal = chooser.showOpenDialog(this);
+        int returnVal = chooser.showOpenDialog( this );
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
             image = loadImage( chooser.getSelectedFile().getPath() );
@@ -573,7 +601,7 @@ public class RandomArt extends PApplet implements ActionListener
                 blue = color.getBlue();
             }
 
-            if (mouseButton == LEFT) 
+            if(mouseButton == LEFT)
             {
                 //println("Detected Mouse Left Click!");
 
@@ -694,9 +722,9 @@ public class RandomArt extends PApplet implements ActionListener
         for(int i = 0; i < 20; i++)
         {
             int r = 10;
-            stroke(red, green, blue);
-            strokeWeight(1);
-            line(mouseX + random(r), mouseY + random(r), pmouseX + random(r), pmouseY + random(r));
+            stroke( red, green, blue );
+            strokeWeight( 1 );
+            line( mouseX + random( r ), mouseY + random( r ), pmouseX + random( r ), pmouseY + random( r ) );
         }
     }
 
@@ -704,19 +732,19 @@ public class RandomArt extends PApplet implements ActionListener
     public void simpleBrush()
     {
         stroke( red, green, blue );
-        strokeWeight(5);
+        strokeWeight( 5 );
         line( mouseX, mouseY, pmouseX, pmouseY );
     }
 
     //The random circle brush function.
     public void randomCirclesBrush()
     {
-        float speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
-        stroke(1);
-        strokeWeight(1);
-        fill(random(255), random(255), random(255), opacity);
-        ellipse(mouseX, mouseY, speed, speed);
-        }
+        float speed = abs( mouseX - pmouseX ) + abs( mouseY - pmouseY );
+        stroke( 1 );
+        strokeWeight( 1 );
+        fill( random( 255 ), random( 255 ), random( 255 ), opacity );
+        ellipse( mouseX, mouseY, speed, speed );
+    }
 
     //The random line brush function.
     public void randomLineBrush()
@@ -853,7 +881,8 @@ public class RandomArt extends PApplet implements ActionListener
             }
         }
 
-        public void redo() {
+        public void redo()
+        {
             println( "Redo" );
             if(redoSteps > 0)
             {
