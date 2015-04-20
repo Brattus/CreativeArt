@@ -158,7 +158,7 @@ public class DisplayFrame extends JFrame
         // Help menu
         helpMenu = new JMenu( "Help" );
         about = new JMenuItem( "About" );
-        sysDocumentation = new JMenuItem( "System Documentation" );
+        sysDocumentation = new JMenuItem( "Documentation" );
 
         undoButton = new JButton( "", new ImageIcon( "Application pics/undo.png" ) );
         ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z");
