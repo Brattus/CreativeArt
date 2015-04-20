@@ -53,6 +53,7 @@ public class DisplayFrame extends JFrame
     // Help menu
     private JMenu helpMenu;
     private JMenuItem about;
+    private JMenuItem sysDocumentation;
 
     // Shortcuts file menu
     private KeyStroke ctrlOKeyStroke = null;
@@ -108,6 +109,8 @@ public class DisplayFrame extends JFrame
         randomArtProcessing.init();
         processingPanel = new JPanel();
 
+        backgroundLabel = new JLabel( new ImageIcon( "Application pics/AppBG3.jpg" ) );
+
 
         this.setSize( randomArtProcessing.width, randomArtProcessing.height );
         this.setMinimumSize( new Dimension( 1366, 830 ) );
@@ -152,12 +155,16 @@ public class DisplayFrame extends JFrame
         ctrlSKeyStroke = KeyStroke.getKeyStroke( "control S" );
         save.setAccelerator( ctrlSKeyStroke );
 
+        // Help menu
+        helpMenu = new JMenu( "Help" );
+        about = new JMenuItem( "About" );
+        sysDocumentation = new JMenuItem( "System Documentation" );
+
         undoButton = new JButton( "", new ImageIcon( "Application pics/undo.png" ) );
         ctrlZKeystroke = KeyStroke.getKeyStroke( "control Z");
 
         redoButton = new JButton( "", new ImageIcon( "Application pics/redo.png" ) );
         ctrlYKeyStroke = KeyStroke.getKeyStroke( "control Y");
-        //redoButton.setAccelerator(ctrlYKeyStroke);
 
         //Brush buttons
         simpleBrush = new JButton( "", new ImageIcon( "Buttons/plainBrush.png" ) );
@@ -240,8 +247,6 @@ public class DisplayFrame extends JFrame
         backgrounds = new JLabel( "Background Options");
         backgrounds.setForeground( new Color( 0, 0, 0));
         backgrounds.setFont( new Font( null, 2, 20));
-
-        backgroundLabel = new JLabel( new ImageIcon( "Application pics/AppBG3.jpg" ) );
     }
 
 
@@ -285,6 +290,10 @@ public class DisplayFrame extends JFrame
         filterMenu.add(erode);
         filterMenu.add(dialate);
 
+        // Help menu
+        menuBar.add( helpMenu );
+        helpMenu.add( about );
+        helpMenu.add( sysDocumentation );
 
         this.add( brushes );
         this.add( shapes );
@@ -463,6 +472,13 @@ public class DisplayFrame extends JFrame
     
         saveHighres.addActionListener( randomArtProcessing );
         saveHighres.setActionCommand( "saveHighRes" );
+
+        // Help menu
+        about.addActionListener( randomArtProcessing );
+        about.setActionCommand( "about" );
+
+        sysDocumentation.addActionListener( randomArtProcessing );
+        sysDocumentation.setActionCommand( "sysdoc" );
     }
 }
 
