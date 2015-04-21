@@ -8,7 +8,6 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import javax.swing.JFrame;
 
 
@@ -142,11 +141,11 @@ public class DisplayFrame extends JFrame
      */
     protected void initiateComponents()
     {
-        ImageIcon appBG = new ImageIcon( "Application pics/background.jpg" );
+        ImageIcon appBG = new ImageIcon( "background.jpg" );
         backgroundLabel = new JLabel( appBG );
 
         // Initiate shape buttons
-        triangleButton = new JButton( "", new ImageIcon( "Buttons/triangles.png" ));
+        triangleButton = new JButton( "", new ImageIcon("Buttons/triangles.png"));
         squareButton = new JButton( "", new ImageIcon( "Buttons/squares.png" ) );
         circleButton = new JButton( "", new ImageIcon( "Buttons/circles.png" ) );
 
