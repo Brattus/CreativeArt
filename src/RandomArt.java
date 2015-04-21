@@ -290,7 +290,8 @@ public class RandomArt extends PApplet implements ActionListener
      */
     protected void aboutMenu()
     {
-        JOptionPane.showMessageDialog( this, "Team:\n" +
+        JOptionPane.showMessageDialog( this, "Version: 1.0\n\n" +
+                "Team:\n" +
                 "Ramin Esfandiari\n" +
                 "Ole Martin Bratteberg\n" +
                 "Per-Olav Eikrem\n" +

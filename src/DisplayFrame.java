@@ -8,6 +8,7 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import javax.swing.JFrame;
 
 
@@ -145,7 +146,7 @@ public class DisplayFrame extends JFrame
         backgroundLabel = new JLabel( appBG );
 
         // Initiate shape buttons
-        triangleButton = new JButton( "", new ImageIcon( "Buttons/triangles.png" ) );
+        triangleButton = new JButton( "", new ImageIcon( "Buttons/triangles.png" ));
         squareButton = new JButton( "", new ImageIcon( "Buttons/squares.png" ) );
         circleButton = new JButton( "", new ImageIcon( "Buttons/circles.png" ) );
 
@@ -234,7 +235,7 @@ public class DisplayFrame extends JFrame
         backgrounds.setFont( new Font( null, 2, 20 ) );
 
         //Brush buttons
-        simpleBrush = new JButton( "", new ImageIcon( "Buttons\\simpleBrush.png" ) );
+        simpleBrush = new JButton( "", new ImageIcon( "Buttons/simpleBrush.png" ) );
 
         //Brush generating lines from center to mouse position
         tunnelBrush = new JButton( "Tunnel brush", new ImageIcon( "Buttons/tunnelBrush.jpg" ) );
