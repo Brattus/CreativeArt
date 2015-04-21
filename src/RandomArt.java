@@ -298,7 +298,6 @@ public class RandomArt extends PApplet implements ActionListener
                 "Knut-Olav Skaret", "About", JOptionPane.INFORMATION_MESSAGE );
     }
 
-
     /**
      * This is a link to a guide for the application
      */
