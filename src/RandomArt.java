@@ -180,6 +180,7 @@ public class RandomArt extends PApplet implements ActionListener
 
                 numberOftrianglesfField.setText( numberOftrianglesfField.getText() );
                 createTriangles();
+
             }
         }
     }
@@ -307,7 +308,7 @@ public class RandomArt extends PApplet implements ActionListener
         {
             try
             {
-                File myFile = new File( "Documentation/SystemDocumentation.pdf" );
+                File myFile = new File( "Documentation/userDoc.pdf" );
                 Desktop.getDesktop().open( myFile );
             } catch(IOException ex)
             {
